@@ -1,35 +1,28 @@
 {
   "compilerOptions": {
-    "allowJs": true,
     "allowSyntheticDefaultImports": true,
-    "baseUrl": ".",
+    "declaration": false,
+    "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "sourceMap": true,
-    "rootDir": "./",
-    "module": "es6",
-    "outDir": ".tmp",
-    "removeComments": false,
-    "target": "es5",
-    "skipLibCheck": true,
-    "moduleResolution": "node",
     "lib": [
-      "es2016",
-      "es2017",
-      "dom"
-    ]
+      "dom",
+      "es2015"
+    ],
+    "module": "es2015",
+    "moduleResolution": "node",
+    "sourceMap": true,
+    "target": "es5"
   },
-  "typeRoots": [
-    "./node_modules/@types/"
+  "include": [
+    "src/**/*.ts"
   ],
   "exclude": [
     "node_modules",
-    "client/**/*.spec.ts"
+    "src/**/*.spec.ts",
+    "src/**/__tests__/*.ts"
   ],
-  "filesGlob": [
-    "client/{app,components}/**/!(*.spec).ts"
-  ],
-  "awesomeTypescriptLoaderOptions": {
-    "resolveGlobs": true,
-    "forkChecker": true
+  "compileOnSave": false,
+  "atom": {
+    "rewriteTsconfig": false
   }
 }
