@@ -2,10 +2,10 @@ import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 
 @Component({
-  selector: 'page-event-history',
-  templateUrl: 'event-history.html'
+  selector: 'page-my-events',
+  templateUrl: 'my-events.html'
 })
-export class EventHistoryPage {
+export class MyEventsPage {
   selectedItem: any;
   icons: string[];
   items: Array<{title: string, note: string, icon: string}>;
@@ -31,7 +31,7 @@ export class EventHistoryPage {
 
   itemTapped(event, item) {
     // That's right, we're pushing to ourselves!
-    this.navCtrl.push(EventHistoryPage, {
+    this.navCtrl.push(MyEventsPage, {
       item: item
     });
   }

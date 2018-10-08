@@ -4,7 +4,7 @@ import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
-import { EventHistoryPage } from '../pages/event-history/event-history';
+import { MyEventsPage } from '../pages/my-events/my-events';
 import { LoginPage } from '../pages/login/login';
 import { AccountPage } from '../pages/account/account';
 import { EventDetailsPage } from '../pages/event-details/event-details';
@@ -52,7 +52,7 @@ import {
     declarations: [
         MyApp,
         HomePage,
-        EventHistoryPage,
+        MyEventsPage,
         LoginPage,
         AccountPage,
         EventDetailsPage
@@ -97,7 +97,7 @@ import {
     entryComponents: [
         MyApp,
         HomePage,
-        EventHistoryPage,
+        MyEventsPage,
         LoginPage,
         AccountPage,
         EventDetailsPage
