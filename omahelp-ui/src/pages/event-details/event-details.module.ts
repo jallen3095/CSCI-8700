@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
 import { EventDetailsPage } from './event-details';
+import { MatFormFieldModule, MatChipsModule, MatIconModule, MatCardModule, MatExpansionModule } from '@angular/material';
 
 @NgModule({
   declarations: [
@@ -8,6 +9,11 @@ import { EventDetailsPage } from './event-details';
   ],
   imports: [
     IonicPageModule.forChild(EventDetailsPage),
+    MatFormFieldModule,
+    MatChipsModule,
+    MatIconModule,
+    MatCardModule,
+    MatExpansionModule
   ],
 })
 export class EventDetailsPageModule {}

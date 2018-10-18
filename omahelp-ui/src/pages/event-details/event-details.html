@@ -9,36 +9,102 @@
 
 
 <ion-content padding>
-<mat-accordion>
-  <mat-expansion-panel>
-    <mat-expansion-panel-header>
-      <mat-panel-title>
-        Personal data
-      </mat-panel-title>
-      <mat-panel-description>
-        Type your name and age
-      </mat-panel-description>
-    </mat-expansion-panel-header>
+  <ion-grid>
+    <!-- Todo: Make this row go away -->
+    <ion-row>
+      <ion-col col-xs-12 col-sm-4 col-md-2><button ion-button (click)="setEditMode()">Edit Mode</button></ion-col>
+      <ion-col col-xs-12 col-sm-4 col-md-2><button ion-button (click)="setCreateMode()">Create Mode</button></ion-col>
+      <ion-col col-xs-12 col-sm-4 col-md-2><button ion-button (click)="setViewMode()">View Mode</button></ion-col>
+    </ion-row>
+    
+    <div *ngIf="viewMode()">
+      <mat-card>
+        <mat-card-title>
+          {{event.name}}
+        </mat-card-title>
+        <mat-card-subtitle>
+          {{event.date | date: "'MMM d, y h:mm a"}}
+        </mat-card-subtitle>
+        <mat-card-content>
+          <strong>Description: </strong> {{event.description}}
+          <br>
+          <br>
+      
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                Attendees
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+            <ion-list *ngFor="let user of event.attendees">
+              <ion-item>{{user.firstName}} {{user.lastName}}, {{user.email}}</ion-item>
+            </ion-list>
+          </mat-expansion-panel>
+          <br>
+          <br>
 
-    <mat-form-field>
-      <input matInput placeholder="First name">
-    </mat-form-field>
+          <mat-chip-list #chipList>
+            <mat-chip *ngFor="let tag of event.tags" [selectable]="selectable">
+              {{tag}}
+            </mat-chip>
+          </mat-chip-list>
+        </mat-card-content>
+      </mat-card>
 
-    <mat-form-field>
-      <input matInput placeholder="Age">
-    </mat-form-field>
-  </mat-expansion-panel>
-  <mat-expansion-panel (opened)="panelOpenState = true"
-                       (closed)="panelOpenState = false">
-    <mat-expansion-panel-header>
-      <mat-panel-title>
-        Self aware panel
-      </mat-panel-title>
-      <mat-panel-description>
-        Currently I am {{panelOpenState ? 'open' : 'closed'}}
-      </mat-panel-description>
-    </mat-expansion-panel-header>
-    <p>I'm visible because I am open</p>
-  </mat-expansion-panel>
-</mat-accordion>
+      <ion-row>
+        <ion-col col-xs-12 col-sm-6 col-md-2><button ion-button (click)="attend()">Attend</button></ion-col>
+        <ion-col col-xs-12 col-sm-6 col-md-2><button ion-button color="secondary" (click)="like()">Like</button></ion-col>
+      </ion-row>
+    </div>
+
+    <div *ngIf="editMode() || createMode()">
+      <ion-row align-items-center>
+        <ion-col col-12 align-self-center>
+          <form>
+            <mat-form-field class="full-width">
+              <input matInput type="text" placeholder="Name" [(ngModel)]="event.name" name="name" required>
+            </mat-form-field>
+            
+            <mat-form-field class="full-width">
+              <input matInput type="textarea" placeholder="Description" [(ngModel)]="event.description" name="description" required>
+            </mat-form-field>
+            
+            <ion-item class="full-width">
+              <ion-label>Date</ion-label>
+              <ion-datetime displayFormat="MMM D, YYYY h:m a" [(ngModel)]="event.date" name="date"></ion-datetime>
+            </ion-item>
+            <br>
+
+            <mat-form-field class="full-width">
+              <input matInput type="text" placeholder="Address" [(ngModel)]="event.address" name="address" required>
+            </mat-form-field>
+            
+            <mat-form-field class="full-width">
+              <input matInput type="text" placeholder="Area" [(ngModel)]="event.area" name="area" required>
+            </mat-form-field>
+
+            <mat-form-field class="full-width">
+              <mat-chip-list #chipList>
+                <mat-chip *ngFor="let tag of event.tags" [selectable]="selectable"
+                          [removable]="removable" (removed)="removeTag(tag)">
+                  {{tag}}
+                  <mat-icon matChipRemove *ngIf="removable">x</mat-icon>
+                </mat-chip>
+                <input placeholder="New Tag..."
+                        [matChipInputFor]="chipList"
+                        [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                        [matChipInputAddOnBlur]="addOnBlur"
+                        (matChipInputTokenEnd)="addTag($event)">
+              </mat-chip-list>
+            </mat-form-field>
+          </form>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col col-xs-12 col-sm-6 col-md-2><button ion-button (click)="submit()">Submit</button></ion-col>
+        <ion-col col-xs-12 col-sm-6 col-md-2><button ion-button color="secondary" (click)="setViewMode()">Cancel</button></ion-col>
+      </ion-row>
+    </div>
+  </ion-grid>
 </ion-content>

@@ -7,18 +7,17 @@
   </ion-navbar>
 </ion-header>
 
-
 <ion-content padding>
 <ion-grid>
   <ion-row *ngIf="loginMode()" align-items-center>
     <ion-row>
       <ion-col col-12 align-self-center>
-        <form class="example-form">
-          <mat-form-field class="example-full-width">
+        <form>
+          <mat-form-field class="full-width">
             <input matInput placeholder="Username" required>
           </mat-form-field>
 
-          <mat-form-field class="example-full-width">
+          <mat-form-field class="full-width">
             <input matInput type="password" placeholder="Password" required>
           </mat-form-field>
         </form>
@@ -34,23 +33,23 @@
   <ion-row *ngIf="registerMode()"  align-items-center>
     <ion-row>
       <ion-col col-12 align-self-center>
-        <form class="example-form">
-          <mat-form-field class="example-full-width">
+        <form>
+          <mat-form-field class="full-width">
             <input matInput type="email" placeholder="Email" required>
           </mat-form-field>
           
-          <mat-form-field class="example-full-width">
+          <mat-form-field class="full-width">
             <input matInput placeholder="First Name" required>
           </mat-form-field>
           
-          <mat-form-field class="example-full-width">
+          <mat-form-field class="full-width">
             <input matInput placeholder="Last Name" required>
           </mat-form-field>
 
-          <mat-form-field class="example-full-width">
+          <mat-form-field class="full-width">
             <input matInput type="password" placeholder="Password" required>
           </mat-form-field>
-          <mat-form-field class="example-full-width">
+          <mat-form-field class="full-width">
             <input matInput type="password" placeholder="Confirm Password" required>
           </mat-form-field>
         </form>
