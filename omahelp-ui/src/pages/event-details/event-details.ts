@@ -67,6 +67,11 @@ export class EventDetailsPage {
 
   submit() {
     // TODO
+    if (this.event.id) {
+      // update event
+    } else {
+      // create event
+    }
   }
 
   editMode() {

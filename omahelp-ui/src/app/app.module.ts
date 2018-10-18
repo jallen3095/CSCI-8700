@@ -46,6 +46,7 @@ import {
   MatTooltipModule,
   MatStepperModule,
 } from '@angular/material';
+import { EventCardComponent } from './shared/event-card/event-card';
 
 
 @NgModule({
@@ -55,7 +56,8 @@ import {
         MyEventsPage,
         LoginPage,
         AccountPage,
-        EventDetailsPage
+        EventDetailsPage,
+        EventCardComponent
     ],
     imports: [
         BrowserModule,
@@ -100,7 +102,8 @@ import {
         MyEventsPage,
         LoginPage,
         AccountPage,
-        EventDetailsPage
+        EventDetailsPage,
+        EventCardComponent
     ],
     providers: [
         StatusBar,

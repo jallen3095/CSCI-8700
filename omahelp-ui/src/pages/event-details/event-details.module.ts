@@ -1,3 +1,4 @@
+import { EventCardComponent } from './../../app/shared/event-card/event-card';
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
 import { EventDetailsPage } from './event-details';
@@ -13,7 +14,8 @@ import { MatFormFieldModule, MatChipsModule, MatIconModule, MatCardModule, MatEx
     MatChipsModule,
     MatIconModule,
     MatCardModule,
-    MatExpansionModule
+    MatExpansionModule,
+    EventCardComponent
   ],
 })
 export class EventDetailsPageModule {}

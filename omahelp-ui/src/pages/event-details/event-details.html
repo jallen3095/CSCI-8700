@@ -18,38 +18,7 @@
     </ion-row>
     
     <div *ngIf="viewMode()">
-      <mat-card>
-        <mat-card-title>
-          {{event.name}}
-        </mat-card-title>
-        <mat-card-subtitle>
-          {{event.date | date: "'MMM d, y h:mm a"}}
-        </mat-card-subtitle>
-        <mat-card-content>
-          <strong>Description: </strong> {{event.description}}
-          <br>
-          <br>
-      
-          <mat-expansion-panel>
-            <mat-expansion-panel-header>
-              <mat-panel-title>
-                Attendees
-              </mat-panel-title>
-            </mat-expansion-panel-header>
-            <ion-list *ngFor="let user of event.attendees">
-              <ion-item>{{user.firstName}} {{user.lastName}}, {{user.email}}</ion-item>
-            </ion-list>
-          </mat-expansion-panel>
-          <br>
-          <br>
-
-          <mat-chip-list #chipList>
-            <mat-chip *ngFor="let tag of event.tags" [selectable]="selectable">
-              {{tag}}
-            </mat-chip>
-          </mat-chip-list>
-        </mat-card-content>
-      </mat-card>
+      <event-card [event]="event"></event-card>
 
       <ion-row>
         <ion-col col-xs-12 col-sm-6 col-md-2><button ion-button (click)="attend()">Attend</button></ion-col>
