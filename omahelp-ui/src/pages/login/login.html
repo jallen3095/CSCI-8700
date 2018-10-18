@@ -9,17 +9,58 @@
 
 
 <ion-content padding>
-<form class="example-form">
-  <mat-form-field class="example-full-width">
-    <input matInput placeholder="Username" >
-  </mat-form-field>
-  
-  <mat-form-field class="example-full-width">
-    <input matInput placeholder="Username" >
-  </mat-form-field>
+<ion-grid>
+  <ion-row *ngIf="loginMode()" align-items-center>
+    <ion-row>
+      <ion-col col-12 align-self-center>
+        <form class="example-form">
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder="Username" required>
+          </mat-form-field>
 
-  <mat-form-field class="example-full-width">
-    <input matInput type="password" placeholder="Password">
-  </mat-form-field>
-</form>
+          <mat-form-field class="example-full-width">
+            <input matInput type="password" placeholder="Password" required>
+          </mat-form-field>
+        </form>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col><button ion-button (click)="login()">Login</button></ion-col>
+      <ion-col><button ion-button color="secondary" (click)="setRegisterMode()">Register</button></ion-col>
+    </ion-row>
+  </ion-row>
+  
+  <ion-row *ngIf="registerMode()"  align-items-center>
+    <ion-row>
+      <ion-col col-12 align-self-center>
+        <form class="example-form">
+          <mat-form-field class="example-full-width">
+            <input matInput type="email" placeholder="Email" required>
+          </mat-form-field>
+          
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder="First Name" required>
+          </mat-form-field>
+          
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder="Last Name" required>
+          </mat-form-field>
+
+          <mat-form-field class="example-full-width">
+            <input matInput type="password" placeholder="Password" required>
+          </mat-form-field>
+          <mat-form-field class="example-full-width">
+            <input matInput type="password" placeholder="Confirm Password" required>
+          </mat-form-field>
+        </form>
+      </ion-col>
+    </ion-row>
+    
+    <ion-row>
+      <ion-col><button ion-button (click)="register()">Register</button></ion-col>
+      <ion-col><button ion-button color="secondary" (click)="setLoginMode()">Login</button></ion-col>
+    </ion-row>
+  </ion-row>
+</ion-grid>
 </ion-content>
