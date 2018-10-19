@@ -22,7 +22,6 @@ export class EventDetailsPage {
   removable = true;
   addOnBlur = true;
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
-  tags: string[] = [];
   event: any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
@@ -109,7 +108,7 @@ export class EventDetailsPage {
     const index = this.event.tags.indexOf(tag);
 
     if (index >= 0) {
-      this.tags.splice(index, 1);
+      this.event.tags.splice(index);
     }
   }
 }
