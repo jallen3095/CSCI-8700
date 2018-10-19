@@ -93,6 +93,11 @@ export class EventDetailsPage {
     const input = event.input;
     const value = event.value;
 
+    if (this.event.tags.indexOf(value.trim()) >= 0) {
+      input.value = '';
+      return;
+    }
+
     // Add our tag
     if ((value || '').trim()) {
       this.event.tags.push(value.trim());
