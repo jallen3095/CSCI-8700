@@ -108,7 +108,7 @@ export class EventDetailsPage {
     const index = this.event.tags.indexOf(tag);
 
     if (index >= 0) {
-      this.event.tags.splice(index);
+      this.event.tags.splice(index, 1);
     }
   }
 }
