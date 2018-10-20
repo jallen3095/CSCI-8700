@@ -1,6 +1,6 @@
 # OmaHelp UI
 
-If you haven't already, install the ionic framework open the command line and enter:
+If you haven't already, install the ionic framework. Open the command line and enter:
 
 ```
 npm install -g ionic
