@@ -1,4 +1,4 @@
-package omahelp;
+package edu.uno.omahelp.user;
 
 public class User {
 

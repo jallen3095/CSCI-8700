@@ -1,4 +1,4 @@
-package omahelp;
+package edu.uno.omahelp.event;
 
 import java.util.Arrays;
 

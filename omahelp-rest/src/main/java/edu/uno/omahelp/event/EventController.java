@@ -1,4 +1,4 @@
-package controller;
+package edu.uno.omahelp.event;
 
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMapping;
