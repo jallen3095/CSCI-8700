@@ -1,16 +1,26 @@
 package edu.uno.omahelp.user;
 
-import org.springframework.web.bind.annotation.RestController;
+import java.util.List;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@RequestMapping("user/")
 public class UserController {
 
-    @RequestMapping("/")
+    private final UserDao userDao;
+
+    public UserController(final UserDao userDao) {
+        this.userDao = userDao;
+    }
+
+    @RequestMapping("register")
     public String registerUser() {
         return "Hello!";
     }
 
-    //@RequestMapping("/user/login")
-    //public String loginUser() {}
+    @RequestMapping("list") 
+    public List<User> listAllUsers() {
+        return userDao.listAllUsers();
+    }
 }

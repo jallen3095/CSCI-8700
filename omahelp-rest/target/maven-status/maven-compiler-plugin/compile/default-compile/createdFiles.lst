@@ -1,5 +1,6 @@
-edu\uno\omahelp\user\User.class
-edu\uno\omahelp\event\EventController.class
-edu\uno\omahelp\OmaHelp.class
-edu\uno\omahelp\user\UserController.class
-edu\uno\omahelp\event\Event.class
+edu/uno/omahelp/user/User.class
+edu/uno/omahelp/OmaHelp.class
+edu/uno/omahelp/event/EventController.class
+edu/uno/omahelp/user/UserController.class
+edu/uno/omahelp/event/Event.class
+edu/uno/omahelp/user/UserDao.class
