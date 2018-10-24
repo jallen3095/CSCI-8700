@@ -8,11 +8,17 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
+import org.springframework.stereotype.Component;
+
+@Component
 class UserDao {
 
+	public String test() {
+		return "From DAO layer!";
+	}
+	
     public List<User> listAllUsers() {
 
         try {
