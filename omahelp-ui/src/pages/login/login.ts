@@ -17,7 +17,7 @@ export class LoginPage {
   mode: string;
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
-    this.mode = 'login';
+    this.setLoginMode();
   }
 
   ionViewDidLoad() {

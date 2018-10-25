@@ -46,8 +46,7 @@ import {
   MatTooltipModule,
   MatStepperModule,
 } from '@angular/material';
-import { EventCardComponent } from './shared/event-card/event-card';
-
+import { EventCardComponent } from '../shared/event-card/event-card';
 
 @NgModule({
     declarations: [

@@ -8,11 +8,16 @@
 </ion-header>
 
 <ion-content padding>
-  <h3>Welcome to OmaHelp!</h3>
-
-  <p>
-    We're still under construction, but something will be here soon.
-  </p>
-
   <button ion-button secondary menuToggle>Poke Around</button>
+  <h3>Feed</h3>
+  <ion-item>
+    <ion-label floating>Filter Events</ion-label>
+    <ion-input type="text" [(ngModel)]="filterText" (ngModelChange)="filterEvents($event)"></ion-input>
+  </ion-item>
+  <br>
+  <ion-list>
+    <div *ngFor="let event of eventsToShow">
+      <event-card [event]="event"></event-card>
+    </div>
+  </ion-list>
 </ion-content>

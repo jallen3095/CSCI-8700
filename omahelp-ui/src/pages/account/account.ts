@@ -14,12 +14,31 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'account.html',
 })
 export class AccountPage {
+  mode: string;
+  user: any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
+    this.setViewMode();
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad AccountPage');
+  }
+
+  viewMode() {
+    return this.mode === 'view';
+  }
+
+  setViewMode() {
+    this.mode = 'view';
+  }
+
+  editMode() {
+    return this.mode === 'edit';
+  }
+
+  setEditMode() {
+    this.mode = 'edit';
   }
 
 }
