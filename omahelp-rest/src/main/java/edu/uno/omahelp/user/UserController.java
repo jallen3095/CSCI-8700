@@ -17,17 +17,11 @@ public class UserController {
 
     @RequestMapping("register")
     public String registerUser() {
-        return "Hello!";
+        return "Register";
     }
 
-    @RequestMapping("test")
-    public String test() {
-    	return userDao.test();
-    }
-    
     @RequestMapping("list") 
     public List<User> listAllUsers() throws URISyntaxException, SQLException {
         return userDao.listAllUsers();
     }
-
 }

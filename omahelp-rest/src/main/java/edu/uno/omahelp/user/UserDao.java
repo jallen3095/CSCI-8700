@@ -15,10 +15,6 @@ import org.springframework.stereotype.Component;
 @Component
 class UserDao {
 
-	public String test() {
-		return "From DAO layer!";
-	}
-	
     public List<User> listAllUsers() throws URISyntaxException, SQLException {
         Connection connection = getConnection();
         Statement stmt = connection.createStatement();
@@ -27,17 +23,20 @@ class UserDao {
         ResultSet rs = stmt.executeQuery(sql);
         List<User> users = new ArrayList<User>();
         while(rs.next()) {
+            int userId = rs.getInt("user_id");
             String firstName = rs.getString("first_name");
             String lastName = rs.getString("last_name");
             String email = rs.getString("email");
             String password = rs.getString("password");
-            users.add(new User(email, firstName, lastName, password));
+            boolean admin = rs.getBoolean("is_site_admin");
+            users.add(new User(userId, firstName, lastName, email, password, admin));
         }
 
         return users;
     }
 
     private Connection getConnection() throws URISyntaxException, SQLException {
+        
         URI dbURI = null;
 
         if(System.getenv("DATABASE_URL") != null) {
@@ -49,9 +48,7 @@ class UserDao {
 
 		String username = dbURI.getUserInfo().split(":")[0];
 		String password = dbURI.getUserInfo().split(":")[1];
-		String dbUrl = "jdbc:postgresql://" + dbURI.getHost() + ':'
-                + dbURI.getPort() + dbURI.getPath()
-                + "?sslmode=require";
+		String dbUrl = "jdbc:postgresql://" + dbURI.getHost() + ':' + dbURI.getPort() + dbURI.getPath() + "?sslmode=require";
 		return DriverManager.getConnection(dbUrl, username, password);
 	}
 }
