@@ -1,4 +1,4 @@
-import { EventCardComponent } from './../../app/shared/event-card/event-card';
+import { EventCardComponent } from './../../shared/event-card/event-card';
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
 import { EventDetailsPage } from './event-details';

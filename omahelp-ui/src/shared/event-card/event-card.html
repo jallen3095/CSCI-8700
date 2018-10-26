@@ -10,18 +10,20 @@
     <br>
     <br>
 
-    <mat-expansion-panel>
-      <mat-expansion-panel-header>
-        <mat-panel-title>
-          Attendees
-        </mat-panel-title>
-      </mat-expansion-panel-header>
-      <ion-list *ngFor="let user of event.attendees">
-        <ion-item>{{user.firstName}} {{user.lastName}}, {{user.email}}</ion-item>
-      </ion-list>
-    </mat-expansion-panel>
-    <br>
-    <br>
+    <div *ngIf="detailed">
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Attendees
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <ion-list *ngFor="let user of event.attendees">
+          <ion-item>{{user.firstName}} {{user.lastName}}, {{user.email}}</ion-item>
+        </ion-list>
+      </mat-expansion-panel>
+      <br>
+      <br>
+    </div>
     
     <mat-chip-list #chipList>
       <mat-chip *ngFor="let tag of event.tags" [selectable]="selectable">
