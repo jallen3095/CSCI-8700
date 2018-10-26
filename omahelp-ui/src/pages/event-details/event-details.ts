@@ -63,14 +63,6 @@ export class EventDetailsPage {
     this.mode = 'view';
   }
 
-  attend() {
-    // TODO
-  }
-
-  like() {
-    // TODO
-  }
-
   submit() {
     // TODO
     if (this.event.id) {
@@ -78,6 +70,7 @@ export class EventDetailsPage {
     } else {
       // create event
     }
+    this.setViewMode();
   }
 
   editMode() {

@@ -14,11 +14,11 @@
       <ion-col col-12 align-self-center>
         <form>
           <mat-form-field class="full-width">
-            <input matInput placeholder="Username" required>
+            <input matInput name="user" placeholder="Username" [(ngModel)]="loginData.username" required>
           </mat-form-field>
 
           <mat-form-field class="full-width">
-            <input matInput type="password" placeholder="Password" required>
+            <input matInput name="pass" type="password" placeholder="Password" [(ngModel)]="loginData.password" required>
           </mat-form-field>
         </form>
       </ion-col>

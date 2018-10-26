@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { AuthService } from '../../services/auth.service';
+import { HomePage } from '../home/home';
 
 /**
  * Generated class for the InputPage page.
@@ -15,8 +17,9 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class LoginPage {
   mode: string;
+  loginData: { username: string, password: string } = {username: null, password: null};
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private AuthService: AuthService) {
     this.setLoginMode();
   }
 
@@ -37,7 +40,12 @@ export class LoginPage {
   }
 
   login() {
-    // TODO
+    // TODO: this will be a subscribe.
+    console.log(this.loginData);
+    this.AuthService.authorize(this.loginData);
+    if (this.AuthService.isAuthorized()) {
+      this.navCtrl.setRoot(HomePage);
+    }
   }
 
   setLoginMode() {

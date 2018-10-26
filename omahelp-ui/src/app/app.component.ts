@@ -8,6 +8,7 @@ import { MyEventsPage } from '../pages/my-events/my-events';
 import { LoginPage } from '../pages/login/login';
 import { AccountPage } from '../pages/account/account';
 import { EventDetailsPage } from '../pages/event-details/event-details';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   templateUrl: 'app.html'
@@ -19,15 +20,15 @@ export class MyApp {
 
   pages: Array<{title: string, component: any}>;
 
-  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
+  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, private AuthService: AuthService) {
     this.initializeApp();
 
     this.pages = [
       { title: 'Home', component: HomePage },
       { title: 'My Events', component: MyEventsPage },
-      { title: 'Login', component: LoginPage },
       { title: 'Account', component: AccountPage },
-      { title: 'Event Details', component: EventDetailsPage }
+      // { title: 'Login', component: LoginPage },
+      // { title: 'Event Details', component: EventDetailsPage }
     ];
 
   }
@@ -38,6 +39,7 @@ export class MyApp {
       // Here you can do any higher level native things you might need.
       this.statusBar.styleDefault();
       this.splashScreen.hide();
+      this.nav.setRoot(LoginPage);
     });
   }
 

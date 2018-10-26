@@ -19,7 +19,14 @@ export class EventCardComponent implements OnInit {
     }
 
     goToDetails() {
-      console.log('Hit Method');
       this.navCtrl.push(EventDetailsPage, {id: 123456});
+    }
+
+    attend() {
+      // TODO
+    }
+  
+    like() {
+      // TODO
     }
 }
