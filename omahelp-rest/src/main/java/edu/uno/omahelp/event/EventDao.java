@@ -15,5 +15,4 @@ import org.springframework.stereotype.Component;
 import edu.uno.omahelp.user.User;
 
 @Component
-class EventDao {
-}
+class EventDao {}
