@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
+import { UserService, UserService } from './user.service';
 
 @Injectable()
 export class AuthService {
   authorized: boolean = false;
 
-  constructor() {}
+  constructor(private UserService: UserService) {}
 
   authorize(userData: any) {
       // TODO: Login here
@@ -13,5 +14,10 @@ export class AuthService {
 
   isAuthorized(): boolean {
       return !!this.authorized;
+  }
+
+  logout() {
+      this.authorized = false;
+      this.UserService.logout();
   }
 }

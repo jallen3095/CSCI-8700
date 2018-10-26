@@ -12,6 +12,8 @@ import { EventDetailsPage } from '../pages/event-details/event-details';
 import { EventCardComponent } from '../shared/event-card/event-card';
 
 import { AuthService } from '../services/auth.service';
+import { UserService } from '../services/user.service';
+import { EventService } from '../services/event.service';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -109,6 +111,8 @@ import {
     ],
     providers: [
         AuthService,
+        UserService,
+        EventService,
         StatusBar,
         SplashScreen,
         {
