@@ -8,6 +8,7 @@ import { MyEventsPage } from '../pages/my-events/my-events';
 import { LoginPage } from '../pages/login/login';
 import { AccountPage } from '../pages/account/account';
 import { EventDetailsPage } from '../pages/event-details/event-details';
+import { EventCardComponent } from '../shared/event-card/event-card';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -46,7 +47,6 @@ import {
   MatTooltipModule,
   MatStepperModule,
 } from '@angular/material';
-import { EventCardComponent } from '../shared/event-card/event-card';
 
 @NgModule({
     declarations: [

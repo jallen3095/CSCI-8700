@@ -8,12 +8,15 @@
 </ion-header>
 
 <ion-content padding>
-  <button ion-button secondary menuToggle>Poke Around</button>
   <h3>Feed</h3>
-  <ion-item>
-    <ion-label floating>Filter Events</ion-label>
-    <ion-input type="text" [(ngModel)]="filterText" (ngModelChange)="filterEvents($event)"></ion-input>
-  </ion-item>
+  <ion-row>
+    <ion-col col-xs-12 col-lg-4>
+      <ion-item>
+        <ion-label floating>Filter Events</ion-label>
+        <ion-input type="text" [(ngModel)]="filterText" (ngModelChange)="filterEvents($event)"></ion-input>
+      </ion-item>
+    </ion-col>
+  </ion-row>
   <br>
   <ion-list>
     <div *ngFor="let event of eventsToShow">

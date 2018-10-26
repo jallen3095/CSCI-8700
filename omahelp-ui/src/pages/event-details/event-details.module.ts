@@ -7,6 +7,7 @@ import { MatFormFieldModule, MatChipsModule, MatIconModule, MatCardModule, MatEx
 @NgModule({
   declarations: [
     EventDetailsPage,
+    EventCardComponent,
   ],
   imports: [
     IonicPageModule.forChild(EventDetailsPage),
@@ -14,8 +15,7 @@ import { MatFormFieldModule, MatChipsModule, MatIconModule, MatCardModule, MatEx
     MatChipsModule,
     MatIconModule,
     MatCardModule,
-    MatExpansionModule,
-    EventCardComponent
+    MatExpansionModule
   ],
 })
 export class EventDetailsPageModule {}

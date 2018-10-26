@@ -5,7 +5,7 @@ import { EventCardComponent } from './../../shared/event-card/event-card';
 
 @NgModule({
   declarations: [
-    HomePage,,
+    HomePage,
     EventCardComponent
   ],
   imports: [

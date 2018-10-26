@@ -22,11 +22,18 @@ export class EventDetailsPage {
   removable = true;
   addOnBlur = true;
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
-  event: any;
+  event: any = {};
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams) { 
+    this.event.id = this.navParams.data.id;
+    console.log(this.event.id);
     this.setViewMode();
+    this.mockEvent();
+  }
+
+  private mockEvent() {
     this.event = {
+      id: this.event.id,
       name: 'Sample Title',
       date: new Date(),
       description: 'Descriptionwordswordswords',
@@ -38,10 +45,10 @@ export class EventDetailsPage {
         'rewarding'
       ],
       attendees: [
-        {firstName: 'Bob', lastName: 'Dole', email: 'bdole@bedull.com'}
+        { firstName: 'Bob', lastName: 'Dole', email: 'bdole@bedull.com' }
       ],
       organizers: []
-    }
+    };
   }
 
   ionViewDidLoad() {
