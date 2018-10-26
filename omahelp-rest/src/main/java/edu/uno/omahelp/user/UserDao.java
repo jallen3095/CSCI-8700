@@ -19,28 +19,22 @@ class UserDao {
 		return "From DAO layer!";
 	}
 	
-    public List<User> listAllUsers() {
-
-        try {
-            Connection connection = getConnection();
-            Statement stmt = connection.createStatement();
-            String sql;
-            sql = "SELECT * FROM USER";
-            ResultSet rs = stmt.executeQuery(sql);
-            List<User> users = new ArrayList<User>();
-            while(rs.next()) {
-                String firstName = rs.getString("first_name");
-                String lastName = rs.getString("last_name");
-                String email = rs.getString("email");
-                String password = rs.getString("password");
-                users.add(new User(email, firstName, lastName, password));
-            }
-
-            return users;
-
-        } catch (Exception e) {
-            return null;
+    public List<User> listAllUsers() throws URISyntaxException, SQLException {
+        Connection connection = getConnection();
+        Statement stmt = connection.createStatement();
+        String sql;
+        sql = "SELECT * FROM \"User\"";
+        ResultSet rs = stmt.executeQuery(sql);
+        List<User> users = new ArrayList<User>();
+        while(rs.next()) {
+            String firstName = rs.getString("first_name");
+            String lastName = rs.getString("last_name");
+            String email = rs.getString("email");
+            String password = rs.getString("password");
+            users.add(new User(email, firstName, lastName, password));
         }
+
+        return users;
     }
 
     private Connection getConnection() throws URISyntaxException, SQLException {
