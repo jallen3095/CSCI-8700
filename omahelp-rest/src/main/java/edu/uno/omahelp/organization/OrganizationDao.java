@@ -1,4 +1,4 @@
-package edu.uno.omahelp.user;
+package edu.uno.omahelp.organization;
 
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -13,30 +13,28 @@ import java.util.List;
 import org.springframework.stereotype.Component;
 
 @Component
-class UserDao {
+class OrganizationDao {
 
-    public List<User> listAllUsers() throws URISyntaxException, SQLException {
+    public List<Organization> listAllOrganizations() throws URISyntaxException, SQLException {
         Connection connection = getConnection();
         Statement stmt = connection.createStatement();
         String sql;
-        sql = "SELECT * FROM \"User\"";
+        sql = "SELECT * FROM \"Organization\"";
         ResultSet rs = stmt.executeQuery(sql);
-        List<User> users = new ArrayList<User>();
+        List<Organization> orgs = new ArrayList<>();
         while(rs.next()) {
-            int userId = rs.getInt("user_id");
-            String firstName = rs.getString("first_name");
-            String lastName = rs.getString("last_name");
-            String email = rs.getString("email");
-            String password = rs.getString("password");
-            boolean admin = rs.getBoolean("is_site_admin");
-            users.add(new User(userId, firstName, lastName, email, password, admin));
+        	Organization org = new Organization();
+            org.setId(rs.getInt("org_id"));
+            org.setName(rs.getString("org_name"));
+            org.setPhone(rs.getString("phone"));
+            org.setAddress(rs.getString("address"));
+            orgs.add(org);
         }
 
-        return users;
+        return orgs;
     }
 
     private Connection getConnection() throws URISyntaxException, SQLException {
-        
         URI dbURI = null;
 
         if(System.getenv("DATABASE_URL") != null) {
@@ -48,7 +46,9 @@ class UserDao {
 
 		String username = dbURI.getUserInfo().split(":")[0];
 		String password = dbURI.getUserInfo().split(":")[1];
-		String dbUrl = "jdbc:postgresql://" + dbURI.getHost() + ':' + dbURI.getPort() + dbURI.getPath() + "?sslmode=require";
+		String dbUrl = "jdbc:postgresql://" + dbURI.getHost() + ':'
+                + dbURI.getPort() + dbURI.getPath()
+                + "?sslmode=require";
 		return DriverManager.getConnection(dbUrl, username, password);
 	}
 }

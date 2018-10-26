@@ -1,4 +1,4 @@
-package edu.uno.omahelp.user;
+package edu.uno.omahelp.organization;
 
 import java.net.URISyntaxException;
 import java.sql.SQLException;
@@ -9,19 +9,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("user/")
-public class UserController {
+@RequestMapping("organization/")
+public class OrganizationController {
 
 	@Autowired
-    private UserDao userDao;
-
-    @RequestMapping("register")
-    public String registerUser() {
-        return "Register";
-    }
+    private OrganizationDao organizationDao;
 
     @RequestMapping("list") 
-    public List<User> listAllUsers() throws URISyntaxException, SQLException {
-        return userDao.listAllUsers();
+    public List<Organization> listAllOrganizations() throws URISyntaxException, SQLException {
+        return organizationDao.listAllOrganizations();
     }
+
 }

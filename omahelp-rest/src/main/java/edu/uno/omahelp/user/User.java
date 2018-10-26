@@ -2,28 +2,29 @@ package edu.uno.omahelp.user;
 
 public class User {
 
-    private String  username;
+    private int     userId;
     private String  firstName;
     private String  lastName;
-    private String  area;
     private String  email;
     private String  password;
     private boolean admin;
 
-    public User(String email, String firstName, String lastName, String password) {
+    public User(int userId, String firstName, String lastName, String email, String password, boolean admin) {
         super();
-        this.email = email;
-        this.firstName = firstName;
+        this.userId = userId;
+        this. firstName = firstName;
         this.lastName = lastName;
+        this.email = email;
         this.password = password;
+        this.admin = admin;
     }
 
-    public String getUsername() {
-        return username;
+    public int getUserId() {
+        return userId;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
     public String getFirstName() {
@@ -40,14 +41,6 @@ public class User {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
-    }
-
-    public String getArea() {
-        return area;
-    }
-
-    public void setArea(String area) {
-        this.area = area;
     }
 
     public String getEmail() {
