@@ -8,10 +8,14 @@ export class UserService {
 
   register(userData: any) {
     // TODO
+    // Send: User Object
+    // Recieve: User Object/failure
   }
 
   editAccount(userData: any) {
     // TODO
+    // Send: User Object
+    // Recieve: User Object/failure
   }
 
   login(user: any) {

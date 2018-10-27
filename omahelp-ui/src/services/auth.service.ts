@@ -8,7 +8,9 @@ export class AuthService {
   constructor(private UserService: UserService) {}
 
   authorize(userData: any) {
-      // TODO: Login here
+    // TODO: Login here
+    // Send: User email, user password
+    // Recieve: user object/failure
       this.authorized = true;
   }
 

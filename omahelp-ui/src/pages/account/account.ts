@@ -23,6 +23,10 @@ export class AccountPage {
     this.mockUser();
   }
 
+  submit() {
+    // TODO
+  }
+
   mockUser() {
     this.user = {
       firstName: "Person",
