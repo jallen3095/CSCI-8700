@@ -15,10 +15,20 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class AccountPage {
   mode: string;
-  user: any;
+  user: any = {};
+  edit: any = {};
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
     this.setViewMode();
+    this.mockUser();
+  }
+
+  mockUser() {
+    this.user = {
+      firstName: "Person",
+      lastName: "McGuy",
+      email: "contact@here.com"
+    }
   }
 
   ionViewDidLoad() {
@@ -38,6 +48,7 @@ export class AccountPage {
   }
 
   setEditMode() {
+    this.edit = JSON.parse(JSON.stringify(this.user));
     this.mode = 'edit';
   }
 

@@ -11,7 +11,7 @@ export class HomePage {
   eventsToShow: any[] = [];
   filterText: string;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(private navCtrl: NavController, private navParams: NavParams) {
     this.mockData();
     this.eventsToShow = this.events;
   }

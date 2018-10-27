@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
 import { AuthService } from '../../services/auth.service';
 import { HomePage } from '../home/home';
 
@@ -17,9 +17,10 @@ import { HomePage } from '../home/home';
 })
 export class LoginPage {
   mode: string;
-  loginData: { username: string, password: string } = {username: null, password: null};
+  loginData: { email: string, password: string } = {email: null, password: null};
+  registrationData: any = {};
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private AuthService: AuthService) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private AuthService: AuthService, private toastController: ToastController) {
     this.setLoginMode();
   }
 
@@ -29,6 +30,18 @@ export class LoginPage {
 
   register() {
     // TODO
+    this.checkPasswords();
+  }
+
+  checkPasswords() {
+    if (this.registrationData.password != this.registrationData.passwordConfirmation) {
+      const toast = this.toastController.create({
+        message: 'Passwords must match!',
+        duration: 3000
+      });
+      toast.present();
+      return;
+    }
   }
 
   setRegisterMode() {

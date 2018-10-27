@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import {COMMA, ENTER} from '@angular/cdk/keycodes';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import {MatChipInputEvent} from '@angular/material';
+import { MatChipInputEvent } from '@angular/material';
 
 /**
  * Generated class for the EventDetails page.
@@ -23,12 +23,17 @@ export class EventDetailsPage {
   addOnBlur = true;
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
   event: any = {};
+  edit: any = {};
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) { 
+  constructor(public navCtrl: NavController, public navParams: NavParams) {
     this.event.id = this.navParams.data.id;
     console.log(this.event.id);
-    this.setViewMode();
-    this.mockEvent();
+    if (!this.event.id) {
+      this.setCreateMode();
+    } else {
+      this.mockEvent();
+      this.setViewMode();
+    }
   }
 
   private mockEvent() {
@@ -45,9 +50,12 @@ export class EventDetailsPage {
         'rewarding'
       ],
       attendees: [
-        { firstName: 'Bob', lastName: 'Dole', email: 'bdole@bedull.com' }
+        { firstName: 'Bob', lastName: 'Dole', email: 'bdole@bedull.com' },
+        { firstName: 'Watsis', lastName: 'Face', email: 'sample@email.com' }
       ],
-      organizers: []
+      organizers: [
+        { firstName: 'Guy', lastName: 'Encharj', email: 'theman@email.com' }
+      ]
     };
   }
 
@@ -78,6 +86,7 @@ export class EventDetailsPage {
   }
 
   setEditMode() {
+    this.edit = JSON.parse(JSON.stringify(this.event));
     this.mode = 'edit';
   }
 

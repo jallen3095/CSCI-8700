@@ -9,12 +9,12 @@
 
 <ion-content padding>
 <ion-grid>
-  <ion-row *ngIf="loginMode()" align-items-center>
+  <div *ngIf="loginMode()" align-items-center>
     <ion-row>
-      <ion-col col-12 align-self-center>
+      <ion-col col-xs-12 col-md-6 col-lg-4 align-self-center>
         <form>
           <mat-form-field class="full-width">
-            <input matInput name="user" placeholder="Username" [(ngModel)]="loginData.username" required>
+            <input matInput name="email" placeholder="Email" [(ngModel)]="loginData.email" required>
           </mat-form-field>
 
           <mat-form-field class="full-width">
@@ -25,41 +25,41 @@
     </ion-row>
 
     <ion-row>
-      <ion-col><button ion-button (click)="login()">Login</button></ion-col>
-      <ion-col><button ion-button color="secondary" (click)="setRegisterMode()">Register</button></ion-col>
+      <ion-col col-xs-12 col-sm-4 col-md-2><button ion-button (click)="login()">Login</button></ion-col>
+      <ion-col col-xs-12 col-sm-4 col-md-2><button ion-button color="secondary" (click)="setRegisterMode()">Register</button></ion-col>
     </ion-row>
-  </ion-row>
+  </div>
   
-  <ion-row *ngIf="registerMode()"  align-items-center>
+  <div *ngIf="registerMode()"  align-items-center>
     <ion-row>
-      <ion-col col-12 align-self-center>
+      <ion-col  col-xs-12 col-md-6 col-lg-4  align-self-center>
         <form>
           <mat-form-field class="full-width">
-            <input matInput type="email" placeholder="Email" required>
+            <input matInput name="email" type="email" placeholder="Email" [(ngModel)]="registrationData.email" required>
           </mat-form-field>
           
           <mat-form-field class="full-width">
-            <input matInput placeholder="First Name" required>
+            <input matInput name="fname" placeholder="First Name" [(ngModel)]="registrationData.firstName" required>
           </mat-form-field>
           
           <mat-form-field class="full-width">
-            <input matInput placeholder="Last Name" required>
+            <input matInput name="lname" placeholder="Last Name" [(ngModel)]="registrationData.lastName" required>
           </mat-form-field>
 
           <mat-form-field class="full-width">
-            <input matInput type="password" placeholder="Password" required>
+            <input matInput name="regpass" type="password" placeholder="Password" [(ngModel)]="registrationData.password" required>
           </mat-form-field>
           <mat-form-field class="full-width">
-            <input matInput type="password" placeholder="Confirm Password" required>
+            <input matInput name="regpassconf" type="password" placeholder="Confirm Password" [(ngModel)]="registrationData.passwordConfirmation" required>
           </mat-form-field>
         </form>
       </ion-col>
     </ion-row>
     
     <ion-row>
-      <ion-col><button ion-button (click)="register()">Register</button></ion-col>
-      <ion-col><button ion-button color="secondary" (click)="setLoginMode()">Login</button></ion-col>
+      <ion-col col-xs-12 col-sm-4 col-md-2><button ion-button (click)="register()">Register</button></ion-col>
+      <ion-col col-xs-12 col-sm-4 col-md-2><button ion-button color="secondary" (click)="setLoginMode()">Login</button></ion-col>
     </ion-row>
-  </ion-row>
+  </div>
 </ion-grid>
 </ion-content>

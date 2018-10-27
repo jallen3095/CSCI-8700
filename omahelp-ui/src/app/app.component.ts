@@ -7,7 +7,7 @@ import { HomePage } from '../pages/home/home';
 import { MyEventsPage } from '../pages/my-events/my-events';
 import { LoginPage } from '../pages/login/login';
 import { AccountPage } from '../pages/account/account';
-import { EventDetailsPage } from '../pages/event-details/event-details';
+// import { EventDetailsPage } from '../pages/event-details/event-details';
 import { AuthService } from '../services/auth.service';
 
 @Component({
@@ -37,9 +37,9 @@ export class MyApp {
     this.platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
+      this.nav.setRoot(LoginPage);
       this.statusBar.styleDefault();
       this.splashScreen.hide();
-      this.nav.setRoot(LoginPage);
     });
   }
 

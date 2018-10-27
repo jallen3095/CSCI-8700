@@ -9,5 +9,44 @@
 
 
 <ion-content padding>
-<button mat-button>Click me!</button>
+  <div *ngIf="viewMode()"  align-items-center>
+    <ion-row>
+      <ion-col col-xs-12 col-md-2><strong>Email:</strong></ion-col>
+      <ion-col>{{user.email}}</ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-xs-12 col-md-2><strong>First Name:</strong></ion-col>
+      <ion-col>{{user.firstName}}</ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-xs-12 col-md-2><strong>Last Name:</strong></ion-col>
+      <ion-col>{{user.lastName}}</ion-col>
+    </ion-row>
+    <br>
+    <ion-row><ion-col col-xs-12 col-sm-4 col-md-2><button ion-button (click)="setEditMode()">Edit</button></ion-col></ion-row>
+  </div>
+  <div *ngIf="editMode()"  align-items-center>
+    <ion-row>
+      <ion-col  col-xs-12 col-md-6 col-lg-4  align-self-center>
+        <form>
+          <mat-form-field class="full-width">
+            <input matInput name="email" type="email" placeholder="Email" [(ngModel)]="edit.email" required>
+          </mat-form-field>
+          
+          <mat-form-field class="full-width">
+            <input matInput name="fname" placeholder="First Name" [(ngModel)]="edit.firstName" required>
+          </mat-form-field>
+          
+          <mat-form-field class="full-width">
+            <input matInput name="lname" placeholder="Last Name" [(ngModel)]="edit.lastName" required>
+          </mat-form-field>
+        </form>
+      </ion-col>
+    </ion-row>
+    
+    <ion-row>
+      <ion-col col-xs-12 col-sm-4 col-md-2><button ion-button (click)="register()">Submit</button></ion-col>
+      <ion-col col-xs-12 col-sm-4 col-md-2><button ion-button color="secondary" (click)="setViewMode()">Cancel</button></ion-col>
+    </ion-row>
+  </div>
 </ion-content>

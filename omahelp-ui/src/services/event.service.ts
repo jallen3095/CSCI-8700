@@ -5,6 +5,14 @@ export class EventService {
 
   constructor() {}
 
+  listEvents() {
+      // TODO
+  }
+
+  listMyEvents() {
+      // TODO
+  }
+
   create(event: any) {
     // TODO
   }

@@ -7,14 +7,23 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content>
-<mat-selection-list #shoes>
-  <mat-list-option *ngFor="let shoe of typesOfShoes">
-    {{shoe}}
-  </mat-list-option>
-</mat-selection-list>
-
-<p>
-  Options selected: {{shoes.selectedOptions.selected.length}}
-</p>
+<ion-content padding>
+  <ion-row>
+    <ion-col col-lg-10 col-sm-9><h3>My Events</h3></ion-col>
+    <ion-col col-lg-2 col-sm-3><button ion-button (click)="goToCreateEvent()">Create Event</button></ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col col-xs-12 col-lg-4>
+      <ion-item>
+        <ion-label floating>Filter Events</ion-label>
+        <ion-input type="text" [(ngModel)]="filterText" (ngModelChange)="filterEvents($event)"></ion-input>
+      </ion-item>
+    </ion-col>
+  </ion-row>
+  <br>
+  <ion-list>
+    <div *ngFor="let event of eventsToShow">
+      <event-card [event]="event"></event-card>
+    </div>
+  </ion-list>
 </ion-content>

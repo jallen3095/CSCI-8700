@@ -11,8 +11,9 @@
         {{p.title}}
       </button>
     </ion-list>
+    <!-- <ion-row><ion-col><span (click)="AuthService.logout()">Logout</span></ion-col></ion-row> -->
+    <button class="logout" ion-button full color="light" (click)="AuthService.logout()">Logout</button>
   </ion-content>
-
 </ion-menu>
 
 <!-- Disable swipe-to-go-back because it's poor UX to combine STGB with side menus -->

@@ -15,6 +15,16 @@
       <mat-expansion-panel>
         <mat-expansion-panel-header>
           <mat-panel-title>
+            Organizers
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <ion-list *ngFor="let user of event.organizers">
+          <ion-item>{{user.firstName}} {{user.lastName}}, {{user.email}}</ion-item>
+        </ion-list>
+      </mat-expansion-panel>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
             Attendees
           </mat-panel-title>
         </mat-expansion-panel-header>
@@ -34,6 +44,6 @@
   </mat-card-content>
   <ion-row>
     <ion-col col-xs-12 col-sm-6 col-md-2><button ion-button (click)="attend()">Attend</button></ion-col>
-    <ion-col col-xs-12 col-sm-6 col-md-2><button ion-button color="secondary" (click)="like()">Like</button></ion-col>
+    <ion-col col-xs-12 col-sm-6 col-md-2><button ion-button color="secondary" (click)="like()">Interested</button></ion-col>
   </ion-row>
 </mat-card>

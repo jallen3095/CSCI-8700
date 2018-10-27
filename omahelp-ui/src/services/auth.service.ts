@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { UserService, UserService } from './user.service';
+import { UserService } from './user.service';
 
 @Injectable()
 export class AuthService {
@@ -19,5 +19,7 @@ export class AuthService {
   logout() {
       this.authorized = false;
       this.UserService.logout();
+      console.log("reloading");
+      window.location.reload();
   }
 }

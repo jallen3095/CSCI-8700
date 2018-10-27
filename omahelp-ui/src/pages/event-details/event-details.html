@@ -13,7 +13,8 @@
     
     <div *ngIf="viewMode()">
       <event-card [event]="event" [detailed]="true"></event-card>
-      <ion-col col-xs-12 col-sm-4 col-md-2><button ion-button (click)="setEditMode()">Edit</button></ion-col>
+      <br>
+      <ion-row><ion-col col-xs-12 col-sm-4 col-md-2><button ion-button (click)="setEditMode()">Edit</button></ion-col></ion-row>
     </div>
  
     <div *ngIf="editMode() || createMode()">
@@ -21,30 +22,30 @@
         <ion-col col-12 align-self-center>
           <form>
             <mat-form-field class="full-width">
-              <input matInput type="text" placeholder="Name" [(ngModel)]="event.name" name="name" required>
+              <input matInput type="text" placeholder="Name" [(ngModel)]="edit.name" name="name" required>
             </mat-form-field>
             
             <mat-form-field class="full-width">
-              <input matInput type="textarea" placeholder="Description" [(ngModel)]="event.description" name="description" required>
+              <input matInput type="textarea" placeholder="Description" [(ngModel)]="edit.description" name="description" required>
             </mat-form-field>
             
             <ion-item class="full-width">
               <ion-label>Date</ion-label>
-              <ion-datetime displayFormat="MMM D, YYYY h:m a" [(ngModel)]="event.date" name="date"></ion-datetime>
+              <ion-datetime displayFormat="MMM D, YYYY h:m a" [(ngModel)]="edit.date" name="date"></ion-datetime>
             </ion-item>
             <br>
 
             <mat-form-field class="full-width">
-              <input matInput type="text" placeholder="Address" [(ngModel)]="event.address" name="address" required>
+              <input matInput type="text" placeholder="Address" [(ngModel)]="edit.address" name="address" required>
             </mat-form-field>
             
             <mat-form-field class="full-width">
-              <input matInput type="text" placeholder="Area" [(ngModel)]="event.area" name="area" required>
+              <input matInput type="text" placeholder="Area" [(ngModel)]="edit.area" name="area" required>
             </mat-form-field>
 
             <mat-form-field class="full-width">
               <mat-chip-list #chipList>
-                <mat-chip *ngFor="let tag of event.tags" [selectable]="selectable"
+                <mat-chip *ngFor="let tag of edit.tags" [selectable]="selectable"
                           [removable]="removable" (removed)="removeTag(tag)">
                   {{tag}}
                   <mat-icon matChipRemove *ngIf="removable">x</mat-icon>

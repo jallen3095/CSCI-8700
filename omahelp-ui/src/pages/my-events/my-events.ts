@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, IonicPage } from 'ionic-angular';
+import { EventDetailsPage } from '../event-details/event-details';
 
 @IonicPage()
 @Component({
@@ -7,33 +8,68 @@ import { NavController, NavParams, IonicPage } from 'ionic-angular';
   templateUrl: 'my-events.html'
 })
 export class MyEventsPage {
-  selectedItem: any;
-  icons: string[];
-  items: Array<{title: string, note: string, icon: string}>;
-  typesOfShoes: any;
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
-    this.typesOfShoes = ['Boots', 'Clogs', 'Loafers', 'Moccasins', 'Sneakers'];
-    // If we navigated to this page, we will have an item available as a nav param
-    this.selectedItem = navParams.get('item');
+  events: any[] = [];
+  eventsToShow: any[] = [];
+  filterText: string;
 
-    // Let's populate this page with some filler content for funzies
-    this.icons = ['flask', 'wifi', 'beer', 'football', 'basketball', 'paper-plane',
-    'american-football', 'boat', 'bluetooth', 'build'];
-
-    this.items = [];
-    for (let i = 1; i < 11; i++) {
-      this.items.push({
-        title: 'Item ' + i,
-        note: 'This is item #' + i,
-        icon: this.icons[Math.floor(Math.random() * this.icons.length)]
-      });
-    }
+  constructor(private navCtrl: NavController, private navParams: NavParams) {
+    this.mockData();
+    this.eventsToShow = this.events;
+    // console.log(this.eventsToShow, this.events);
   }
 
-  itemTapped(event, item) {
-    // That's right, we're pushing to ourselves!
-    this.navCtrl.push(MyEventsPage, {
-      item: item
-    });
+  goToCreateEvent() {
+    this.navCtrl.push(EventDetailsPage);
+  }
+
+  filterEvents() {
+    this.eventsToShow = this.filter(this.events, this.filterText);
+  }
+
+  mockData(): void {
+    const event = {
+      name: 'Sample Title',
+      date: new Date(),
+      description: 'Descriptionwordswordswords',
+      address: 'Sample Street, SA SAMPLE',
+      area: 'Dundee',
+      tags: [
+        'fun',
+        'exciting',
+        'rewarding'
+      ],
+      attendees: [
+        {firstName: 'Bob', lastName: 'Dole', email: 'bdole@bedull.com'}
+      ],
+      organizers: []
+    }
+
+    for (let i = 0; i < 50; i++) {
+      this.events.push(JSON.parse(JSON.stringify(event)));
+    }
+    this.events[25].name = "Example Event";
+    this.events[25].description = "searchin";
+    this.events[25].tags[1] = "wat";
+  }
+
+  filter(array: any[], string: string): any[] {
+    let returnArr = [];
+    if (string === null || string === '') {
+      return array;
+    }
+    for (let event of array) {
+      if (event.name.toUpperCase().indexOf(string.toUpperCase()) >= 0
+        || event.description.toUpperCase().indexOf(string.toUpperCase()) >= 0) {
+        returnArr.push(event);
+        continue;
+      }
+      for(let tag of event.tags) {
+        if (tag.toUpperCase().indexOf(string.toUpperCase()) >= 0) {
+          returnArr.push(event);
+          continue;
+        }
+      }
+    }
+    return returnArr;
   }
 }
