@@ -24,6 +24,24 @@ class UserDao {
         return stmt.execute(sql);
     }
 
+    public User login(String email, String password) throws Exception {
+        Connection connection = getConnection();
+        Statement stmt = connection.createStatement();
+        String sql;
+        sql = String.format("SELECT * FROM \"User\" WHERE email = %s and password = %s", email, password);
+        ResultSet rs = stmt.executeQuery(sql);
+        if(rs.next()) {
+            int userId = rs.getInt("user_id");
+            String firstName = rs.getString("first_name");
+            String lastName = rs.getString("last_name");
+            boolean admin = rs.getBoolean("is_site_admin");
+            User user = new User(userId, firstName, lastName, email, password, admin);
+            return user;
+        } else {
+            throw new Exception("Invalid Email or Password!");
+        }
+    }
+
     public List<User> listAllUsers() throws URISyntaxException, SQLException {
         Connection connection = getConnection();
         Statement stmt = connection.createStatement();

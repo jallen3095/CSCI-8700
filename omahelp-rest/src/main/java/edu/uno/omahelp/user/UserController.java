@@ -25,6 +25,11 @@ public class UserController {
         return userDao.createUser(userId, firstName, lastName, email, password, admin);
     }
 
+    @RequestMapping("login")
+    public User login(@RequestParam String email, @RequestParam String password) throws Exception {
+        return userDao.login(email, password);
+    }
+
     @RequestMapping("list") 
     public List<User> listAllUsers() throws URISyntaxException, SQLException {
         return userDao.listAllUsers();
