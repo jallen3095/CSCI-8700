@@ -15,6 +15,15 @@ import org.springframework.stereotype.Component;
 @Component
 class UserDao {
 
+    public boolean createUser(int userId, String firstName, String lastName, String email, String password, boolean admin) throws URISyntaxException, SQLException {
+        Connection connection = getConnection();
+        Statement stmt = connection.createStatement();
+        String sql;
+        sql = String.format("INSERT INTO \"User\" VALUES (%d, %s, %s, %s, %s, %b)", userId, firstName, lastName, email, password, admin);
+        
+        return stmt.execute(sql);
+    }
+
     public List<User> listAllUsers() throws URISyntaxException, SQLException {
         Connection connection = getConnection();
         Statement stmt = connection.createStatement();
