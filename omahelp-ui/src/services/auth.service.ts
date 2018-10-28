@@ -1,17 +1,24 @@
 import { Injectable } from '@angular/core';
 import { UserService } from './user.service';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable()
 export class AuthService {
   authorized: boolean = false;
+  serverUrl: string = 'someurl/user';
 
-  constructor(private UserService: UserService) {}
+  constructor(private UserService: UserService, private http: HttpClient) {}
 
-  authorize(userData: any) {
+  authorize(email: string, password: string) {
     // TODO: Login here
     // Send: User email, user password
     // Recieve: user object/failure
-      this.authorized = true;
+    const login = {
+        email: email,
+        password: password
+    };
+    // return this.http.post(`${this.serverUrl}/login`, login);
+    this.authorized = true;
   }
 
   isAuthorized(): boolean {
@@ -21,7 +28,6 @@ export class AuthService {
   logout() {
       this.authorized = false;
       this.UserService.logout();
-      console.log("reloading");
       window.location.reload();
   }
 }

@@ -44,6 +44,7 @@ export class AccountPage {
   }
 
   setViewMode() {
+    this.edit = {};
     this.mode = 'view';
   }
 

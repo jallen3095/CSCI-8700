@@ -1,28 +1,32 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable()
 export class UserService {
-  user: any;
+    user: any;
+    serverUrl: string = 'someurl/user';
 
-  constructor() {}
+    constructor(private http: HttpClient) {}
 
-  register(userData: any) {
-    // TODO
-    // Send: User Object
-    // Recieve: User Object/failure
-  }
+    register(userData: any) {
+        // TODO
+        // Send: User Object
+        // Recieve: User Object/failure
+        return this.http.post(`${this.serverUrl}/register`, userData);
+    }
 
-  editAccount(userData: any) {
-    // TODO
-    // Send: User Object
-    // Recieve: User Object/failure
-  }
+    editAccount(userData: any) {
+        // TODO
+        // Send: User Object
+        // Recieve: User Object/failure
+        return this.http.post(`${this.serverUrl}/edit`, userData);
+    }
 
-  login(user: any) {
-      this.user = user;
-  }
+    login(user: any) {
+        this.user = user;
+    }
 
-  logout() {
-      this.user = null;
-  }
+    logout() {
+        this.user = null;
+    }
 }
