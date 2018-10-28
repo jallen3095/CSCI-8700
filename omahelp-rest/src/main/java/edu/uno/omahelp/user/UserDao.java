@@ -14,14 +14,27 @@ import org.springframework.stereotype.Component;
 
 @Component
 class UserDao {
-
-    public boolean createUser(int userId, String firstName, String lastName, String email, String password, boolean admin) throws URISyntaxException, SQLException {
+    
+    public int createUser(String firstName, String lastName, String email, String password, boolean admin) throws URISyntaxException, SQLException {
         Connection connection = getConnection();
         Statement stmt = connection.createStatement();
         String sql;
-        sql = String.format("INSERT INTO \"User\" VALUES (%d, %s, %s, %s, %s, %b)", userId, firstName, lastName, email, password, admin);
-        
-        return stmt.execute(sql);
+        sql = String.format("INSERT INTO \"User\" (first_name, last_name, email, password, is_site_admin) VALUES (%s, %s, %s, %s, %b)", firstName, lastName, email, password, admin);
+        return stmt.executeUpdate(sql);
+    }
+
+    public boolean update(User user) throws URISyntaxException, SQLException {
+        Connection connection = getConnection();
+        Statement stmt = connection.createStatement();
+        String sql;
+        sql = String.format("UPDATE \"User\" SET email = %s AND first_name = %s AND last_name = %s WHERE user_id = %d", user.getEmail(), user.getFirstName(), user.getLastName(), user.getUserId());
+        int res = stmt.executeUpdate(sql);
+
+        if(res > 0) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public User login(String email, String password) throws Exception {
@@ -63,7 +76,6 @@ class UserDao {
     }
 
     private Connection getConnection() throws URISyntaxException, SQLException {
-        
         URI dbURI = null;
 
         if(System.getenv("DATABASE_URL") != null) {
@@ -75,7 +87,8 @@ class UserDao {
 
 		String username = dbURI.getUserInfo().split(":")[0];
 		String password = dbURI.getUserInfo().split(":")[1];
-		String dbUrl = "jdbc:postgresql://" + dbURI.getHost() + ':' + dbURI.getPort() + dbURI.getPath() + "?sslmode=require";
+        String dbUrl = "jdbc:postgresql://" + dbURI.getHost() + ':' + dbURI.getPort() + dbURI.getPath() + "?sslmode=require";
+        
 		return DriverManager.getConnection(dbUrl, username, password);
 	}
 }
