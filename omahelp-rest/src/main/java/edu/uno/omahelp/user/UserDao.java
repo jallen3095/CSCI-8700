@@ -4,6 +4,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -32,6 +33,7 @@ public class UserDao {
         stmt.setString(1, user.getEmail());
         stmt.setString(2, user.getFirstName());
         stmt.setString(3, user.getLastName());
+        stmt.setInt(4, user.getUserId());
         stmt.executeUpdate();
     }
     
@@ -76,7 +78,7 @@ public class UserDao {
         ResultSet rs = stmt.executeQuery();
         if(rs.next()) {
             User user = mapUser(rs);
-            
+
             return user;
         }
         
