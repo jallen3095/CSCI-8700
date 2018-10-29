@@ -10,85 +10,78 @@ import edu.uno.omahelp.user.User;
 @JsonInclude(Include.NON_EMPTY)
 public class Event {
 
-    private int id;
-    private String name;
-    private String description;
-    private String location;
-    private String area;
-    private String date;
-    private List<User> attendees;
-    private List<User> organizers;
-    private List<String> tags;
+	private int id;
+	private String name;
+	private String description;
+	private String location;
+	private String date;
 
-    public int getId() {
-        return id;
-    }
+	private List<User> attendees;
+	private List<User> organizers;
+	private List<String> tags;
 
-    public void setId(int id) {
-        this.id = id;
-    }
+	public int getId() {
+		return id;
+	}
 
-    public String getName() {
-        return name;
-    }
+	public void setId(int id) {
+		this.id = id;
+	}
 
-    public void setName(String name) {
-        this.name = name;
-    }
+	public String getName() {
+		return name;
+	}
 
-    public String getDescription() {
-        return description;
-    }
+	public void setName(String name) {
+		this.name = name;
+	}
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
+	public String getDescription() {
+		return description;
+	}
 
-    public String getLocation() {
-        return location;
-    }
+	public void setDescription(String description) {
+		this.description = description;
+	}
 
-    public void setLocation(String location) {
-        this.location = location;
-    }
+	public String getLocation() {
+		return location;
+	}
 
-    public String getArea() {
-        return area;
-    }
+	public void setLocation(String location) {
+		this.location = location;
+	}
 
-    public void setArea(String area) {
-        this.area = area;
-    }
+	public String getDate() {
+		return date;
+	}
 
-    public String getDate() {
-        return date;
-    }
+	public void setDate(String date) {
+		this.date = date;
+	}
 
-    public void setDate(String date) {
-        this.date = date;
-    }
+	public List<User> getAttendees() {
+		return attendees;
+	}
 
-    public List<User> getAttendees() {
-    	return attendees;
-    }
+	public void setAttendees(List<User> attendees) {
+		this.attendees = attendees;
+	}
 
-    public void setAttendees(List<User> attendees) {
-    	this.attendees = attendees;
-    }
+	public List<User> getOrganizers() {
+		return organizers;
+	}
 
-    public List<User> getOrganizers() {
-    	return organizers;
-    }
+	public void setOrganizers(List<User> organizers) {
+		this.organizers = organizers;
+	}
 
-    public void setOrganizers(List<User> organizers) {
-    	this.organizers = organizers;
-    }
+	public List<String> getTags() {
+		return tags;
+	}
 
-    public List<String> getTags() {
-    	return tags;
-    }
-
-    public void setTags(List<String> tags) {
-    	this.tags = tags;
-    }
+	public void setTags(List<String> tags) {
+		this.tags = tags;
+	}
+	
 }
