@@ -21,7 +21,7 @@ class EventDao {
           String sql;
           sql = "SELECT * FROM \"Event\"";
           ResultSet rs = stmt.executeQuery(sql);
-          List<Organization> orgs = new ArrayList<>();
+          List<Event> events = new ArrayList<>();
           while(rs.next()) {
             Event event = new Event();
               event.setId(rs.getInt("event_id"));
@@ -29,10 +29,10 @@ class EventDao {
               event.setLocation(rs.getString("event_address"));
               event.setDate(rs.getString("event_date"));
               event.setDescription(rs.getString("event_description"));
-              orgs.add(org);
+              events.add(event);
           }
 
-          return orgs;
+          return events;
       }
 
       private Connection getConnection() throws URISyntaxException, SQLException {

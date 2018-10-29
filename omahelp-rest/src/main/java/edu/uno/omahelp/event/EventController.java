@@ -21,4 +21,9 @@ public class EventController {
 
     //@RequestMapping("/event/register")
     //public String registerEvent() {}
+
+    @RequestMapping(value = "list", method = RequestMethod.GET)
+    public List<Event> listAllEvent() throws URISyntaxException, SQLException {
+        return eventDao.listAllEvents();
+    }
 }
