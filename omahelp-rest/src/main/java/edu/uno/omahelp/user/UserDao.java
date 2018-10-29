@@ -13,7 +13,7 @@ import java.util.List;
 import org.springframework.stereotype.Component;
 
 @Component
-class UserDao {
+public class UserDao {
     
     public int createUser(String firstName, String lastName, String email, String password, boolean admin) throws URISyntaxException, SQLException {
         Connection connection = getConnection();
@@ -75,6 +75,25 @@ class UserDao {
         return users;
     }
 
+    public User getUser(int userId) throws URISyntaxException, SQLException {
+        Connection connection = getConnection();
+        Statement stmt = connection.createStatement();
+        String sql;
+        sql = "SELECT * FROM \"User\"";
+        ResultSet rs = stmt.executeQuery(sql);
+        List<User> users = new ArrayList<User>();
+        while(rs.next()) {
+            userId = rs.getInt("user_id");
+            String firstName = rs.getString("first_name");
+            String lastName = rs.getString("last_name");
+            String email = rs.getString("email");
+            String password = rs.getString("password");
+            boolean admin = rs.getBoolean("is_site_admin");
+            return new User(userId, firstName, lastName, email, password, admin);
+        }
+        return null;
+    }
+    
     private Connection getConnection() throws URISyntaxException, SQLException {
         URI dbURI = null;
 
