@@ -34,6 +34,7 @@ class EventDao {
         while(rs.next()) {
             events.add(mapEvent(rs));
         }
+        
         return events;
     }
     
@@ -46,6 +47,7 @@ class EventDao {
         while(rs.next()) {
             events.add(mapEvent(rs));
         }
+        
         return events;
     }
     
@@ -142,7 +144,7 @@ class EventDao {
         List<User> users = new ArrayList<>();
         while (rs.next()) {
         	int userId = rs.getInt("user_id");
-        	User user = userDao.getUser(userId);
+        	User user = userDao.getUserById(userId);
         	users.add(user);
         }
         return users;
@@ -160,10 +162,8 @@ class EventDao {
 
 		String username = dbURI.getUserInfo().split(":")[0];
 		String password = dbURI.getUserInfo().split(":")[1];
-		String dbUrl = "jdbc:postgresql://" + dbURI.getHost() + ':'
-                + dbURI.getPort() + dbURI.getPath()
-                + "?sslmode=require";
+		String dbUrl = "jdbc:postgresql://" + dbURI.getHost() + ':' + dbURI.getPort() + dbURI.getPath() + "?sslmode=require";
+                
 		return DriverManager.getConnection(dbUrl, username, password);
 	}
-
 }

@@ -15,40 +15,41 @@ import org.springframework.stereotype.Component;
 @Component
 public class UserDao {
     
-    public int createUser(String firstName, String lastName, String email, String password, boolean admin) throws URISyntaxException, SQLException {
+    public void createUser(User user) throws URISyntaxException, SQLException {
         Connection connection = getConnection();
-        Statement stmt = connection.createStatement();
-        String sql;
-        sql = String.format("INSERT INTO \"User\" (first_name, last_name, email, password, is_site_admin) VALUES (%s, %s, %s, %s, %b)", firstName, lastName, email, password, admin);
-        return stmt.executeUpdate(sql);
+        PreparedStatement stmt = connection.prepareStatement("INSERT INTO \"User\" (first_name, last_name, email, password, is_site_admin) VALUES (?, ?, ?, ?, ?)");
+        stmt.setString(1, user.getFirstName());
+        stmt.setString(2, user.getLastName());
+        stmt.setString(3, user.getEmail());
+        stmt.setString(4, user.getPassword());
+        stmt.setBoolean(5, user.getAdmin());
+        stmt.executeUpdate();
     }
 
-    public boolean update(User user) throws URISyntaxException, SQLException {
+    public void editUser(User user) throws URISyntaxException, SQLException {
         Connection connection = getConnection();
-        Statement stmt = connection.createStatement();
-        String sql;
-        sql = String.format("UPDATE \"User\" SET email = %s AND first_name = %s AND last_name = %s WHERE user_id = %d", user.getEmail(), user.getFirstName(), user.getLastName(), user.getUserId());
-        int res = stmt.executeUpdate(sql);
-
-        if(res > 0) {
-            return true;
-        } else {
-            return false;
-        }
+        PreparedStatement stmt = connection.prepareStatement("UPDATE \"User\" SET email = ?, first_name = ?, last_name = ? WHERE user_id = ?");
+        stmt.setString(1, user.getEmail());
+        stmt.setString(2, user.getFirstName());
+        stmt.setString(3, user.getLastName());
+        stmt.executeUpdate();
+    }
+    
+    public void deleteUser(int userId) throws URISyntaxException, SQLException {
+        Connection connection = getConnection();
+        PreparedStatement stmt = connection.prepareStatement("DELETE FROM \"User\" WHERE user_id = ?");
+        stmt.setInt(1, userId);
+        stmt.executeUpdate();
     }
 
     public User login(String email, String password) throws Exception {
         Connection connection = getConnection();
-        Statement stmt = connection.createStatement();
-        String sql;
-        sql = String.format("SELECT * FROM \"User\" WHERE email = %s and password = %s", email, password);
-        ResultSet rs = stmt.executeQuery(sql);
+        PreparedStatement stmt = connection.prepareStatement("SELECT * FROM \"User\" WHERE email = ? and password = ?");
+        stmt.setString(1, email);
+        stmt.setString(2, password);
+        ResultSet rs = stmt.executeQuery();
         if(rs.next()) {
-            int userId = rs.getInt("user_id");
-            String firstName = rs.getString("first_name");
-            String lastName = rs.getString("last_name");
-            boolean admin = rs.getBoolean("is_site_admin");
-            User user = new User(userId, firstName, lastName, email, password, admin);
+            User user = mapUser(rs);
             return user;
         } else {
             throw new Exception("Invalid Email or Password!");
@@ -58,40 +59,40 @@ public class UserDao {
     public List<User> listAllUsers() throws URISyntaxException, SQLException {
         Connection connection = getConnection();
         Statement stmt = connection.createStatement();
-        String sql;
-        sql = "SELECT * FROM \"User\"";
+        String sql = "SELECT * FROM \"User\"";
         ResultSet rs = stmt.executeQuery(sql);
-        List<User> users = new ArrayList<User>();
+        List<User> users = new ArrayList<>();
         while(rs.next()) {
-            int userId = rs.getInt("user_id");
-            String firstName = rs.getString("first_name");
-            String lastName = rs.getString("last_name");
-            String email = rs.getString("email");
-            String password = rs.getString("password");
-            boolean admin = rs.getBoolean("is_site_admin");
-            users.add(new User(userId, firstName, lastName, email, password, admin));
+            users.add(mapUser(rs));
         }
 
         return users;
     }
 
-    public User getUser(int userId) throws URISyntaxException, SQLException {
+    public User getUserById(int userId) throws URISyntaxException, SQLException {
         Connection connection = getConnection();
-        Statement stmt = connection.createStatement();
-        String sql;
-        sql = "SELECT * FROM \"User\"";
-        ResultSet rs = stmt.executeQuery(sql);
-        List<User> users = new ArrayList<User>();
-        while(rs.next()) {
-            userId = rs.getInt("user_id");
-            String firstName = rs.getString("first_name");
-            String lastName = rs.getString("last_name");
-            String email = rs.getString("email");
-            String password = rs.getString("password");
-            boolean admin = rs.getBoolean("is_site_admin");
-            return new User(userId, firstName, lastName, email, password, admin);
+        PreparedStatement stmt = connection.prepareStatement("SELECT * FROM \"User\" WHERE user_id = ?");
+        stmt.setInt(1, userId);
+        ResultSet rs = stmt.executeQuery();
+        if(rs.next()) {
+            User user = mapUser(rs);
+            
+            return user;
         }
+        
         return null;
+    }
+    
+    private User mapUser(ResultSet rs) throws URISyntaxException, SQLException {
+        User user = new User();
+        user.setUserId(rs.getInt("user_id"));
+        user.setFirstName(rs.getString("first_name"));
+        user.setLastName(rs.getString("last_name"));
+        user.setEmail(rs.getString("email"));
+        user.setPassword(rs.getString("password"));
+        user.setAdmin(rs.getBoolean("is_site_admin"));
+        
+        return user;
     }
     
     private Connection getConnection() throws URISyntaxException, SQLException {

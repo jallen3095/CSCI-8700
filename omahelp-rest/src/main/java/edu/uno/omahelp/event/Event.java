@@ -82,6 +82,5 @@ public class Event {
 
 	public void setTags(List<String> tags) {
 		this.tags = tags;
-	}
-	
+	}	
 }

@@ -2,23 +2,13 @@ package edu.uno.omahelp.user;
 
 public class User {
 
-    private int     userId;
-    private String  firstName;
-    private String  lastName;
-    private String  email;
-    private String  password;
+    private int userId;
+    private String firstName;
+    private String lastName;
+    private String email;
+    private String password;
     private boolean admin;
-
-    public User(int userId, String firstName, String lastName, String email, String password, boolean admin) {
-        super();
-        this.userId = userId;
-        this. firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-        this.password = password;
-        this.admin = admin;
-    }
-
+    
     public int getUserId() {
         return userId;
     }

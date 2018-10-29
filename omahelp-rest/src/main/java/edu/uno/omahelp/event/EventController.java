@@ -54,5 +54,4 @@ public class EventController {
     public void unattendEvent(@RequestParam int userId, @RequestParam int eventId) throws SQLException, URISyntaxException {
     	eventDao.setEventAttending(userId, eventId, false);
     }
-    
 }
