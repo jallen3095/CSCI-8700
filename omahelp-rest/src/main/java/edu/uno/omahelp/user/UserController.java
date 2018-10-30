@@ -18,15 +18,6 @@ public class UserController {
 
 	@Autowired
     private UserDao userDao;
-
-    //@RequestMapping(path = "register", method = RequestMethod.POST)
-    //public boolean createUser(@RequestParam String firstName,
-    //                          @RequestParam String lastName,
-    //                          @RequestParam String email,
-    //                          @RequestParam String password,
-    //                          @RequestParam boolean admin) throws URISyntaxException, SQLException {
-    //    return (userDao.createUser(firstName, lastName, email, password, admin) > 0);
-    //}
     
     @RequestMapping(path = "list/{userId}")
     public User getUserById(@PathVariable int userId) throws URISyntaxException, SQLException {
