@@ -13,9 +13,20 @@ import java.util.List;
 
 import org.springframework.stereotype.Component;
 
+/**
+ * This class contains the methods necessary to handle the User database operations
+ * requested by the UserController.
+ */
 @Component
 public class UserDao {
     
+    /**
+     * Performs the actual insertion of a new user into the User database.
+     * 
+     * @param user A User object to add into the database.
+     * @throws URISyntaxException
+     * @throws SQLException
+     */
     public void createUser(User user) throws URISyntaxException, SQLException {
         Connection connection = getConnection();
         PreparedStatement stmt = connection.prepareStatement("INSERT INTO \"User\" (first_name, last_name, email, password, is_site_admin) VALUES (?, ?, ?, ?, ?)");
@@ -27,6 +38,13 @@ public class UserDao {
         stmt.executeUpdate();
     }
 
+    /**
+     * Performs the actual editing of a user in the User database.
+     * 
+     * @param user A User object with updated field values.
+     * @throws URISyntaxException
+     * @throws SQLException
+     */
     public void editUser(User user) throws URISyntaxException, SQLException {
         Connection connection = getConnection();
         PreparedStatement stmt = connection.prepareStatement("UPDATE \"User\" SET email = ?, first_name = ?, last_name = ? WHERE user_id = ?");
@@ -37,6 +55,13 @@ public class UserDao {
         stmt.executeUpdate();
     }
     
+    /**
+     * Performs the actual deletion of a user in the User database.
+     * 
+     * @param userId The user_id value of the user to delete.
+     * @throws URISyntaxException
+     * @throws SQLException
+     */
     public void deleteUser(int userId) throws URISyntaxException, SQLException {
         Connection connection = getConnection();
         PreparedStatement stmt = connection.prepareStatement("DELETE FROM \"User\" WHERE user_id = ?");
@@ -44,6 +69,14 @@ public class UserDao {
         stmt.executeUpdate();
     }
 
+    /**
+     * Checks to see if an email and password used for logging in is valid.
+     * 
+     * @param email    The email the user registered with.
+     * @param password The user's password.
+     * @return A User object corresponding to the user that is logging in.
+     * @throws Exception
+     */
     public User login(String email, String password) throws Exception {
         Connection connection = getConnection();
         PreparedStatement stmt = connection.prepareStatement("SELECT * FROM \"User\" WHERE email = ? and password = ?");
@@ -58,6 +91,13 @@ public class UserDao {
         }
     }
 
+    /**
+     * Lists all the users in the User database and puts them in a List.
+     * 
+     * @return A List object containing a User object for each user in the User database.
+     * @throws URISyntaxException
+     * @throws SQLException
+     */
     public List<User> listAllUsers() throws URISyntaxException, SQLException {
         Connection connection = getConnection();
         Statement stmt = connection.createStatement();
@@ -71,6 +111,14 @@ public class UserDao {
         return users;
     }
 
+    /**
+     * Returns the User object corresponding the passed in user_id.
+     * 
+     * @param userId The user_id of the specified user.
+     * @return A User object of the specified user.
+     * @throws URISyntaxException
+     * @throws SQLException
+     */
     public User getUserById(int userId) throws URISyntaxException, SQLException {
         Connection connection = getConnection();
         PreparedStatement stmt = connection.prepareStatement("SELECT * FROM \"User\" WHERE user_id = ?");
@@ -85,6 +133,14 @@ public class UserDao {
         return null;
     }
     
+    /**
+     * Maps the field values from a ResultSet object into a new User object.
+     * 
+     * @param rs A ResultSet that needs to be converted into a User object.
+     * @return A User object representing a row from the User database.
+     * @throws URISyntaxException
+     * @throws SQLException
+     */
     private User mapUser(ResultSet rs) throws URISyntaxException, SQLException {
         User user = new User();
         user.setUserId(rs.getInt("user_id"));
@@ -97,6 +153,13 @@ public class UserDao {
         return user;
     }
     
+    /**
+     * Performs the connection to the database.
+     * 
+     * @return A Connection object for the database connection.
+     * @throws URISyntaxException
+     * @throws SQLException
+     */
     private Connection getConnection() throws URISyntaxException, SQLException {
         URI dbURI = null;
 

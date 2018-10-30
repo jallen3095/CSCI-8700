@@ -91,7 +91,7 @@ public class UserController {
      * 
      * @param email    The email the user registered with.
      * @param password The user's password.
-     * @return (User)  A User object corresponding to the user that is logging in.
+     * @return A User object corresponding to the user that is logging in.
      * @throws Exception
      */ 
     @RequestMapping(path = "login")
