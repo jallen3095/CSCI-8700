@@ -9,14 +9,10 @@ export class AuthService {
 
   constructor(private UserService: UserService, private http: HttpClient) {}
 
-  authorize(email: string, password: string) {
+  authorize(loginData:  { email: string, password: string }) {
     // TODO: Login here
     // Send: User email, user password
     // Recieve: user object/failure
-    const login = {
-        email: email,
-        password: password
-    };
     // return this.http.post(`${this.serverUrl}/login`, login);
     this.authorized = true;
   }
