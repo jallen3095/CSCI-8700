@@ -1,98 +1,171 @@
 package edu.uno.omahelp.event;
 
-import java.util.Arrays;
+import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+
+import edu.uno.omahelp.user.User;
+
+/**
+ * This class consists of all fields and methods necessary to represent
+ * an event within the OmaHelp application. The fields of this class correspond
+ * to the "Event" table within the OmaHelp database.
+ */
+@JsonInclude(Include.NON_EMPTY)
 public class Event {
 
-    private int id;
-    private String name;
-    private String description;
-    private String location;
-    private String area;
-    private String date;
-    private String[] attendees;
-    private String[] organizers;
-    private String[] tags;
+	private int id;
+	private String name;
+	private String description;
+	private String location;
+	private String date;
 
-    public Event(String name, String description, String date, String location, String area, String[] tags) {
-        super();
-        this.name = name;
-        this.description = description;
-        this.date = date;
-        this.location = location;
-        this.area = area;
-        this.tags = Arrays.copyOf(tags, tags.length);
-    }
+	private List<User> attendees;
+	private List<User> organizers;
+	private List<String> tags;
 
-    public int getId() {
-        return id;
-    }
+    /**
+     * Returns the Event object's event identification number.
+     *
+     * @return The Event object's integer identification number.
+     */    
+	public int getId() {
+		return id;
+	}
 
-    public void setId(int id) {
-        this.id = id;
-    }
+    /**
+     * Sets the Event object's event identification number.
+     *
+     * @param id The integer id value of an Event.
+     */    
+	public void setId(int id) {
+		this.id = id;
+	}
 
-    public String getName() {
-        return name;
-    }
+    /**
+     * Returns the Event object's name.
+     *
+     * @return The Event object's name String.
+     */    
+	public String getName() {
+		return name;
+	}
 
-    public void setName(String name) {
-        this.name = name;
-    }
+    /**
+     * Sets the Event object's name.
+     *
+     * @param name The name String of an Event.
+     */
+	public void setName(String name) {
+		this.name = name;
+	}
 
-    public String getDescription() {
-        return description;
-    }
+    /**
+     * Returns the Event object's description.
+     *
+     * @return The Event object's description String.
+     */
+	public String getDescription() {
+		return description;
+	}
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
+    /**
+     * Sets the Event object's description.
+     *
+     * @param description The description String of an Event.
+     */    
+	public void setDescription(String description) {
+		this.description = description;
+	}
 
-    public String getLocation() {
-        return location;
-    }
+    /**
+     * Returns the Event object's location.
+     *
+     * @return The Event object's location String.
+     */    
+	public String getLocation() {
+		return location;
+	}
 
-    public void setLocation(String location) {
-        this.location = location;
-    }
+    /**
+     * Sets the Event object's location.
+     *
+     * @param location The location String of an Event.
+     */
+	public void setLocation(String location) {
+		this.location = location;
+	}
 
-    public String getArea() {
-        return area;
-    }
+    /**
+     * Returns the Event object's date.
+     *
+     * @return The Event object's date String.
+     */    
+	public String getDate() {
+		return date;
+	}
 
-    public void setArea(String area) {
-        this.area = area;
-    }
+    /**
+     * Sets the Event object's date.
+     *
+     * @param date The date String of an Event.
+     */    
+	public void setDate(String date) {
+		this.date = date;
+	}
 
-    public String getDate() {
-        return date;
-    }
+    /**
+     * Returns the list of attendees for the Event object.
+     *
+     * @return The list of User objects who are attending the Event object.
+     */    
+	public List<User> getAttendees() {
+		return attendees;
+	}
 
-    public void setDate(String date) {
-        this.date = date;
-    }
+    /**
+     * Sets the Event object's attendees list.
+     *
+     * @param attendees The list of User objects who are attending the Event object.
+     */    
+	public void setAttendees(List<User> attendees) {
+		this.attendees = attendees;
+	}
 
-    public String[] getAttendees() {
-        return Arrays.copyOf(attendees, attendees.length);
-    }
+    /**
+     * Returns the list of organizers for the Event object.
+     *
+     * @return The list of User objects who organized the Event object.
+     */    
+	public List<User> getOrganizers() {
+		return organizers;
+	}
 
-    public void setAttendees(String[] attendees) {
-        this.attendees = Arrays.copyOf(attendees, attendees.length);
-    }
+    /**
+     * Sets the Event object's organizers list.
+     *
+     * @param organizers The list of User objects who organized the Event object.
+     */    
+	public void setOrganizers(List<User> organizers) {
+		this.organizers = organizers;
+	}
 
-    public String[] getOrganizers() {
-        return Arrays.copyOf(organizers, organizers.length);
-    }
+    /**
+     * Returns the list of tags associated with the Event object.
+     *
+     * @return The list of String tags that are associated with the Event object.
+     */    
+	public List<String> getTags() {
+		return tags;
+	}
 
-    public void setOrganizers(String[] organizers) {
-        this.organizers = Arrays.copyOf(organizers, organizers.length);
-    }
-
-    public String[] getTags() {
-        return Arrays.copyOf(tags, tags.length);
-    }
-
-    public void setTags(String[] tags) {
-        this.tags = Arrays.copyOf(tags, tags.length);
-    }
+    /**
+     * Sets the Event object's tag list.
+     *
+     * @param tags The list of String tags that are associated with the Event object.
+     */    
+	public void setTags(List<String> tags) {
+		this.tags = tags;
+	}	
 }
