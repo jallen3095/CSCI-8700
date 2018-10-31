@@ -152,7 +152,7 @@ class EventDao {
 
 	public List<User> getAttendingUsers(int eventId) throws SQLException, URISyntaxException {
 		Connection connection = getConnection();
-        PreparedStatement stmt = connection.prepareStatement("SELECT * FROM \"Event_User\" WHERE event_id = ? AND attending ="t"");
+        PreparedStatement stmt = connection.prepareStatement("SELECT * FROM \"Event_User\" WHERE event_id = ? AND attending ='t'");
         stmt.setInt(1, eventId);
         ResultSet rs = stmt.executeQuery();
         List<User> users = new ArrayList<>();
