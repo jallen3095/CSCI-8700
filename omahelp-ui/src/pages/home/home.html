@@ -9,7 +9,7 @@
 
 <ion-content padding>
   <ion-row><ion-col><h3>Upcoming Events</h3></ion-col></ion-row>
-  <ion-row>
+  <ion-row *ngIf="eventsToShow.length > 0">
     <ion-col col-xs-12 col-lg-4>
       <ion-item>
         <ion-label floating>Filter Events</ion-label>

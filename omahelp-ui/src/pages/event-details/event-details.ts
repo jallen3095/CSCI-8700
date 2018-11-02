@@ -2,6 +2,9 @@ import { Component } from '@angular/core';
 import {COMMA, ENTER} from '@angular/cdk/keycodes';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { MatChipInputEvent } from '@angular/material';
+import { EventService } from '../../services/event.service';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
+import { UserService } from '../../services/user.service';
 
 /**
  * Generated class for the EventDetails page.
@@ -25,38 +28,15 @@ export class EventDetailsPage {
   event: any = {};
   edit: any = {};
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
-    this.event.id = this.navParams.data.id;
-    console.log(this.event.id);
-    if (!this.event.id) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private EventService: EventService, private UserService: UserService) {
+    this.event = this.navParams.data.event;
+    console.log(this.event);
+    if (!this.event) {
       this.setCreateMode();
     } else {
-      this.mockEvent();
+      // this.mockEvent();
       this.setViewMode();
     }
-  }
-
-  private mockEvent() {
-    this.event = {
-      id: this.event.id,
-      name: 'Sample Title',
-      date: new Date(),
-      description: 'Descriptionwordswordswords',
-      address: 'Sample Street, SA SAMPLE',
-      area: 'Dundee',
-      tags: [
-        'fun',
-        'exciting',
-        'rewarding'
-      ],
-      attendees: [
-        { firstName: 'Bob', lastName: 'Dole', email: 'bdole@bedull.com' },
-        { firstName: 'Watsis', lastName: 'Face', email: 'sample@email.com' }
-      ],
-      organizers: [
-        { firstName: 'Guy', lastName: 'Encharj', email: 'theman@email.com' }
-      ]
-    };
   }
 
   ionViewDidLoad() {
@@ -75,10 +55,32 @@ export class EventDetailsPage {
     // TODO
     if (this.event.id) {
       // update event
+      this.EventService.edit(this.edit).subscribe(() => {
+         this.event = this.edit;
+         this.setViewMode();
+      });
     } else {
       // create event
+      this.edit.organizers.push(this.UserService.getUser());
+      this.EventService.create(this.edit).subscribe(() => {
+        this.event = this.edit;
+        this.setViewMode();
+      });
     }
     this.setViewMode();
+  }
+
+  canEdit() {
+    if (this.UserService.getUser().admin) {
+      return true;
+    }
+    const id = this.UserService.getUser().userId;
+    for (let org of this.event.organizers) {
+      if (org.userId === id) {
+        return true;
+      }
+    }
+    return false;
   }
 
   editMode() {
@@ -124,5 +126,28 @@ export class EventDetailsPage {
     if (index >= 0) {
       this.event.tags.splice(index, 1);
     }
+  }
+
+  private mockEvent() {
+    this.event = {
+      id: this.event.id,
+      name: 'Sample Title',
+      date: new Date(),
+      description: 'Descriptionwordswordswords',
+      address: 'Sample Street, SA SAMPLE',
+      area: 'Dundee',
+      tags: [
+        'fun',
+        'exciting',
+        'rewarding'
+      ],
+      attendees: [
+        { firstName: 'Bob', lastName: 'Dole', email: 'bdole@bedull.com' },
+        { firstName: 'Watsis', lastName: 'Face', email: 'sample@email.com' }
+      ],
+      organizers: [
+        { firstName: 'Guy', lastName: 'Encharj', email: 'theman@email.com' }
+      ]
+    };
   }
 }

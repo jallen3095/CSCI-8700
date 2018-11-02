@@ -55,4 +55,14 @@ public class EventController {
     public void unattendEvent(@RequestParam int userId, @RequestParam int eventId) throws SQLException, URISyntaxException {
     	eventDao.setEventAttending(userId, eventId, false);
     }
+
+    @RequestMapping(method=RequestMethod.POST, path="like")
+    public void likeEvent(@RequestParam int userId, @RequestParam int eventId) throws SQLException, URISyntaxException {
+    	eventDao.setEventLiked(userId, eventId, true);
+    }
+    
+    @RequestMapping(method=RequestMethod.DELETE, path="like")
+    public void unlikeEvent(@RequestParam int userId, @RequestParam int eventId) throws SQLException, URISyntaxException {
+    	eventDao.setEventLiked(userId, eventId, false);
+    }
 }

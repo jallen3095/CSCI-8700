@@ -19,7 +19,7 @@ export class EventCardComponent implements OnInit {
     }
 
     goToDetails() {
-      this.navCtrl.push(EventDetailsPage, {id: 123456});
+      this.navCtrl.push(EventDetailsPage, {event: this.event});
     }
 
     attend() {

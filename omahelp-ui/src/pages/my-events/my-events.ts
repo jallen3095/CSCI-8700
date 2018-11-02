@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, IonicPage } from 'ionic-angular';
 import { EventDetailsPage } from '../event-details/event-details';
+import { EventService } from '../../services/event.service';
+import { UserService } from '../../services/user.service';
 
 @IonicPage()
 @Component({
@@ -12,10 +14,17 @@ export class MyEventsPage {
   eventsToShow: any[] = [];
   filterText: string;
 
-  constructor(private navCtrl: NavController, private navParams: NavParams) {
-    this.mockData();
-    this.eventsToShow = this.events;
+  constructor(private navCtrl: NavController, private navParams: NavParams, private EventService: EventService, private UserService: UserService) {
+    // this.mockData();
+    this.loadEvents();
     // console.log(this.eventsToShow, this.events);
+  }
+
+  loadEvents() {
+    this.EventService.listMyEvents().subscribe((resp: any) => {
+      this.events = resp;
+      this.eventsToShow = this.events;
+    });
   }
 
   goToCreateEvent() {

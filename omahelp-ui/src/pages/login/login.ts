@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
 import { AuthService } from '../../services/auth.service';
-import { HomePage } from '../home/home';
-
+import { UserService } from '../../services/user.service';
 /**
  * Generated class for the InputPage page.
  *
@@ -20,7 +19,7 @@ export class LoginPage {
   loginData: { email: string, password: string } = {email: null, password: null};
   registrationData: any = {};
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private AuthService: AuthService, private toastController: ToastController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private AuthService: AuthService, private UserService: UserService, private toastController: ToastController) {
     this.setLoginMode();
   }
 
@@ -30,7 +29,15 @@ export class LoginPage {
 
   register() {
     // TODO
-    this.checkPasswords();
+    if (this.checkPasswords()) {
+      delete this.registrationData.passwordConfirmation;
+      this.UserService.register(this.registrationData).subscribe((resp: any) => {
+        if (resp.data.userId) {
+          this.UserService.login(resp.data);
+          this.AuthService.authorize({email: resp.data.email, password: resp.data.password}, this.navCtrl);
+        }
+      });
+    }
   }
 
   checkPasswords() {
@@ -40,8 +47,16 @@ export class LoginPage {
         duration: 3000
       });
       toast.present();
-      return;
+      return false;
+    } else if (this.registrationData.password.length < 6) {
+      const toast = this.toastController.create({
+        message: 'Passwords must be at least 6 characters!',
+        duration: 3000
+      });
+      toast.present();
+      return false;
     }
+    return true;
   }
 
   setRegisterMode() {
@@ -53,12 +68,9 @@ export class LoginPage {
   }
 
   login() {
-    // TODO: this will be a subscribe.
+    // TODO
     console.log(this.loginData);
-    this.AuthService.authorize(this.loginData);
-    if (this.AuthService.isAuthorized()) {
-      this.navCtrl.setRoot(HomePage);
-    }
+    this.AuthService.authorize(this.loginData, this.navCtrl);
   }
 
   setLoginMode() {

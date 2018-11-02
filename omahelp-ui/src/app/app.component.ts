@@ -37,7 +37,11 @@ export class MyApp {
     this.platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
-      this.nav.setRoot(LoginPage);
+      if (this.AuthService.isAuthorized()) {
+        this.nav.setRoot(HomePage);
+      } else {
+        this.nav.setRoot(LoginPage);
+      }
       this.statusBar.styleDefault();
       this.splashScreen.hide();
     });
