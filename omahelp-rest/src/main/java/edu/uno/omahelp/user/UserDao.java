@@ -12,7 +12,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Component;
-import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * This class contains the methods necessary to handle the User database operations
