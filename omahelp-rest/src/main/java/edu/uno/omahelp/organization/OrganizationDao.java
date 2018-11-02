@@ -15,8 +15,13 @@ import org.springframework.stereotype.Component;
 @Component
 class OrganizationDao {
 
+    private Connection connection;
+
+    public OrganizationDao() throws URISyntaxException, SQLException {
+        connection = getConnection();
+    }
+
     public List<Organization> listAllOrganizations() throws URISyntaxException, SQLException {
-        Connection connection = getConnection();
         Statement stmt = connection.createStatement();
         String sql;
         sql = "SELECT * FROM \"Organization\"";
@@ -46,9 +51,8 @@ class OrganizationDao {
 
 		String username = dbURI.getUserInfo().split(":")[0];
 		String password = dbURI.getUserInfo().split(":")[1];
-		String dbUrl = "jdbc:postgresql://" + dbURI.getHost() + ':'
-                + dbURI.getPort() + dbURI.getPath()
-                + "?sslmode=require";
+        String dbUrl = "jdbc:postgresql://" + dbURI.getHost() + ':' + dbURI.getPort() + dbURI.getPath() + "?sslmode=require";
+        
 		return DriverManager.getConnection(dbUrl, username, password);
 	}
 }

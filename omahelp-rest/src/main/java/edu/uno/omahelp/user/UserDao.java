@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Component;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * This class contains the methods necessary to handle the User database operations
@@ -19,6 +20,15 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class UserDao {
+
+    private Connection connection;
+
+    /**
+     * Class constructor that creates a connection to the database.
+     */
+    public UserDao() throws URISyntaxException, SQLException {
+        connection = getConnection();
+    }
     
     /**
      * Performs the actual insertion of a new user into the User database.
@@ -28,7 +38,6 @@ public class UserDao {
      * @throws SQLException
      */
     public void createUser(User user) throws URISyntaxException, SQLException {
-        Connection connection = getConnection();
         PreparedStatement stmt = connection.prepareStatement("INSERT INTO \"User\" (first_name, last_name, email, password, is_site_admin) VALUES (?, ?, ?, ?, ?)");
         stmt.setString(1, user.getFirstName());
         stmt.setString(2, user.getLastName());
@@ -46,7 +55,6 @@ public class UserDao {
      * @throws SQLException
      */
     public void editUser(User user) throws URISyntaxException, SQLException {
-        Connection connection = getConnection();
         PreparedStatement stmt = connection.prepareStatement("UPDATE \"User\" SET email = ?, first_name = ?, last_name = ? WHERE user_id = ?");
         stmt.setString(1, user.getEmail());
         stmt.setString(2, user.getFirstName());
@@ -63,7 +71,6 @@ public class UserDao {
      * @throws SQLException
      */
     public void deleteUser(int userId) throws URISyntaxException, SQLException {
-        Connection connection = getConnection();
         PreparedStatement stmt = connection.prepareStatement("DELETE FROM \"User\" WHERE user_id = ?");
         stmt.setInt(1, userId);
         stmt.executeUpdate();
@@ -78,7 +85,6 @@ public class UserDao {
      * @throws Exception
      */
     public User login(String email, String password) throws Exception {
-        Connection connection = getConnection();
         PreparedStatement stmt = connection.prepareStatement("SELECT * FROM \"User\" WHERE email = ? and password = ?");
         stmt.setString(1, email);
         stmt.setString(2, password);
@@ -99,7 +105,6 @@ public class UserDao {
      * @throws SQLException
      */
     public List<User> listAllUsers() throws URISyntaxException, SQLException {
-        Connection connection = getConnection();
         Statement stmt = connection.createStatement();
         String sql = "SELECT * FROM \"User\"";
         ResultSet rs = stmt.executeQuery(sql);
@@ -120,7 +125,6 @@ public class UserDao {
      * @throws SQLException
      */
     public User getUserById(int userId) throws URISyntaxException, SQLException {
-        Connection connection = getConnection();
         PreparedStatement stmt = connection.prepareStatement("SELECT * FROM \"User\" WHERE user_id = ?");
         stmt.setInt(1, userId);
         ResultSet rs = stmt.executeQuery();

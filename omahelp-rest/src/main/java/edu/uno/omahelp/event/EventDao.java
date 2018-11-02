@@ -22,10 +22,15 @@ import edu.uno.omahelp.user.UserDao;
 class EventDao {
 
 	@Autowired
-	private UserDao userDao;
+    private UserDao userDao;
+
+    private Connection connection;
+    
+    public EventDao() throws URISyntaxException, SQLException {
+        connection = getConnection();
+    }
 
     public List<Event> listAllEvents() throws URISyntaxException, SQLException {
-        Connection connection = getConnection();
         Statement stmt = connection.createStatement();
         String sql;
         sql = "SELECT * FROM \"Event\"";
@@ -39,7 +44,6 @@ class EventDao {
     }
 
     public List<Event> listMyEvents(int userId) throws URISyntaxException, SQLException {
-        Connection connection = getConnection();
         PreparedStatement stmt = connection.prepareStatement("SELECT DISTINCT E.* FROM \"Event\" E INNER JOIN \"Event_User\" EU ON E.event_id = EU.event_id WHERE EU.user_id = ? AND EU.attending = 't'");
         stmt.setInt(1, userId);
         ResultSet rs = stmt.executeQuery();
@@ -63,7 +67,6 @@ class EventDao {
     }
 
     public void createEvent(Event event) throws URISyntaxException, SQLException {
-        Connection connection = getConnection();
         PreparedStatement stmt = connection.prepareStatement("INSERT INTO \"Event\" (event_name, event_address, event_date, event_description) VALUES (?, ?, ?, ?)");
         stmt.setString(1, event.getName());
         stmt.setString(2, event.getLocation());
@@ -73,7 +76,6 @@ class EventDao {
     }
 
     public void editEvent(Event event) throws SQLException, URISyntaxException {
-    	Connection connection = getConnection();
         PreparedStatement stmt = connection.prepareStatement("UPDATE \"Event\" SET event_name = ?, event_address = ?, event_date = ?, event_description = ? WHERE event_id = ?");
         stmt.setString(1, event.getName());
         stmt.setString(2, event.getLocation());
@@ -84,14 +86,12 @@ class EventDao {
     }
 
 	public void deleteEvent(int eventId) throws URISyntaxException, SQLException {
-		Connection connection = getConnection();
         PreparedStatement stmt = connection.prepareStatement("DELETE FROM \"Event\" WHERE event_id = ?");
         stmt.setInt(1, eventId);
         stmt.executeUpdate();
 	}
 
 	public boolean hasEventUser(int userId, int eventId) throws SQLException, URISyntaxException {
-		Connection connection = getConnection();
         PreparedStatement stmt = connection.prepareStatement("SELECT * FROM \"Event_User\" WHERE user_id = ? AND event_id = ?");
         stmt.setInt(1, userId);
         stmt.setInt(2, eventId);
@@ -100,14 +100,12 @@ class EventDao {
 
 	public void setEventLiked(int userId, int eventId, boolean liked) throws SQLException, URISyntaxException {
 		if (hasEventUser(userId, eventId)) {
-			Connection connection = getConnection();
             PreparedStatement stmt = connection.prepareStatement("UPDATE \"Event_User\" SET liked = ? WHERE user_id = ? AND event_id = ?");
             stmt.setBoolean(1, liked);
             stmt.setInt(2, userId);
             stmt.setInt(3, eventId);
             stmt.executeUpdate();
 		} else {
-            Connection connection = getConnection();
             PreparedStatement stmt = connection.prepareStatement("INSERT INTO \"Event_User\" VALUES (%s, %s, %s, %s)");
             stmt.setInt(1, userId);
             stmt.setInt(2, eventId);
@@ -118,7 +116,6 @@ class EventDao {
 	}
 
   public List<User> getLikedUsers(int eventId) throws SQLException, URISyntaxException {
-    Connection connection = getConnection();
         PreparedStatement stmt = connection.prepareStatement("SELECT * FROM \"Event_User\" WHERE event_id = ? AND liked = 't'");
         stmt.setInt(1, eventId);
         ResultSet rs = stmt.executeQuery();
@@ -133,14 +130,12 @@ class EventDao {
 
 	public void setEventAttending(int userId, int eventId, boolean attending) throws SQLException, URISyntaxException {
 		if (hasEventUser(userId, eventId)) {
-			Connection connection = getConnection();
             PreparedStatement stmt = connection.prepareStatement("UPDATE \"Event_User\" SET attending = ? WHERE user_id = ? AND event_id = ?");
             stmt.setBoolean(1, attending);
             stmt.setInt(2, userId);
             stmt.setInt(3, eventId);
             stmt.executeUpdate();
 		} else {
-            Connection connection = getConnection();
             PreparedStatement stmt = connection.prepareStatement("INSERT INTO \"Event_User\" VALUES (?, ?, ?, ?)");
             stmt.setInt(1, userId);
             stmt.setInt(2, eventId);
@@ -151,7 +146,6 @@ class EventDao {
 	}
 
 	public List<User> getAttendingUsers(int eventId) throws SQLException, URISyntaxException {
-		Connection connection = getConnection();
         PreparedStatement stmt = connection.prepareStatement("SELECT * FROM \"Event_User\" WHERE event_id = ? AND attending ='t'");
         stmt.setInt(1, eventId);
         ResultSet rs = stmt.executeQuery();
