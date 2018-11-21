@@ -63,6 +63,7 @@ class EventDao {
         event.setDate(rs.getString("event_date"));
         event.setDescription(rs.getString("event_description"));
         event.setAttendees(getAttendingUsers(event.getId()));
+        event.setInterested(getLikedUsers(event.getId()));
         return event;
     }
 
@@ -123,7 +124,9 @@ class EventDao {
         while (rs.next()) {
           int userId = rs.getInt("user_id");
           User user = userDao.getUserById(userId);
-          users.add(user);
+          if (user != null) {
+        	  users.add(user);
+          }
         }
         return users;
   }

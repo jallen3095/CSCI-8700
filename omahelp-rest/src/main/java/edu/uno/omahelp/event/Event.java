@@ -22,6 +22,7 @@ public class Event {
 	private String date;
 
 	private List<User> attendees;
+	private List<User> interested;
 	private List<User> organizers;
 	private List<String> tags;
 
@@ -167,5 +168,23 @@ public class Event {
      */    
 	public void setTags(List<String> tags) {
 		this.tags = tags;
+	}
+
+    /**
+     * Returns the list of interested users for the Event object.
+     *
+     * @return The list of User objects who are interested in the Event object.
+     */    
+	public List<User> getInterested() {
+		return interested;
+	}
+
+    /**
+     * Sets the Event object's interested list.
+     *
+     * @param attendees The list of User objects who are interested in the Event object.
+     */
+	public void setInterested(List<User> interested) {
+		this.interested = interested;
 	}	
 }
