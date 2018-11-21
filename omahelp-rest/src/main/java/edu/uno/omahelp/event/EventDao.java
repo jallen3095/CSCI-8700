@@ -153,7 +153,9 @@ class EventDao {
         while (rs.next()) {
         	int userId = rs.getInt("user_id");
         	User user = userDao.getUserById(userId);
-        	users.add(user);
+        	if (user != null) {
+        		users.add(user);
+        	}
         }
         return users;
 	}
