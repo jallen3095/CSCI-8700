@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { UserService } from '../../services/user.service';
 
 /**
  * Generated class for the AccountPage page.
@@ -18,9 +19,9 @@ export class AccountPage {
   user: any = {};
   edit: any = {};
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private UserService: UserService) {
     this.setViewMode();
-    this.mockUser();
+    this.user = this.UserService.getUser();
   }
 
   submit() {
