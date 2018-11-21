@@ -31,11 +31,10 @@ export class LoginPage {
     // TODO
     if (this.checkPasswords()) {
       delete this.registrationData.passwordConfirmation;
-      this.UserService.register(this.registrationData).subscribe((resp: any) => {
-        if (resp.data.userId) {
-          this.UserService.login(resp.data);
-          this.AuthService.authorize({email: resp.data.email, password: resp.data.password}, this.navCtrl);
-        }
+      this.UserService.register(this.registrationData).subscribe(() => {
+        this.AuthService.authorize({email: this.registrationData.email, password: this.registrationData.password}, this.navCtrl);
+      },() => {
+        this.AuthService.authorize({email: this.registrationData.email, password: this.registrationData.password}, this.navCtrl);
       });
     }
   }
