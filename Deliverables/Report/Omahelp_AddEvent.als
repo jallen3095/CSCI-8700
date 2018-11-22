@@ -1,10 +1,18 @@
 sig Omahelp {
-    users: set User, eventIds: set Id,  events: eventIds -> one Event, organizations: set Organization
-}
+		usrs: UserList, evts: EventList, organizations: set Organization
+	}
 
 sig Event {
-    attIds, intIds, orgIds: set Id, attendees: attIds ->one User, interestedUsers: intIds ->one User, organizers: orgIds ->one User, name: lone Name, desc: lone Description, date: lone Date, addr: lone Address
-}
+		attendees: UserList, interestedUsers: UserList, organizers: UserList, name: lone Name, desc: lone Description, date: lone Date, addr: lone Address
+	}
+
+sig EventList {
+		known: Id, events: known -> one Event
+	}
+
+sig UserList {
+		known: Id, users: known -> one User
+	}
 
 sig Id, User, Organization, Address, Name, Description, Date {}
 
@@ -29,36 +37,37 @@ pred SetEventDate [ev', ev: Event, d: Date] {
 		ev'.date = d
 	}
 
-pred FindUser [li: set Id -> one User, id: Id, user: lone User] {
-    		user = li[id]
+pred FindUser [li: UserList, id: Id, user: lone User] {
+    		user = li.users[id]
     	}
 
-pred AddUser [li', li: set Id -> one User, id: Id, user: User] {
-		li' = li ++ (id -> user)
+pred AddUser [li', li: UserList, id: Id, user: User] {
+		li'.users = li.users ++ (id -> user)
 	}
 
-pred DeleteUser [li', li: set Id -> one User, id: Id] {
-    		li' = li - (id->User)
+pred DeleteUser [li', li: UserList, id: Id] {
+    		li'.users = li.users - (id->User)
     	}
 
 pred FindEvent [oh: Omahelp, id: Id, event: lone Event] {
-    		event = oh.events[id]
+    		event = oh.evts.events[id]
     	}
 
 pred AddEvent [oh', oh: Omahelp, id: Id, newEvent: Event] {
 		oh' = oh
-		oh'.events = oh'.events ++ (id -> newEvent)
+		oh'.evts.events = oh'.evts.events ++ (id -> newEvent)
 	}
 
 
 pred EditEvent [oh', oh: Omahelp, id: Id, newEvent: Event] {
 		oh' = oh
-		oh'.events [id] = newEvent
+		oh'.evts.events[id] = newEvent
 	}
 
 
 pred DeleteEvent [oh, oh': Omahelp, id: Id] {
-    		oh'.events = oh.events - (id->Event)
+		oh' = oh
+    		oh'.evts.events = oh.evts.events - (id->Event)
     	}
 
 assert SetEventNameWorks {
@@ -82,12 +91,12 @@ assert SetEventDateWorks {
 	}
 
 assert AddUserWorks {
-    		all li', li: set Id -> one User, id: Id, user: User, user': lone User |
+    		all li', li: UserList, id: Id, user: User, user': lone User |
        			AddUser [li',li,id,user] && FindUser [li',id,user'] => user = user'
     	}
 
 assert DeleteUserWorks {
-    		all li1,li2,li3: set Id -> one User, id: Id, user: User|
+    		all li1,li2,li3: UserList, id: Id, user: User|
         		AddUser [li1,li2,id,user] && DeleteUser [li2,li3,id]
           		  => li1 = li3
     	}
@@ -105,7 +114,7 @@ assert EditEventWorks {
 assert DeleteEventWorks {
     		all oh1,oh2,oh3: Omahelp, id: Id, event: Event|
         		AddEvent [oh1,oh2,id,event] && DeleteEvent [oh2,oh3,id]
-          		  => oh1.events = oh3.events
+          		  => oh1.evts = oh3.evts
     	}
 
 check SetEventNameWorks for 10
