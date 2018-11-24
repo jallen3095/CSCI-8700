@@ -12,15 +12,29 @@ import java.util.List;
 
 import org.springframework.stereotype.Component;
 
+/**
+ * This class contains the methods necessary to handle the Organization database operations
+ * requested by the OrganizationController.
+ */
 @Component
 class OrganizationDao {
 
     private Connection connection;
 
+    /**
+     * Class constructor that creates a connection to the database.
+     */
     public OrganizationDao() throws URISyntaxException, SQLException {
         connection = getConnection();
     }
 
+    /**
+     * Lists all the organizations in the Organization database and puts them in a list.
+     * 
+     * @return A List object containing an Organization object for each organization in the Organization database.
+     * @throws URISyntaxException
+     * @throws SQLException
+     */
     public List<Organization> listAllOrganizations() throws URISyntaxException, SQLException {
         Statement stmt = connection.createStatement();
         String sql;
@@ -39,6 +53,13 @@ class OrganizationDao {
         return orgs;
     }
 
+    /**
+     * Performs the connection to the database.
+     * 
+     * @return A Connection object for the database connection.
+     * @throws URISyntaxException
+     * @throws SQLException
+     */
     private Connection getConnection() throws URISyntaxException, SQLException {
         URI dbURI = null;
 

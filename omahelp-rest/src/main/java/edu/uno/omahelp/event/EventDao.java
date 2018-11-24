@@ -18,6 +18,10 @@ import org.springframework.stereotype.Component;
 import edu.uno.omahelp.user.User;
 import edu.uno.omahelp.user.UserDao;
 
+/**
+ * This class contains the methods necessary to handle the User database operations
+ * requested by the EventController.
+ */
 @Component
 class EventDao {
 
@@ -26,10 +30,20 @@ class EventDao {
 
     private Connection connection;
     
+    /**
+     * Class constructor that creates a connection to the database.
+     */
     public EventDao() throws URISyntaxException, SQLException {
         connection = getConnection();
     }
 
+    /**
+     * Lists all the events in the Event database and puts them in a list.
+     * 
+     * @return A List object containing an Event object for each event in the database.
+     * @throws URISyntaxException
+     * @throws SQLException
+     */
     public List<Event> listAllEvents() throws URISyntaxException, SQLException {
         Statement stmt = connection.createStatement();
         String sql;
@@ -43,6 +57,14 @@ class EventDao {
         return events;
     }
 
+    /**
+     * Lists all the events in the Event_User database corresponding to userId.
+     * 
+     * @param userId The userId of the user to return events for.
+     * @return A List object containing Event objects.
+     * @throws URISyntaxException
+     * @throws SQLException
+     */
     public List<Event> listMyEvents(int userId) throws URISyntaxException, SQLException {
         PreparedStatement stmt = connection.prepareStatement("SELECT DISTINCT E.* FROM \"Event\" E INNER JOIN \"Event_User\" EU ON E.event_id = EU.event_id WHERE EU.user_id = ? AND EU.attending = 't'");
         stmt.setInt(1, userId);
@@ -55,18 +77,13 @@ class EventDao {
         return events;
     }
 
-    private Event mapEvent(ResultSet rs) throws SQLException, URISyntaxException {
-    	Event event = new Event();
-        event.setId(rs.getInt("event_id"));
-        event.setName(rs.getString("event_name"));
-        event.setLocation(rs.getString("event_address"));
-        event.setDate(rs.getString("event_date"));
-        event.setDescription(rs.getString("event_description"));
-        event.setAttendees(getAttendingUsers(event.getId()));
-        event.setInterested(getLikedUsers(event.getId()));
-        return event;
-    }
-
+    /**
+     * Performs the actual insertion of an Event into the Event database.
+     * 
+     * @param event An Event object to add into the database.
+     * @throws URISyntaxException
+     * @throws SQLException
+     */
     public void createEvent(Event event) throws URISyntaxException, SQLException {
         PreparedStatement stmt = connection.prepareStatement("INSERT INTO \"Event\" (event_name, event_address, event_date, event_description) VALUES (?, ?, ?, ?)");
         stmt.setString(1, event.getName());
@@ -76,6 +93,13 @@ class EventDao {
         stmt.executeUpdate();
     }
 
+    /**
+     * Performs the actual editing of an event in the database.
+     * 
+     * @param event An Event object containing updated values.
+     * @throws SQLException
+     * @throws URISyntaxException
+     */
     public void editEvent(Event event) throws SQLException, URISyntaxException {
         PreparedStatement stmt = connection.prepareStatement("UPDATE \"Event\" SET event_name = ?, event_address = ?, event_date = ?, event_description = ? WHERE event_id = ?");
         stmt.setString(1, event.getName());
@@ -86,12 +110,28 @@ class EventDao {
         stmt.executeUpdate();
     }
 
+    /**
+     * Performs the actual deletion of an event in the Event database.
+     * 
+     * @param eventId The eventId of the Event to delete.
+     * @throws URISyntaxException
+     * @throws SQLException
+     */
 	public void deleteEvent(int eventId) throws URISyntaxException, SQLException {
         PreparedStatement stmt = connection.prepareStatement("DELETE FROM \"Event\" WHERE event_id = ?");
         stmt.setInt(1, eventId);
         stmt.executeUpdate();
 	}
 
+    /**
+     * Returns true if the specified user and event is in the Event_User database and false otherwise.
+     * 
+     * @param userId The userId of the user.
+     * @param eventId The eventId of the event.
+     * @return Truth value of the existence of the user and event in the Event_User database.
+     * @throws SQLException
+     * @throws URISyntaxException
+     */
 	public boolean hasEventUser(int userId, int eventId) throws SQLException, URISyntaxException {
         PreparedStatement stmt = connection.prepareStatement("SELECT * FROM \"Event_User\" WHERE user_id = ? AND event_id = ?");
         stmt.setInt(1, userId);
@@ -99,6 +139,15 @@ class EventDao {
         return stmt.executeQuery().next();
 	}
 
+    /**
+     * Marks a specified user as liking a specified event in the Event_User database.
+     * 
+     * @param userId The userId of the user.
+     * @param eventId The eventId of the event.
+     * @param liked The truth value of what to set the 'liked' field to.
+     * @throws SQLException
+     * @throws URISyntaxException
+     */
 	public void setEventLiked(int userId, int eventId, boolean liked) throws SQLException, URISyntaxException {
 		if (hasEventUser(userId, eventId)) {
             PreparedStatement stmt = connection.prepareStatement("UPDATE \"Event_User\" SET liked = ? WHERE user_id = ? AND event_id = ?");
@@ -116,7 +165,15 @@ class EventDao {
 		}
 	}
 
-  public List<User> getLikedUsers(int eventId) throws SQLException, URISyntaxException {
+    /**
+     * Returns the list of users who have liked a specified event.
+     * 
+     * @param eventId The eventId of the event.
+     * @return A List object containing User objects.
+     * @throws SQLException
+     * @throws URISyntaxException
+     */
+    public List<User> getLikedUsers(int eventId) throws SQLException, URISyntaxException {
         PreparedStatement stmt = connection.prepareStatement("SELECT * FROM \"Event_User\" WHERE event_id = ? AND liked = 't'");
         stmt.setInt(1, eventId);
         ResultSet rs = stmt.executeQuery();
@@ -129,8 +186,17 @@ class EventDao {
           }
         }
         return users;
-  }
+    }
 
+    /**
+     * Marks a specified user as attending a specified event.
+     * 
+     * @param userId The userId of the user.
+     * @param eventId The eventId of the event.
+     * @param attending The truth value of if the user is attending the event.
+     * @throws SQLException
+     * @throws URISyntaxException
+     */
 	public void setEventAttending(int userId, int eventId, boolean attending) throws SQLException, URISyntaxException {
 		if (hasEventUser(userId, eventId)) {
             PreparedStatement stmt = connection.prepareStatement("UPDATE \"Event_User\" SET attending = ? WHERE user_id = ? AND event_id = ?");
@@ -148,6 +214,14 @@ class EventDao {
 		}
 	}
 
+    /**
+     * Returns the list of users who are attending a specified event.
+     * 
+     * @param eventId The eventId of the event.
+     * @return A List object containing User objects.
+     * @throws SQLException
+     * @throws URISyntaxException
+     */
 	public List<User> getAttendingUsers(int eventId) throws SQLException, URISyntaxException {
         PreparedStatement stmt = connection.prepareStatement("SELECT * FROM \"Event_User\" WHERE event_id = ? AND attending ='t'");
         stmt.setInt(1, eventId);
@@ -163,6 +237,33 @@ class EventDao {
         return users;
 	}
 
+    /**
+     * Maps the field values from a ResultSet object into a new Event object.
+     * 
+     * @param rs A ResultSet that needs to be converted into an Event object.
+     * @return An Event object representing a row from the Event database.
+     * @throws SQLException
+     * @throws URISyntaxException
+     */
+    private Event mapEvent(ResultSet rs) throws SQLException, URISyntaxException {
+    	Event event = new Event();
+        event.setId(rs.getInt("event_id"));
+        event.setName(rs.getString("event_name"));
+        event.setLocation(rs.getString("event_address"));
+        event.setDate(rs.getString("event_date"));
+        event.setDescription(rs.getString("event_description"));
+        event.setAttendees(getAttendingUsers(event.getId()));
+        event.setInterested(getLikedUsers(event.getId()));
+        return event;
+    }
+
+    /**
+     * Performs the connection to the database.
+     * 
+     * @return A Connection object for the database connection.
+     * @throws URISyntaxException
+     * @throws SQLException
+     */
     private Connection getConnection() throws URISyntaxException, SQLException {
         URI dbURI = null;
 
