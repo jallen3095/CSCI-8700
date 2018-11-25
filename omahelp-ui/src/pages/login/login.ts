@@ -28,7 +28,6 @@ export class LoginPage {
   }
 
   register() {
-    // TODO
     if (this.checkPasswords()) {
       delete this.registrationData.passwordConfirmation;
       this.UserService.register(this.registrationData).subscribe(() => {
@@ -67,8 +66,6 @@ export class LoginPage {
   }
 
   login() {
-    // TODO
-    console.log(this.loginData);
     this.AuthService.authorize(this.loginData, this.navCtrl);
   }
 

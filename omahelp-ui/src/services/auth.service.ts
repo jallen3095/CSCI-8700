@@ -38,6 +38,7 @@ export class AuthService {
         message: 'Incorrect username or password!',
         duration: 3000
       })
+      toast.present();
     });
   }
 

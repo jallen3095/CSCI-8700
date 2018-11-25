@@ -33,28 +33,31 @@ export class EventService {
         return this.http.put(`${this.serverUrl}/edit`, event);
     }
 
-    // Don't think we can do these without adding a list of interested users to the event object
-    // like() {
-    //     // TODO
-    //     // Send: User id, event id
-    //     // Recieve: success/failure
-    // }
-
-    // unlike() {
-    //     // TODO
-    //     // Send: User id, event id
-    //     // Recieve: success/failure
-    // }
-
-    attend() {
-        // TODO
+    like(eventId) {
         // Send: User id, event id
         // Recieve: success/failure
+        const userId = this.UserService.getUser().userId;
+        return this.http.post(`${this.serverUrl}/like?userId=${userId}&eventId=${eventId}`, {});
     }
 
-    unattend() {
-        // TODO
+    unlike(eventId) {
         // Send: User id, event id
         // Recieve: success/failure
+        const userId = this.UserService.getUser().userId;
+        return this.http.delete(`${this.serverUrl}/like?userId=${userId}&eventId=${eventId}`);
+    }
+
+    attend(eventId) {
+        // Send: User id, event id
+        // Recieve: success/failure
+        const userId = this.UserService.getUser().userId;
+        return this.http.post(`${this.serverUrl}/edit?userId=${userId}&eventId=${eventId}`, {});
+    }
+
+    unattend(eventId) {
+        // Send: User id, event id
+        // Recieve: success/failure
+        const userId = this.UserService.getUser().userId;
+        return this.http.delete(`${this.serverUrl}/edit?userId=${userId}&eventId=${eventId}`);
     }
 }

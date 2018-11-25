@@ -19,7 +19,7 @@
           </mat-panel-title>
         </mat-expansion-panel-header>
         <ion-list *ngFor="let user of event.organizers">
-          <ion-item>{{user.firstName}} {{user.lastName}}, {{user.email}}</ion-item>
+          <ion-item *ngIf="user">{{user.firstName}} {{user.lastName}}, {{user.email}}</ion-item>
         </ion-list>
       </mat-expansion-panel>
       <mat-expansion-panel>
@@ -29,7 +29,7 @@
           </mat-panel-title>
         </mat-expansion-panel-header>
         <ion-list *ngFor="let user of event.attendees">
-          <ion-item>{{user.firstName}} {{user.lastName}}, {{user.email}}</ion-item>
+          <ion-item *ngIf="user">{{user.firstName}} {{user.lastName}}, {{user.email}}</ion-item>
         </ion-list>
       </mat-expansion-panel>
       <br>
@@ -43,7 +43,23 @@
     </mat-chip-list>
   </mat-card-content>
   <ion-row>
-    <ion-col col-xs-12 col-sm-6 col-md-2><button ion-button (click)="attend()">Attend</button></ion-col>
-    <ion-col col-xs-12 col-sm-6 col-md-2><button ion-button color="secondary" (click)="like()">Interested</button></ion-col>
+    <ion-col col-xs-12 col-sm-6 col-md-2>
+      <!-- <span *ngIf="isAttending()">
+          <ion-icon name="checkmark-circle"></ion-icon>
+      </span> -->
+      <button ion-button (click)="attend()">
+        <span *ngIf="!isAttending()">Attend</span>
+        <span *ngIf="isAttending()">Not Attending</span>
+      </button>
+    </ion-col>
+    <ion-col col-xs-12 col-sm-6 col-md-2>
+      <!-- <span *ngIf="isInterested()">
+          <ion-icon name="checkmark-circle"></ion-icon>
+      </span> -->
+      <button ion-button color="secondary" (click)="like()">
+        <span *ngIf="!isInterested()">Interested</span>
+        <span *ngIf="isInterested()">Not Interested</span>
+      </button>
+    </ion-col>
   </ion-row>
 </mat-card>
