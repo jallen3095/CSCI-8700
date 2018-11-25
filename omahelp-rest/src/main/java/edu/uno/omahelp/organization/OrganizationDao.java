@@ -4,6 +4,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -17,7 +18,7 @@ import org.springframework.stereotype.Component;
  * requested by the OrganizationController.
  */
 @Component
-class OrganizationDao {
+public class OrganizationDao {
 
     private Connection connection;
 
@@ -40,6 +41,23 @@ class OrganizationDao {
         String sql;
         sql = "SELECT * FROM \"Organization\"";
         ResultSet rs = stmt.executeQuery(sql);
+        List<Organization> orgs = new ArrayList<>();
+        while(rs.next()) {
+        	Organization org = new Organization();
+            org.setId(rs.getInt("org_id"));
+            org.setName(rs.getString("org_name"));
+            org.setPhone(rs.getString("phone"));
+            org.setAddress(rs.getString("address"));
+            orgs.add(org);
+        }
+
+        return orgs;
+    }
+    
+    public List<Organization> listUserOrganizations(int userId) throws SQLException {
+    	PreparedStatement stmt = connection.prepareStatement("SELECT * FROM \"Organization\" O INNER JOIN \"Organization_User\" OU ON O.org_id = OU.org_id AND OU.user_id = ? AND OU.is_org_admin = 't'");
+        stmt.setInt(1, userId);
+        ResultSet rs = stmt.executeQuery();
         List<Organization> orgs = new ArrayList<>();
         while(rs.next()) {
         	Organization org = new Organization();

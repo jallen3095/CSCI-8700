@@ -1,5 +1,9 @@
 package edu.uno.omahelp.user;
 
+import java.util.List;
+
+import edu.uno.omahelp.organization.Organization;
+
 /**
  * This class consists of all fields and methods necessary to represent
  * a user of the OmaHelp application. The fields of this class correspond
@@ -12,6 +16,7 @@ public class User {
     private String lastName;
     private String email;
     private String password;
+    private List<Organization> organizations;
     private boolean admin;
     
     /**
@@ -121,4 +126,22 @@ public class User {
     public void setAdmin(boolean admin) {
         this.admin = admin;
     }
+
+    /**
+     * Returns the User object's organizations.
+     * 
+     * @return The User object's organization list.
+     */
+	public List<Organization> getOrganizations() {
+		return organizations;
+	}
+
+	/**
+	 * Sets the User object's organizations.
+	 * 
+	 * @param organizations The list of organizations the user belongs to.
+	 */
+	public void setOrganizations(List<Organization> organizations) {
+		this.organizations = organizations;
+	}
 }

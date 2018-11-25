@@ -11,7 +11,10 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import edu.uno.omahelp.organization.OrganizationDao;
 
 /**
  * This class contains the methods necessary to handle the User database operations
@@ -20,6 +23,9 @@ import org.springframework.stereotype.Component;
 @Component
 public class UserDao {
 
+	@Autowired
+	private OrganizationDao organizationDao;
+	
     private Connection connection;
 
     /**
@@ -90,6 +96,7 @@ public class UserDao {
         ResultSet rs = stmt.executeQuery();
         if(rs.next()) {
             User user = mapUser(rs);
+//            user.setOrganizations(organizationDao.listUserOrganizations(user.getUserId()));
             return user;
         } else {
             throw new Exception("Invalid Email or Password!");
@@ -109,7 +116,9 @@ public class UserDao {
         ResultSet rs = stmt.executeQuery(sql);
         List<User> users = new ArrayList<>();
         while(rs.next()) {
-            users.add(mapUser(rs));
+        	User user = mapUser(rs);
+//        	user.setOrganizations(organizationDao.listUserOrganizations(user.getUserId()));
+            users.add(user);
         }
 
         return users;
@@ -129,7 +138,7 @@ public class UserDao {
         ResultSet rs = stmt.executeQuery();
         if(rs.next()) {
             User user = mapUser(rs);
-
+//            user.setOrganizations(organizationDao.listUserOrganizations(user.getUserId()));
             return user;
         }
         

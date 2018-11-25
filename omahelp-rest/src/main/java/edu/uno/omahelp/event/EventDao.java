@@ -51,7 +51,9 @@ class EventDao {
         ResultSet rs = stmt.executeQuery(sql);
         List<Event> events = new ArrayList<>();
         while(rs.next()) {
-            events.add(mapEvent(rs));
+        	Event event = mapEvent(rs);
+        	event.setOrganizers(getOrganizingUsers(event.getId()));
+        	events.add(event);
         }
 
         return events;
@@ -66,12 +68,14 @@ class EventDao {
      * @throws SQLException
      */
     public List<Event> listMyEvents(int userId) throws URISyntaxException, SQLException {
-        PreparedStatement stmt = connection.prepareStatement("SELECT DISTINCT E.* FROM \"Event\" E INNER JOIN \"Event_User\" EU ON E.event_id = EU.event_id WHERE EU.user_id = ? AND EU.attending = 't'");
+        PreparedStatement stmt = connection.prepareStatement("SELECT DISTINCT E.* FROM \"Event\" E INNER JOIN \"Event_User\" EU ON E.event_id = EU.event_id WHERE EU.user_id = ? AND (EU.attending = 't' OR EU.organizing = 't')");
         stmt.setInt(1, userId);
         ResultSet rs = stmt.executeQuery();
         List<Event> events = new ArrayList<>();
         while(rs.next()) {
-            events.add(mapEvent(rs));
+        	Event event = mapEvent(rs);
+        	event.setOrganizers(getOrganizingUsers(event.getId()));
+            events.add(event);
         }
 
         return events;
@@ -91,6 +95,13 @@ class EventDao {
         stmt.setDate(3, new Date(Date.parse(event.getDate())));
         stmt.setString(4, event.getDescription());
         stmt.executeUpdate();
+        List<Event> allEvents = listAllEvents();
+        Event createdEvent = allEvents.get(allEvents.size() - 1);
+        if (event.getOrganizers() != null) {
+        	for (User user : event.getOrganizers()) {
+                setEventOrganizing(user.getUserId(), createdEvent.getId(), true);
+        	}
+        }
     }
 
     /**
@@ -156,11 +167,12 @@ class EventDao {
             stmt.setInt(3, eventId);
             stmt.executeUpdate();
 		} else {
-            PreparedStatement stmt = connection.prepareStatement("INSERT INTO \"Event_User\" VALUES (%s, %s, %s, %s)");
+            PreparedStatement stmt = connection.prepareStatement("INSERT INTO \"Event_User\" VALUES (?, ?, ?, ?, ?)");
             stmt.setInt(1, userId);
             stmt.setInt(2, eventId);
             stmt.setBoolean(3, false);
             stmt.setBoolean(4, liked);
+            stmt.setBoolean(5, false);
             stmt.executeUpdate();
 		}
 	}
@@ -205,11 +217,39 @@ class EventDao {
             stmt.setInt(3, eventId);
             stmt.executeUpdate();
 		} else {
-            PreparedStatement stmt = connection.prepareStatement("INSERT INTO \"Event_User\" VALUES (?, ?, ?, ?)");
+            PreparedStatement stmt = connection.prepareStatement("INSERT INTO \"Event_User\" VALUES (?, ?, ?, ?, ?)");
             stmt.setInt(1, userId);
             stmt.setInt(2, eventId);
             stmt.setBoolean(3, attending);
             stmt.setBoolean(4, false);
+            stmt.setBoolean(5, false);
+            stmt.executeUpdate();
+		}
+	}
+	
+	/**
+     * Set event organizing
+     * 
+     * @param userId The userId of the user.
+     * @param eventId The eventId of the event.
+     * @param organizing The truth value of if the user is organizing the event.
+     * @throws SQLException
+     * @throws URISyntaxException
+     */
+	public void setEventOrganizing(int userId, int eventId, boolean organizing) throws SQLException, URISyntaxException {
+		if (hasEventUser(userId, eventId)) {
+            PreparedStatement stmt = connection.prepareStatement("UPDATE \"Event_User\" SET organizing = ? WHERE user_id = ? AND event_id = ?");
+            stmt.setBoolean(1, organizing);
+            stmt.setInt(2, userId);
+            stmt.setInt(3, eventId);
+            stmt.executeUpdate();
+		} else {
+            PreparedStatement stmt = connection.prepareStatement("INSERT INTO \"Event_User\" VALUES (?, ?, ?, ?, ?)");
+            stmt.setInt(1, userId);
+            stmt.setInt(2, eventId);
+            stmt.setBoolean(3, false);
+            stmt.setBoolean(4, false);
+            stmt.setBoolean(5, organizing);
             stmt.executeUpdate();
 		}
 	}
@@ -224,6 +264,29 @@ class EventDao {
      */
 	public List<User> getAttendingUsers(int eventId) throws SQLException, URISyntaxException {
         PreparedStatement stmt = connection.prepareStatement("SELECT * FROM \"Event_User\" WHERE event_id = ? AND attending ='t'");
+        stmt.setInt(1, eventId);
+        ResultSet rs = stmt.executeQuery();
+        List<User> users = new ArrayList<>();
+        while (rs.next()) {
+        	int userId = rs.getInt("user_id");
+        	User user = userDao.getUserById(userId);
+        	if (user != null) {
+        		users.add(user);
+        	}
+        }
+        return users;
+	}
+	
+    /**
+     * Returns the list of users who are organizing a specified event.
+     * 
+     * @param eventId The eventId of the event.
+     * @return A List object containing User objects.
+     * @throws SQLException
+     * @throws URISyntaxException
+     */
+	public List<User> getOrganizingUsers(int eventId) throws SQLException, URISyntaxException {
+        PreparedStatement stmt = connection.prepareStatement("SELECT * FROM \"Event_User\" WHERE event_id = ? AND organizing ='t'");
         stmt.setInt(1, eventId);
         ResultSet rs = stmt.executeQuery();
         List<User> users = new ArrayList<>();
