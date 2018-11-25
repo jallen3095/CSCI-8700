@@ -54,6 +54,13 @@ public class OrganizationDao {
         return orgs;
     }
     
+    /**
+     * Lists all the organizations that a specified user is associated with.
+     * 
+     * @param userId The userId of the user.
+     * @return A list object containing Organization objects.
+     * @throws SQLException
+     */
     public List<Organization> listUserOrganizations(int userId) throws SQLException {
     	PreparedStatement stmt = connection.prepareStatement("SELECT * FROM \"Organization\" O INNER JOIN \"Organization_User\" OU ON O.org_id = OU.org_id AND OU.user_id = ? AND OU.is_org_admin = 't'");
         stmt.setInt(1, userId);
