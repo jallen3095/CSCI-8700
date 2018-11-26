@@ -56,7 +56,7 @@ public class EventController {
      * @throws URISyntaxException
      * @throws SQLException
      */
-    @RequestMapping(method=RequestMethod.POST)
+    @RequestMapping(path="create", method=RequestMethod.POST)
     public void createEvent(@RequestBody Event event) throws URISyntaxException, SQLException {
     	eventDao.createEvent(event);
     }
@@ -68,7 +68,7 @@ public class EventController {
      * @throws URISyntaxException
      * @throws SQLException
      */
-    @RequestMapping(method=RequestMethod.PUT)
+    @RequestMapping(path="edit", method=RequestMethod.PUT)
     public void editEvent(@RequestBody Event event) throws URISyntaxException, SQLException {
     	eventDao.editEvent(event);
 	}
@@ -80,7 +80,7 @@ public class EventController {
      * @throws URISyntaxException
      * @throws SQLException
      */
-    @RequestMapping(method=RequestMethod.DELETE)
+    @RequestMapping(path="delete", method=RequestMethod.DELETE)
     public void deleteEvent(@RequestParam int eventId) throws URISyntaxException, SQLException {
         eventDao.deleteEvent(eventId);
     }
