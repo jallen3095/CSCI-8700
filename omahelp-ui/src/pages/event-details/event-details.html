@@ -46,8 +46,6 @@
               <input matInput type="text" placeholder="Area" [(ngModel)]="edit.area" name="area" required>
             </mat-form-field>
 
-
-
             <mat-form-field class="full-width">
               <mat-chip-list #chipList>
                 <mat-chip *ngFor="let tag of edit.tags" [selectable]="selectable" [removable]="removable" (removed)="removeTag(tag)">
@@ -61,7 +59,7 @@
           </form>
         </ion-col>
       </ion-row>
-
+      
       <ion-row>
         <ion-col col-xs-12 col-sm-6 col-md-2><button ion-button (click)="submit()">Submit</button></ion-col>
         <ion-col col-xs-12 col-sm-6 col-md-2><button ion-button color="secondary" (click)="setViewMode()">Cancel</button></ion-col>

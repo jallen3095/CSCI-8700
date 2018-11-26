@@ -24,13 +24,19 @@ export class EventService {
     create(event: any) {
         // Send: Event Object
         // Recieve: Event Object/failure
-        return this.http.post(`${this.serverUrl}/register`, event);
+        return this.http.post(`${this.serverUrl}/create`, event);
     }
 
     edit(event: any) {
         // Send: Event Object
         // Recieve: Event Object/failure
         return this.http.put(`${this.serverUrl}/edit`, event);
+    }
+
+    delete(event: any) {
+        // Send: Event Object
+        // Recieve: Event Object/failure
+        return this.http.delete(`${this.serverUrl}/delete?eventId=${event.id}`);
     }
 
     like(eventId) {
@@ -51,13 +57,13 @@ export class EventService {
         // Send: User id, event id
         // Recieve: success/failure
         const userId = this.UserService.getUser().userId;
-        return this.http.post(`${this.serverUrl}/edit?userId=${userId}&eventId=${eventId}`, {});
+        return this.http.post(`${this.serverUrl}/attend?userId=${userId}&eventId=${eventId}`, {});
     }
 
     unattend(eventId) {
         // Send: User id, event id
         // Recieve: success/failure
         const userId = this.UserService.getUser().userId;
-        return this.http.delete(`${this.serverUrl}/edit?userId=${userId}&eventId=${eventId}`);
+        return this.http.delete(`${this.serverUrl}/attend?userId=${userId}&eventId=${eventId}`);
     }
 }

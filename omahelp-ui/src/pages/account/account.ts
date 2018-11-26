@@ -26,6 +26,11 @@ export class AccountPage {
 
   submit() {
     // TODO
+    this.UserService.editAccount(this.edit).subscribe(() => {
+      this.user = this.edit;
+    }, () => {
+
+    });
   }
 
   mockUser() {
