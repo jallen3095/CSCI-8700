@@ -5,6 +5,7 @@ import { MatChipInputEvent } from '@angular/material';
 import { EventService } from '../../services/event.service';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { UserService } from '../../services/user.service';
+import { dateDataSortValue } from 'ionic-angular/umd/util/datetime-util';
 
 /**
  * Generated class for the EventDetails page.
@@ -25,13 +26,15 @@ export class EventDetailsPage {
   removable = true;
   addOnBlur = true;
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
-  event: any = {};
-  edit: any = {};
+  event: any;
+  edit: any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private EventService: EventService, private UserService: UserService) {
     this.event = this.navParams.data.event;
     console.log(this.event);
     if (!this.event) {
+      this.event = {id: '', name: '', date: '', description: '', address: '', area: '', attendees: [], organizers: [], tags: []};
+      this.edit = JSON.parse(JSON.stringify(this.event));
       this.setCreateMode();
     } else {
       // this.mockEvent();
@@ -74,9 +77,12 @@ export class EventDetailsPage {
     if (this.UserService.getUser().admin) {
       return true;
     }
-    const id = this.UserService.getUser().userId;
+    if (!this.event.organizers) {
+      return false;
+    }
+    const email = this.UserService.getUser().email;
     for (let org of this.event.organizers) {
-      if (org.userId === id) {
+      if (org.email === email) {
         return true;
       }
     }
@@ -84,6 +90,7 @@ export class EventDetailsPage {
   }
 
   editMode() {
+    this.edit = JSON.parse(JSON.stringify(this.event));
     return this.mode === 'edit';
   }
 
@@ -103,16 +110,21 @@ export class EventDetailsPage {
   addTag(event: MatChipInputEvent): void {
     const input = event.input;
     const value = event.value;
+    console.log('before: ' + JSON.stringify(this.edit), this.event);
+    this.edit.tags ? {} : this.edit.tags = [];
 
-    if (this.event.tags.indexOf(value.trim()) >= 0) {
+    if (this.edit.tags.indexOf(value.trim()) >= 0) {
       input.value = '';
       return;
     }
 
     // Add our tag
     if ((value || '').trim()) {
-      this.event.tags.push(value.trim());
+      this.edit.tags.push(value.trim());
+      console.log('after: ' + JSON.stringify(this.edit, this.event));
     }
+    this.event = JSON.parse(JSON.stringify(this.edit));
+    console.log('after 2: ' + JSON.stringify(this.edit, this.event));
 
     // Reset the input value
     if (input) {
@@ -121,11 +133,12 @@ export class EventDetailsPage {
   }
 
   removeTag(tag: string): void {
-    const index = this.event.tags.indexOf(tag);
+    const index = this.edit.tags.indexOf(tag);
 
     if (index >= 0) {
-      this.event.tags.splice(index, 1);
+      this.edit.tags.splice(index, 1);
     }
+    this.event = JSON.parse(JSON.stringify(this.edit));
   }
 
   private mockEvent() {

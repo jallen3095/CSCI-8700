@@ -5,6 +5,7 @@ import java.util.List;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
+import edu.uno.omahelp.organization.Organization;
 import edu.uno.omahelp.user.User;
 
 /**

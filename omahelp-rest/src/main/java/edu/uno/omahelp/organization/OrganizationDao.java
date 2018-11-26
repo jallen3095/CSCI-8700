@@ -4,6 +4,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -12,15 +13,29 @@ import java.util.List;
 
 import org.springframework.stereotype.Component;
 
+/**
+ * This class contains the methods necessary to handle the Organization database operations
+ * requested by the OrganizationController.
+ */
 @Component
-class OrganizationDao {
+public class OrganizationDao {
 
     private Connection connection;
 
+    /**
+     * Class constructor that creates a connection to the database.
+     */
     public OrganizationDao() throws URISyntaxException, SQLException {
         connection = getConnection();
     }
 
+    /**
+     * Lists all the organizations in the Organization database and puts them in a list.
+     * 
+     * @return A List object containing an Organization object for each organization in the Organization database.
+     * @throws URISyntaxException
+     * @throws SQLException
+     */
     public List<Organization> listAllOrganizations() throws URISyntaxException, SQLException {
         Statement stmt = connection.createStatement();
         String sql;
@@ -38,7 +53,38 @@ class OrganizationDao {
 
         return orgs;
     }
+    
+    /**
+     * Lists all the organizations that a specified user is associated with.
+     * 
+     * @param userId The userId of the user.
+     * @return A list object containing Organization objects.
+     * @throws SQLException
+     */
+    public List<Organization> listUserOrganizations(int userId) throws SQLException {
+    	PreparedStatement stmt = connection.prepareStatement("SELECT * FROM \"Organization\" O INNER JOIN \"Organization_User\" OU ON O.org_id = OU.org_id AND OU.user_id = ? AND OU.is_org_admin = 't'");
+        stmt.setInt(1, userId);
+        ResultSet rs = stmt.executeQuery();
+        List<Organization> orgs = new ArrayList<>();
+        while(rs.next()) {
+        	Organization org = new Organization();
+            org.setId(rs.getInt("org_id"));
+            org.setName(rs.getString("org_name"));
+            org.setPhone(rs.getString("phone"));
+            org.setAddress(rs.getString("address"));
+            orgs.add(org);
+        }
 
+        return orgs;
+    }
+
+    /**
+     * Performs the connection to the database.
+     * 
+     * @return A Connection object for the database connection.
+     * @throws URISyntaxException
+     * @throws SQLException
+     */
     private Connection getConnection() throws URISyntaxException, SQLException {
         URI dbURI = null;
 

@@ -10,13 +10,15 @@
 
 <ion-content padding>
   <ion-grid>
-    
+
     <div *ngIf="viewMode()">
       <event-card [event]="event" [detailed]="true"></event-card>
       <br>
-      <ion-row *ngIf="canEdit()"><ion-col col-xs-12 col-sm-4 col-md-2><button ion-button (click)="setEditMode()">Edit</button></ion-col></ion-row>
+      <ion-row *ngIf="canEdit()">
+        <ion-col col-xs-12 col-sm-4 col-md-2><button ion-button (click)="setEditMode()">Edit</button></ion-col>
+      </ion-row>
     </div>
- 
+
     <div *ngIf="editMode() || createMode()">
       <ion-row align-items-center>
         <ion-col col-12 align-self-center>
@@ -24,11 +26,12 @@
             <mat-form-field class="full-width">
               <input matInput type="text" placeholder="Name" [(ngModel)]="edit.name" name="name" required>
             </mat-form-field>
-            
+
             <mat-form-field class="full-width">
-              <input matInput type="textarea" placeholder="Description" [(ngModel)]="edit.description" name="description" required>
+              <input matInput type="textarea" placeholder="Description" [(ngModel)]="edit.description" name="description"
+                required>
             </mat-form-field>
-            
+
             <ion-item class="full-width">
               <ion-label>Date</ion-label>
               <ion-datetime displayFormat="MMM D, YYYY h:m a" [(ngModel)]="edit.date" name="date"></ion-datetime>
@@ -38,29 +41,25 @@
             <mat-form-field class="full-width">
               <input matInput type="text" placeholder="Address" [(ngModel)]="edit.address" name="address" required>
             </mat-form-field>
-            
+
             <mat-form-field class="full-width">
               <input matInput type="text" placeholder="Area" [(ngModel)]="edit.area" name="area" required>
             </mat-form-field>
 
             <mat-form-field class="full-width">
               <mat-chip-list #chipList>
-                <mat-chip *ngFor="let tag of edit.tags" [selectable]="selectable"
-                          [removable]="removable" (removed)="removeTag(tag)">
+                <mat-chip *ngFor="let tag of edit.tags" [selectable]="selectable" [removable]="removable" (removed)="removeTag(tag)">
                   {{tag}}
                   <mat-icon matChipRemove *ngIf="removable">x</mat-icon>
                 </mat-chip>
-                <input placeholder="New Tag..."
-                        [matChipInputFor]="chipList"
-                        [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-                        [matChipInputAddOnBlur]="addOnBlur"
-                        (matChipInputTokenEnd)="addTag($event)">
+                <input placeholder="New Tag..." [matChipInputFor]="chipList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                  [matChipInputAddOnBlur]="addOnBlur" (matChipInputTokenEnd)="addTag($event)">
               </mat-chip-list>
             </mat-form-field>
           </form>
         </ion-col>
       </ion-row>
-
+      
       <ion-row>
         <ion-col col-xs-12 col-sm-6 col-md-2><button ion-button (click)="submit()">Submit</button></ion-col>
         <ion-col col-xs-12 col-sm-6 col-md-2><button ion-button color="secondary" (click)="setViewMode()">Cancel</button></ion-col>
