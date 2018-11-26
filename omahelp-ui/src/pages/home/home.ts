@@ -25,7 +25,6 @@ export class HomePage {
     this.EventService.listEvents().subscribe((resp: any) => {
       this.events = resp;
       this.eventsToShow = this.events;
-      console.log(this.events);
     });
   }
 

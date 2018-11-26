@@ -39,7 +39,7 @@
             <br>
 
             <mat-form-field class="full-width">
-              <input matInput type="text" placeholder="Address" [(ngModel)]="edit.address" name="address" required>
+              <input matInput type="text" placeholder="Address" [(ngModel)]="edit.location" (ngModelChange)="setLocation($event)" name="address" required>
             </mat-form-field>
 
             <mat-form-field class="full-width">
@@ -59,11 +59,12 @@
           </form>
         </ion-col>
       </ion-row>
-      
       <ion-row>
         <ion-col col-xs-12 col-sm-6 col-md-2><button ion-button (click)="submit()">Submit</button></ion-col>
         <ion-col col-xs-12 col-sm-6 col-md-2><button ion-button color="secondary" (click)="setViewMode()">Cancel</button></ion-col>
       </ion-row>
     </div>
+
+    <pre>{{edit.location | json}}</pre>
   </ion-grid>
 </ion-content>
