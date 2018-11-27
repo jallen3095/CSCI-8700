@@ -137,7 +137,7 @@ class EventDao {
 	 */
 	public void editEvent(Event event) throws SQLException, URISyntaxException {
 		PreparedStatement stmt = connection.prepareStatement(
-				"UPDATE \"Event\" SET event_name = ?, event_address = ?, event_date = ?, event_description = ? WHERE event_id = ?");
+				"UPDATE \"Event\" SET event_name = ?, event_address = ?, event_date = ?, event_description = ?, tags = ? WHERE event_id = ?");
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 		String dateString = event.getDate();
 
@@ -147,7 +147,8 @@ class EventDao {
 			stmt.setString(2, event.getLocation());
 			stmt.setDate(3, date);
 			stmt.setString(4, event.getDescription());
-			stmt.setInt(5, event.getId());
+			stmt.setString(5, StringUtils.join(event.getTags()));
+			stmt.setInt(6, event.getId());
 			stmt.executeUpdate();
 		} catch (ParseException e) {
 			e.printStackTrace();
