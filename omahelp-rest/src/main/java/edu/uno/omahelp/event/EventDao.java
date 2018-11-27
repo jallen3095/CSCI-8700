@@ -10,8 +10,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
+import org.apache.tomcat.util.buf.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -89,11 +91,15 @@ class EventDao {
      * @throws SQLException
      */
     public void createEvent(Event event) throws URISyntaxException, SQLException {
-        PreparedStatement stmt = connection.prepareStatement("INSERT INTO \"Event\" (event_name, event_address, event_date, event_description) VALUES (?, ?, ?, ?)");
+        PreparedStatement stmt = connection.prepareStatement("INSERT INTO \"Event\" (event_name, event_address, event_date, event_description, tags) VALUES (?, ?, ?, ?, ?)");
+        if (event.getTags() == null) {
+        	event.setTags(new ArrayList<>());
+        }
         stmt.setString(1, event.getName());
         stmt.setString(2, event.getLocation());
         stmt.setDate(3, new Date(Date.parse(event.getDate())));
         stmt.setString(4, event.getDescription());
+        stmt.setString(5, StringUtils.join(event.getTags()));
         stmt.executeUpdate();
         List<Event> allEvents = listAllEvents();
         Event createdEvent = allEvents.get(allEvents.size() - 1);
@@ -315,6 +321,10 @@ class EventDao {
         event.setLocation(rs.getString("event_address"));
         event.setDate(rs.getString("event_date"));
         event.setDescription(rs.getString("event_description"));
+        String tagsString = rs.getString("tags");
+        if (tagsString != null && !tagsString.isEmpty()) {
+        	event.setTags(Arrays.asList(tagsString.split(",")));
+        }
         event.setAttendees(getAttendingUsers(event.getId()));
         event.setInterested(getLikedUsers(event.getId()));
         return event;
