@@ -65,6 +65,7 @@ export class EventDetailsPage {
     } else {
       // create event
       this.edit.organizers.push(this.UserService.getUser());
+      this.event = JSON.parse(JSON.stringify(this.edit));
       this.EventService.create(this.edit).subscribe(() => {
         this.event = JSON.parse(JSON.stringify(this.edit));
         this.setViewMode();
@@ -138,19 +139,37 @@ export class EventDetailsPage {
     this.event = JSON.parse(JSON.stringify(this.edit));
   }
 
-  setLocation($event) {
-    console.log('setting location', $event);
-    this.edit.location = $event;
-    console.log(this.edit.location);
+  setName($event) {
+    this.edit.name = $event;
+    this.event = JSON.parse(JSON.stringify(this.edit));
   }
 
+  setDescription($event) {
+    this.edit.description = $event;
+    this.event = JSON.parse(JSON.stringify(this.edit));
+  }
+
+  setDate($event) {
+    this.edit.date = $event;
+    this.event = JSON.parse(JSON.stringify(this.edit));
+  }
+
+  setLocation($event) {
+    this.edit.location = $event;
+    this.event = JSON.parse(JSON.stringify(this.edit));
+  }
+
+  setArea($event) {
+    this.edit.area = $event;
+    this.event = JSON.parse(JSON.stringify(this.edit));
+  }
   private mockEvent() {
     this.event = {
       id: this.event.id,
       name: 'Sample Title',
       date: new Date(),
       description: 'Descriptionwordswordswords',
-      address: 'Sample Street, SA SAMPLE',
+      location: 'Sample Street, SA SAMPLE',
       area: 'Dundee',
       tags: [
         'fun',
