@@ -115,7 +115,7 @@ class EventDao {
         PreparedStatement stmt = connection.prepareStatement("UPDATE \"Event\" SET event_name = ?, event_address = ?, event_date = ?, event_description = ? WHERE event_id = ?");
         stmt.setString(1, event.getName());
         stmt.setString(2, event.getLocation());
-        stmt.setDate(3, new Date(Date.parse(event.getLocation())));
+        stmt.setDate(3, new Date(Date.parse(event.getDate())));
         stmt.setString(4, event.getDescription());
         stmt.setInt(5, event.getId());
         stmt.executeUpdate();
