@@ -75,8 +75,11 @@ export class EventDetailsPage {
   }
 
   delete() {
-    this.EventService.delete(this.event).subscribe(() => { });
-    window.location.reload();
+    this.EventService.delete(this.event).subscribe(() => { 
+      window.location.reload();
+    }, () => { 
+      window.location.reload();
+    });
   }
 
   canEdit() {
