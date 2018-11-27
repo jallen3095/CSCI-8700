@@ -17,7 +17,6 @@ export class EventCardComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log(this.event);
     this.clearNulls(); 
   }
 
@@ -26,28 +25,36 @@ export class EventCardComponent implements OnInit {
   }
 
   attend() {
-    console.log('attend()');
     if (this.isAttending()) {
-      this.EventService.unattend(this.event.id).subscribe(() => {
-        console.log('called service');
-      }, () => {});
+      this.EventService.unattend(this.event.id).subscribe(() => {}, () => {});
+      for(let i = 0; i < this.event.attendees.length; i++) {
+        if (this.event.attendees[i].userId == this.UserService.getUser().userId) {
+          this.event.attendees.splice(i, 1);
+        }
+      }
     } else {
-      this.EventService.attend(this.event.id).subscribe(() => {
-        console.log('called service');
-      }, () => {});
+      this.EventService.attend(this.event.id).subscribe(() => {}, () => {});
+      if (!this.event.attendees) {
+        this.event.attendees = [];
+      }
+      this.event.attendees.push(this.UserService.getUser());
     }
   }
 
   like() {
-    console.log('like()');
     if (this.isInterested()) {
-      this.EventService.unlike(this.event.id).subscribe(() => {
-        console.log('called service');
-      }, () => {});
+      this.EventService.unlike(this.event.id).subscribe(() => { },() => { });
+      for(let i = 0; i < this.event.interested.length; i++) {
+        if (this.event.interested[i].userId == this.UserService.getUser().userId) {
+          this.event.interested.splice(i, 1);
+        }
+      }
     } else {
-      this.EventService.like(this.event.id).subscribe(() => {
-        console.log('called service');
-      }, () => {});
+      this.EventService.like(this.event.id).subscribe(() => { },() => { });
+      if (!this.event.interested) {
+        this.event.interested = [];
+      }
+      this.event.interested.push(this.UserService.getUser());
     }
   }
 
@@ -78,18 +85,16 @@ export class EventCardComponent implements OnInit {
 
   clearNulls() {
     if (this.event.organizers) {
-      console.log(JSON.stringify(this.event.organizers));
       for(let i = 0; i < this.event.organizers.length; i++) {
         if (this.event.organizers[i] == null) {
-          delete this.event.organizers[i];
+          this.event.organizers.splice(i, 1);
         }
       }
     }
     if (this.event.attendees) {
-      console.log(JSON.stringify(this.event.attendees));
       for(let i = 0; i < this.event.attendees.length; i++) {
         if (this.event.attendees[i] == null) {
-          delete this.event.attendees[i];
+          this.event.attendees.splice(i, 1);
         }
       }
     }

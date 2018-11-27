@@ -22,7 +22,8 @@ export class UserService {
         // TODO
         // Send: User Object
         // Recieve: User Object/failure
-        return this.http.post(`${this.serverUrl}/edit`, userData);
+        this.login(userData);
+        return this.http.put(`${this.serverUrl}/edit`, userData);
     }
 
     getUser() {

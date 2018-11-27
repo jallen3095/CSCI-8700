@@ -3,9 +3,7 @@ import {COMMA, ENTER} from '@angular/cdk/keycodes';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { MatChipInputEvent } from '@angular/material';
 import { EventService } from '../../services/event.service';
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { UserService } from '../../services/user.service';
-import { dateDataSortValue } from 'ionic-angular/umd/util/datetime-util';
 
 /**
  * Generated class for the EventDetails page.
@@ -33,7 +31,7 @@ export class EventDetailsPage {
     this.event = this.navParams.data.event;
     console.log(this.event);
     if (!this.event) {
-      this.event = {id: '', name: '', date: '', description: '', address: '', area: '', attendees: [], organizers: [], tags: []};
+      this.event = {name: '', date: '', description: '', location: '', area: '', attendees: [], organizers: [], tags: []};
       this.edit = JSON.parse(JSON.stringify(this.event));
       this.setCreateMode();
     } else {
@@ -58,19 +56,30 @@ export class EventDetailsPage {
     // TODO
     if (this.event.id) {
       // update event
+      console.log(JSON.stringify(this.edit));
       this.EventService.edit(this.edit).subscribe(() => {
-         this.event = this.edit;
+         this.event = JSON.parse(JSON.stringify(this.edit));
+         console.log(this.edit, this.event);
          this.setViewMode();
       });
     } else {
       // create event
       this.edit.organizers.push(this.UserService.getUser());
+      this.event = JSON.parse(JSON.stringify(this.edit));
       this.EventService.create(this.edit).subscribe(() => {
-        this.event = this.edit;
+        this.event = JSON.parse(JSON.stringify(this.edit));
         this.setViewMode();
       });
     }
     this.setViewMode();
+  }
+
+  delete() {
+    this.EventService.delete(this.event).subscribe(() => { 
+      window.location.reload();
+    }, () => { 
+      window.location.reload();
+    });
   }
 
   canEdit() {
@@ -110,7 +119,6 @@ export class EventDetailsPage {
   addTag(event: MatChipInputEvent): void {
     const input = event.input;
     const value = event.value;
-    console.log('before: ' + JSON.stringify(this.edit), this.event);
     this.edit.tags ? {} : this.edit.tags = [];
 
     if (this.edit.tags.indexOf(value.trim()) >= 0) {
@@ -121,10 +129,8 @@ export class EventDetailsPage {
     // Add our tag
     if ((value || '').trim()) {
       this.edit.tags.push(value.trim());
-      console.log('after: ' + JSON.stringify(this.edit, this.event));
     }
     this.event = JSON.parse(JSON.stringify(this.edit));
-    console.log('after 2: ' + JSON.stringify(this.edit, this.event));
 
     // Reset the input value
     if (input) {
@@ -141,13 +147,37 @@ export class EventDetailsPage {
     this.event = JSON.parse(JSON.stringify(this.edit));
   }
 
+  setName($event) {
+    this.edit.name = $event;
+    this.event = JSON.parse(JSON.stringify(this.edit));
+  }
+
+  setDescription($event) {
+    this.edit.description = $event;
+    this.event = JSON.parse(JSON.stringify(this.edit));
+  }
+
+  setDate($event) {
+    this.edit.date = $event;
+    this.event = JSON.parse(JSON.stringify(this.edit));
+  }
+
+  setLocation($event) {
+    this.edit.location = $event;
+    this.event = JSON.parse(JSON.stringify(this.edit));
+  }
+
+  setArea($event) {
+    this.edit.area = $event;
+    this.event = JSON.parse(JSON.stringify(this.edit));
+  }
   private mockEvent() {
     this.event = {
       id: this.event.id,
       name: 'Sample Title',
       date: new Date(),
       description: 'Descriptionwordswordswords',
-      address: 'Sample Street, SA SAMPLE',
+      location: 'Sample Street, SA SAMPLE',
       area: 'Dundee',
       tags: [
         'fun',

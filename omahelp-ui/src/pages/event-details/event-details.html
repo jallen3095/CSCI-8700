@@ -24,29 +24,27 @@
         <ion-col col-12 align-self-center>
           <form>
             <mat-form-field class="full-width">
-              <input matInput type="text" placeholder="Name" [(ngModel)]="edit.name" name="name" required>
+              <input matInput type="text" placeholder="Name" [(ngModel)]="edit.name" name="name" (ngModelChange)="setName($event)"required>
             </mat-form-field>
 
             <mat-form-field class="full-width">
-              <input matInput type="textarea" placeholder="Description" [(ngModel)]="edit.description" name="description"
+              <input matInput type="textarea" placeholder="Description" [(ngModel)]="edit.description" name="description" (ngModelChange)="setDescription($event)" 
                 required>
             </mat-form-field>
 
             <ion-item class="full-width">
               <ion-label>Date</ion-label>
-              <ion-datetime displayFormat="MMM D, YYYY h:m a" [(ngModel)]="edit.date" name="date"></ion-datetime>
+              <ion-datetime displayFormat="MMM D, YYYY h:m a" [(ngModel)]="edit.date" name="date" (ngModelChange)="setDate($event)" ></ion-datetime>
             </ion-item>
             <br>
 
             <mat-form-field class="full-width">
-              <input matInput type="text" placeholder="Address" [(ngModel)]="edit.address" name="address" required>
+              <input matInput type="text" placeholder="Address" [(ngModel)]="edit.location" (ngModelChange)="setLocation($event)" name="address" required>
             </mat-form-field>
 
             <mat-form-field class="full-width">
-              <input matInput type="text" placeholder="Area" [(ngModel)]="edit.area" name="area" required>
+              <input matInput type="text" placeholder="Area" [(ngModel)]="edit.area" name="area" (ngModelChange)="setArea($event)" required>
             </mat-form-field>
-
-
 
             <mat-form-field class="full-width">
               <mat-chip-list #chipList>
@@ -61,10 +59,10 @@
           </form>
         </ion-col>
       </ion-row>
-
       <ion-row>
         <ion-col col-xs-12 col-sm-6 col-md-2><button ion-button (click)="submit()">Submit</button></ion-col>
         <ion-col col-xs-12 col-sm-6 col-md-2><button ion-button color="secondary" (click)="setViewMode()">Cancel</button></ion-col>
+        <ion-col offset-4 *ngIf="editMode()"><button ion-button color="danger" (click)="delete()">Delete</button></ion-col>
       </ion-row>
     </div>
   </ion-grid>
