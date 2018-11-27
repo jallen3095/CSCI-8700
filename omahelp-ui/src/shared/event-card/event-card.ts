@@ -34,6 +34,9 @@ export class EventCardComponent implements OnInit {
       }
     } else {
       this.EventService.attend(this.event.id).subscribe(() => {}, () => {});
+      if (!this.event.attendees) {
+        this.event.attendees = [];
+      }
       this.event.attendees.push(this.UserService.getUser());
     }
   }
@@ -48,6 +51,9 @@ export class EventCardComponent implements OnInit {
       }
     } else {
       this.EventService.like(this.event.id).subscribe(() => { },() => { });
+      if (!this.event.interested) {
+        this.event.interested = [];
+      }
       this.event.interested.push(this.UserService.getUser());
     }
   }
