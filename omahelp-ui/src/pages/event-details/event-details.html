@@ -62,6 +62,7 @@
       <ion-row>
         <ion-col col-xs-12 col-sm-6 col-md-2><button ion-button (click)="submit()">Submit</button></ion-col>
         <ion-col col-xs-12 col-sm-6 col-md-2><button ion-button color="secondary" (click)="setViewMode()">Cancel</button></ion-col>
+        <ion-col offset-4 *ngIf="editMode()"><button ion-button color="danger" (click)="delete()">Delete</button></ion-col>
       </ion-row>
     </div>
   </ion-grid>

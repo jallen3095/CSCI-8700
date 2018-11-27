@@ -74,6 +74,11 @@ export class EventDetailsPage {
     this.setViewMode();
   }
 
+  delete() {
+    this.EventService.delete(this.event).subscribe(() => { });
+    window.location.reload();
+  }
+
   canEdit() {
     if (this.UserService.getUser().admin) {
       return true;
