@@ -92,11 +92,20 @@ class EventDao {
      */
     public void createEvent(Event event) throws URISyntaxException, SQLException {
         PreparedStatement stmt = connection.prepareStatement("INSERT INTO \"Event\" (event_name, event_address, event_date, event_description) VALUES (?, ?, ?, ?)");
-        stmt.setString(1, event.getName());
-        stmt.setString(2, event.getLocation());
-        stmt.setDate(3, new Date(Date.parse(event.getDate())));
-        stmt.setString(4, event.getDescription());
-        stmt.executeUpdate();
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        String dateString = event.getDate();
+
+        try {
+            Date date = convertJavaDateToSqlDate(format.parse(dateString));
+            stmt.setString(1, event.getName());
+            stmt.setString(2, event.getLocation());
+            stmt.setDate(3, date);
+            stmt.setString(4, event.getDescription());
+            stmt.executeUpdate();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        
         List<Event> allEvents = listAllEvents();
         Event createdEvent = allEvents.get(allEvents.size() - 1);
         if (event.getOrganizers() != null) {
