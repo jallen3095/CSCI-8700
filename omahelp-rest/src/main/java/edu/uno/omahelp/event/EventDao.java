@@ -9,6 +9,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -113,12 +115,20 @@ class EventDao {
      */
     public void editEvent(Event event) throws SQLException, URISyntaxException {
         PreparedStatement stmt = connection.prepareStatement("UPDATE \"Event\" SET event_name = ?, event_address = ?, event_date = ?, event_description = ? WHERE event_id = ?");
-        stmt.setString(1, event.getName());
-        stmt.setString(2, event.getLocation());
-        stmt.setDate(3, new Date(Date.parse(event.getDate())));
-        stmt.setString(4, event.getDescription());
-        stmt.setInt(5, event.getId());
-        stmt.executeUpdate();
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        String dateString = event.getDate();
+
+        try {
+            Date date = convertJavaDateToSqlDate(format.parse(dateString));
+            stmt.setString(1, event.getName());
+            stmt.setString(2, event.getLocation());
+            stmt.setDate(3, date);
+            stmt.setString(4, event.getDescription());
+            stmt.setInt(5, event.getId());
+            stmt.executeUpdate();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -318,6 +328,16 @@ class EventDao {
         event.setAttendees(getAttendingUsers(event.getId()));
         event.setInterested(getLikedUsers(event.getId()));
         return event;
+    }
+
+    /**
+     * Converts a java.util.Date into a java.sql.Date to be used in SQL queries.
+     * 
+     * @param date A java.util.Date to be converted.
+     * @return A java.sql.Date object.
+     */
+    private java.sql.Date convertJavaDateToSqlDate(java.util.Date date) {
+        return new java.sql.Date(date.getTime());
     }
 
     /**
