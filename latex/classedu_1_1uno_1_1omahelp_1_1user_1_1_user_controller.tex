@@ -1,0 +1,152 @@
+\hypertarget{classedu_1_1uno_1_1omahelp_1_1user_1_1_user_controller}{}\section{edu.\+uno.\+omahelp.\+user.\+User\+Controller Class Reference}
+\label{classedu_1_1uno_1_1omahelp_1_1user_1_1_user_controller}\index{edu.\+uno.\+omahelp.\+user.\+User\+Controller@{edu.\+uno.\+omahelp.\+user.\+User\+Controller}}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classedu_1_1uno_1_1omahelp_1_1user_1_1_user}{User}} \mbox{\hyperlink{classedu_1_1uno_1_1omahelp_1_1user_1_1_user_controller_a5a90651af7dcd51135e810f0e7cce451}{get\+User\+By\+Id}} (@Path\+Variable int user\+Id)  throws U\+R\+I\+Syntax\+Exception, S\+Q\+L\+Exception 
+\item 
+List$<$ \mbox{\hyperlink{classedu_1_1uno_1_1omahelp_1_1user_1_1_user}{User}} $>$ \mbox{\hyperlink{classedu_1_1uno_1_1omahelp_1_1user_1_1_user_controller_acc5f63f341ece707127e3915db5a85df}{list\+All\+Users}} ()  throws U\+R\+I\+Syntax\+Exception, S\+Q\+L\+Exception 
+\item 
+void \mbox{\hyperlink{classedu_1_1uno_1_1omahelp_1_1user_1_1_user_controller_a7167a8f081b5f02f891ec356779c01ae}{create\+User}} (@Request\+Body \mbox{\hyperlink{classedu_1_1uno_1_1omahelp_1_1user_1_1_user}{User}} user)  throws U\+R\+I\+Syntax\+Exception, S\+Q\+L\+Exception 
+\item 
+void \mbox{\hyperlink{classedu_1_1uno_1_1omahelp_1_1user_1_1_user_controller_a927db3a77547e5c129a02bcfc1bacddb}{edit\+User}} (@Request\+Body \mbox{\hyperlink{classedu_1_1uno_1_1omahelp_1_1user_1_1_user}{User}} user)  throws U\+R\+I\+Syntax\+Exception, S\+Q\+L\+Exception 
+\item 
+void \mbox{\hyperlink{classedu_1_1uno_1_1omahelp_1_1user_1_1_user_controller_a5ca080d27acf3359a338994e3bdaf5b6}{delete\+User}} (@Request\+Param int user\+Id)  throws U\+R\+I\+Syntax\+Exception, S\+Q\+L\+Exception 
+\item 
+\mbox{\hyperlink{classedu_1_1uno_1_1omahelp_1_1user_1_1_user}{User}} \mbox{\hyperlink{classedu_1_1uno_1_1omahelp_1_1user_1_1_user_controller_ac9c9bf78bbd14781ac3493e6d1cfcffc}{login}} (@Request\+Param String email, @Request\+Param String password)  throws Exception 
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+This class provides the /user mappings for the R\+E\+ST A\+PI of \mbox{\hyperlink{classedu_1_1uno_1_1omahelp_1_1_oma_help}{Oma\+Help}}. 
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classedu_1_1uno_1_1omahelp_1_1user_1_1_user_controller_a7167a8f081b5f02f891ec356779c01ae}\label{classedu_1_1uno_1_1omahelp_1_1user_1_1_user_controller_a7167a8f081b5f02f891ec356779c01ae}} 
+\index{edu\+::uno\+::omahelp\+::user\+::\+User\+Controller@{edu\+::uno\+::omahelp\+::user\+::\+User\+Controller}!create\+User@{create\+User}}
+\index{create\+User@{create\+User}!edu\+::uno\+::omahelp\+::user\+::\+User\+Controller@{edu\+::uno\+::omahelp\+::user\+::\+User\+Controller}}
+\subsubsection{\texorpdfstring{create\+User()}{createUser()}}
+{\footnotesize\ttfamily void edu.\+uno.\+omahelp.\+user.\+User\+Controller.\+create\+User (\begin{DoxyParamCaption}\item[{@Request\+Body \mbox{\hyperlink{classedu_1_1uno_1_1omahelp_1_1user_1_1_user}{User}}}]{user }\end{DoxyParamCaption}) throws U\+R\+I\+Syntax\+Exception, S\+Q\+L\+Exception}
+
+Creates a new record in the \mbox{\hyperlink{classedu_1_1uno_1_1omahelp_1_1user_1_1_user}{User}} database for registering a new user. A user\+Id does not need to be sent in as these are automatically generated.
+
+
+\begin{DoxyParams}{Parameters}
+{\em user} & A \mbox{\hyperlink{classedu_1_1uno_1_1omahelp_1_1user_1_1_user}{User}} object to add into the database. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em U\+R\+I\+Syntax\+Exception} & \\
+\hline
+{\em S\+Q\+L\+Exception} & \\
+\hline
+\end{DoxyExceptions}
+\mbox{\Hypertarget{classedu_1_1uno_1_1omahelp_1_1user_1_1_user_controller_a5ca080d27acf3359a338994e3bdaf5b6}\label{classedu_1_1uno_1_1omahelp_1_1user_1_1_user_controller_a5ca080d27acf3359a338994e3bdaf5b6}} 
+\index{edu\+::uno\+::omahelp\+::user\+::\+User\+Controller@{edu\+::uno\+::omahelp\+::user\+::\+User\+Controller}!delete\+User@{delete\+User}}
+\index{delete\+User@{delete\+User}!edu\+::uno\+::omahelp\+::user\+::\+User\+Controller@{edu\+::uno\+::omahelp\+::user\+::\+User\+Controller}}
+\subsubsection{\texorpdfstring{delete\+User()}{deleteUser()}}
+{\footnotesize\ttfamily void edu.\+uno.\+omahelp.\+user.\+User\+Controller.\+delete\+User (\begin{DoxyParamCaption}\item[{@Request\+Param int}]{user\+Id }\end{DoxyParamCaption}) throws U\+R\+I\+Syntax\+Exception, S\+Q\+L\+Exception}
+
+Deletes a user from the \mbox{\hyperlink{classedu_1_1uno_1_1omahelp_1_1user_1_1_user}{User}} database.
+
+
+\begin{DoxyParams}{Parameters}
+{\em user\+Id} & The user\+\_\+id value of the user to delete. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em U\+R\+I\+Syntax\+Exception} & \\
+\hline
+{\em S\+Q\+L\+Exception} & \\
+\hline
+\end{DoxyExceptions}
+\mbox{\Hypertarget{classedu_1_1uno_1_1omahelp_1_1user_1_1_user_controller_a927db3a77547e5c129a02bcfc1bacddb}\label{classedu_1_1uno_1_1omahelp_1_1user_1_1_user_controller_a927db3a77547e5c129a02bcfc1bacddb}} 
+\index{edu\+::uno\+::omahelp\+::user\+::\+User\+Controller@{edu\+::uno\+::omahelp\+::user\+::\+User\+Controller}!edit\+User@{edit\+User}}
+\index{edit\+User@{edit\+User}!edu\+::uno\+::omahelp\+::user\+::\+User\+Controller@{edu\+::uno\+::omahelp\+::user\+::\+User\+Controller}}
+\subsubsection{\texorpdfstring{edit\+User()}{editUser()}}
+{\footnotesize\ttfamily void edu.\+uno.\+omahelp.\+user.\+User\+Controller.\+edit\+User (\begin{DoxyParamCaption}\item[{@Request\+Body \mbox{\hyperlink{classedu_1_1uno_1_1omahelp_1_1user_1_1_user}{User}}}]{user }\end{DoxyParamCaption}) throws U\+R\+I\+Syntax\+Exception, S\+Q\+L\+Exception}
+
+Edits an existing user within the \mbox{\hyperlink{classedu_1_1uno_1_1omahelp_1_1user_1_1_user}{User}} database.
+
+
+\begin{DoxyParams}{Parameters}
+{\em user} & A \mbox{\hyperlink{classedu_1_1uno_1_1omahelp_1_1user_1_1_user}{User}} object with updated field values to send to the database. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em U\+R\+I\+Syntax\+Exception} & \\
+\hline
+{\em S\+Q\+L\+Exception} & \\
+\hline
+\end{DoxyExceptions}
+\mbox{\Hypertarget{classedu_1_1uno_1_1omahelp_1_1user_1_1_user_controller_a5a90651af7dcd51135e810f0e7cce451}\label{classedu_1_1uno_1_1omahelp_1_1user_1_1_user_controller_a5a90651af7dcd51135e810f0e7cce451}} 
+\index{edu\+::uno\+::omahelp\+::user\+::\+User\+Controller@{edu\+::uno\+::omahelp\+::user\+::\+User\+Controller}!get\+User\+By\+Id@{get\+User\+By\+Id}}
+\index{get\+User\+By\+Id@{get\+User\+By\+Id}!edu\+::uno\+::omahelp\+::user\+::\+User\+Controller@{edu\+::uno\+::omahelp\+::user\+::\+User\+Controller}}
+\subsubsection{\texorpdfstring{get\+User\+By\+Id()}{getUserById()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classedu_1_1uno_1_1omahelp_1_1user_1_1_user}{User}} edu.\+uno.\+omahelp.\+user.\+User\+Controller.\+get\+User\+By\+Id (\begin{DoxyParamCaption}\item[{@Path\+Variable int}]{user\+Id }\end{DoxyParamCaption}) throws U\+R\+I\+Syntax\+Exception, S\+Q\+L\+Exception}
+
+Returns a \mbox{\hyperlink{classedu_1_1uno_1_1omahelp_1_1user_1_1_user}{User}} object that represents the user in the database with a user\+\_\+id of user\+Id.
+
+
+\begin{DoxyParams}{Parameters}
+{\em user\+Id} & The user\+\_\+id of the user to return. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The \mbox{\hyperlink{classedu_1_1uno_1_1omahelp_1_1user_1_1_user}{User}} object associated with the user\+Id parameter. 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em U\+R\+I\+Syntax\+Exception} & \\
+\hline
+{\em S\+Q\+L\+Exception} & \\
+\hline
+\end{DoxyExceptions}
+\mbox{\Hypertarget{classedu_1_1uno_1_1omahelp_1_1user_1_1_user_controller_acc5f63f341ece707127e3915db5a85df}\label{classedu_1_1uno_1_1omahelp_1_1user_1_1_user_controller_acc5f63f341ece707127e3915db5a85df}} 
+\index{edu\+::uno\+::omahelp\+::user\+::\+User\+Controller@{edu\+::uno\+::omahelp\+::user\+::\+User\+Controller}!list\+All\+Users@{list\+All\+Users}}
+\index{list\+All\+Users@{list\+All\+Users}!edu\+::uno\+::omahelp\+::user\+::\+User\+Controller@{edu\+::uno\+::omahelp\+::user\+::\+User\+Controller}}
+\subsubsection{\texorpdfstring{list\+All\+Users()}{listAllUsers()}}
+{\footnotesize\ttfamily List$<$\mbox{\hyperlink{classedu_1_1uno_1_1omahelp_1_1user_1_1_user}{User}}$>$ edu.\+uno.\+omahelp.\+user.\+User\+Controller.\+list\+All\+Users (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) throws U\+R\+I\+Syntax\+Exception, S\+Q\+L\+Exception}
+
+Returns a List object that contains all users in the database.
+
+\begin{DoxyReturn}{Returns}
+A List object that contains \mbox{\hyperlink{classedu_1_1uno_1_1omahelp_1_1user_1_1_user}{User}} objects. 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em U\+R\+I\+Syntax\+Exception} & \\
+\hline
+{\em S\+Q\+L\+Exception} & \\
+\hline
+\end{DoxyExceptions}
+\mbox{\Hypertarget{classedu_1_1uno_1_1omahelp_1_1user_1_1_user_controller_ac9c9bf78bbd14781ac3493e6d1cfcffc}\label{classedu_1_1uno_1_1omahelp_1_1user_1_1_user_controller_ac9c9bf78bbd14781ac3493e6d1cfcffc}} 
+\index{edu\+::uno\+::omahelp\+::user\+::\+User\+Controller@{edu\+::uno\+::omahelp\+::user\+::\+User\+Controller}!login@{login}}
+\index{login@{login}!edu\+::uno\+::omahelp\+::user\+::\+User\+Controller@{edu\+::uno\+::omahelp\+::user\+::\+User\+Controller}}
+\subsubsection{\texorpdfstring{login()}{login()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classedu_1_1uno_1_1omahelp_1_1user_1_1_user}{User}} edu.\+uno.\+omahelp.\+user.\+User\+Controller.\+login (\begin{DoxyParamCaption}\item[{@Request\+Param String}]{email,  }\item[{@Request\+Param String}]{password }\end{DoxyParamCaption}) throws Exception}
+
+Logs in a user by checking if the email and password correspond to a record in the \mbox{\hyperlink{classedu_1_1uno_1_1omahelp_1_1user_1_1_user}{User}} database.
+
+
+\begin{DoxyParams}{Parameters}
+{\em email} & The email the user registered with. \\
+\hline
+{\em password} & The user\textquotesingle{}s password. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A \mbox{\hyperlink{classedu_1_1uno_1_1omahelp_1_1user_1_1_user}{User}} object corresponding to the user that is logging in. 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em Exception} & \\
+\hline
+\end{DoxyExceptions}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+S\+C\+I-\/8700/omahelp-\/rest/src/main/java/edu/uno/omahelp/user/User\+Controller.\+java\end{DoxyCompactItemize}
