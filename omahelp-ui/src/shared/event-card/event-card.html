@@ -4,7 +4,7 @@
     <a *ngIf="!detailed" (click)="goToDetails()">{{event.name}}</a>
   </mat-card-title>
   <mat-card-subtitle>
-    {{event.date | date: "'MMM d, y h:mm a"}}
+    {{event.date | date: "'MMM d, y"}}
   </mat-card-subtitle>
   <mat-card-content>
     <strong>Description: </strong> {{event.description}}

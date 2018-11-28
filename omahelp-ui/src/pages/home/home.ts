@@ -61,7 +61,7 @@ export class HomePage {
     }
     for (let event of array) {
       if (event.name.toUpperCase().indexOf(string.toUpperCase()) >= 0
-        || event.description.toUpperCase().indexOf(string.toUpperCase()) >= 0) {
+        || event.description && event.description.toUpperCase().indexOf(string.toUpperCase()) >= 0) {
         returnArr.push(event);
         continue;
       }
