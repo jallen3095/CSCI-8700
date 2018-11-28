@@ -1,0 +1,223 @@
+\hypertarget{classedu_1_1uno_1_1omahelp_1_1event_1_1_event_controller}{}\section{edu.\+uno.\+omahelp.\+event.\+Event\+Controller Class Reference}
+\label{classedu_1_1uno_1_1omahelp_1_1event_1_1_event_controller}\index{edu.\+uno.\+omahelp.\+event.\+Event\+Controller@{edu.\+uno.\+omahelp.\+event.\+Event\+Controller}}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+List$<$ \mbox{\hyperlink{classedu_1_1uno_1_1omahelp_1_1event_1_1_event}{Event}} $>$ \mbox{\hyperlink{classedu_1_1uno_1_1omahelp_1_1event_1_1_event_controller_a3a0ce672a4dcadc4ad500d0ba7f5fdf8}{list\+All\+Events}} ()  throws U\+R\+I\+Syntax\+Exception, S\+Q\+L\+Exception 
+\item 
+List$<$ \mbox{\hyperlink{classedu_1_1uno_1_1omahelp_1_1event_1_1_event}{Event}} $>$ \mbox{\hyperlink{classedu_1_1uno_1_1omahelp_1_1event_1_1_event_controller_a829db25a4758bcb33dbc7735aad24ae4}{list\+My\+Events}} (@Path\+Variable int user\+Id)  throws U\+R\+I\+Syntax\+Exception, S\+Q\+L\+Exception 
+\item 
+void \mbox{\hyperlink{classedu_1_1uno_1_1omahelp_1_1event_1_1_event_controller_ae632d8ee353a9e82c4742a693924f83f}{create\+Event}} (@Request\+Body \mbox{\hyperlink{classedu_1_1uno_1_1omahelp_1_1event_1_1_event}{Event}} event)  throws U\+R\+I\+Syntax\+Exception, S\+Q\+L\+Exception 
+\item 
+void \mbox{\hyperlink{classedu_1_1uno_1_1omahelp_1_1event_1_1_event_controller_a69f49a3dd69d82c705e0de3566832d0b}{edit\+Event}} (@Request\+Body \mbox{\hyperlink{classedu_1_1uno_1_1omahelp_1_1event_1_1_event}{Event}} event)  throws U\+R\+I\+Syntax\+Exception, S\+Q\+L\+Exception 
+\item 
+void \mbox{\hyperlink{classedu_1_1uno_1_1omahelp_1_1event_1_1_event_controller_a6e08d5245406b049598da714e4bde5d6}{delete\+Event}} (@Request\+Param int event\+Id)  throws U\+R\+I\+Syntax\+Exception, S\+Q\+L\+Exception 
+\item 
+void \mbox{\hyperlink{classedu_1_1uno_1_1omahelp_1_1event_1_1_event_controller_aeb967fdf80fb5b9547c2dc360e8ab8c1}{attend\+Event}} (@Request\+Param int user\+Id, @Request\+Param int event\+Id)  throws S\+Q\+L\+Exception, U\+R\+I\+Syntax\+Exception 
+\item 
+void \mbox{\hyperlink{classedu_1_1uno_1_1omahelp_1_1event_1_1_event_controller_ac6ce265c776c82ca7e1b56c911267da8}{unattend\+Event}} (@Request\+Param int user\+Id, @Request\+Param int event\+Id)  throws S\+Q\+L\+Exception, U\+R\+I\+Syntax\+Exception 
+\item 
+void \mbox{\hyperlink{classedu_1_1uno_1_1omahelp_1_1event_1_1_event_controller_a7fd1113ad27e4a32243168bd4c2f19c7}{like\+Event}} (@Request\+Param int user\+Id, @Request\+Param int event\+Id)  throws S\+Q\+L\+Exception, U\+R\+I\+Syntax\+Exception 
+\item 
+void \mbox{\hyperlink{classedu_1_1uno_1_1omahelp_1_1event_1_1_event_controller_af352df6963751f721b1e25c57aba36c8}{unlike\+Event}} (@Request\+Param int user\+Id, @Request\+Param int event\+Id)  throws S\+Q\+L\+Exception, U\+R\+I\+Syntax\+Exception 
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+This class provides the /event mappings for the R\+E\+ST A\+PI of \mbox{\hyperlink{classedu_1_1uno_1_1omahelp_1_1_oma_help}{Oma\+Help}}. 
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classedu_1_1uno_1_1omahelp_1_1event_1_1_event_controller_aeb967fdf80fb5b9547c2dc360e8ab8c1}\label{classedu_1_1uno_1_1omahelp_1_1event_1_1_event_controller_aeb967fdf80fb5b9547c2dc360e8ab8c1}} 
+\index{edu\+::uno\+::omahelp\+::event\+::\+Event\+Controller@{edu\+::uno\+::omahelp\+::event\+::\+Event\+Controller}!attend\+Event@{attend\+Event}}
+\index{attend\+Event@{attend\+Event}!edu\+::uno\+::omahelp\+::event\+::\+Event\+Controller@{edu\+::uno\+::omahelp\+::event\+::\+Event\+Controller}}
+\subsubsection{\texorpdfstring{attend\+Event()}{attendEvent()}}
+{\footnotesize\ttfamily void edu.\+uno.\+omahelp.\+event.\+Event\+Controller.\+attend\+Event (\begin{DoxyParamCaption}\item[{@Request\+Param int}]{user\+Id,  }\item[{@Request\+Param int}]{event\+Id }\end{DoxyParamCaption}) throws S\+Q\+L\+Exception, U\+R\+I\+Syntax\+Exception}
+
+Marks the specified user as attending a specified event.
+
+
+\begin{DoxyParams}{Parameters}
+{\em user\+Id} & The user\+Id of the user that is attending. \\
+\hline
+{\em event\+Id} & The event\+Id of the event that the user is not attending. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em S\+Q\+L\+Exception} & \\
+\hline
+{\em U\+R\+I\+Syntax\+Exception} & \\
+\hline
+\end{DoxyExceptions}
+\mbox{\Hypertarget{classedu_1_1uno_1_1omahelp_1_1event_1_1_event_controller_ae632d8ee353a9e82c4742a693924f83f}\label{classedu_1_1uno_1_1omahelp_1_1event_1_1_event_controller_ae632d8ee353a9e82c4742a693924f83f}} 
+\index{edu\+::uno\+::omahelp\+::event\+::\+Event\+Controller@{edu\+::uno\+::omahelp\+::event\+::\+Event\+Controller}!create\+Event@{create\+Event}}
+\index{create\+Event@{create\+Event}!edu\+::uno\+::omahelp\+::event\+::\+Event\+Controller@{edu\+::uno\+::omahelp\+::event\+::\+Event\+Controller}}
+\subsubsection{\texorpdfstring{create\+Event()}{createEvent()}}
+{\footnotesize\ttfamily void edu.\+uno.\+omahelp.\+event.\+Event\+Controller.\+create\+Event (\begin{DoxyParamCaption}\item[{@Request\+Body \mbox{\hyperlink{classedu_1_1uno_1_1omahelp_1_1event_1_1_event}{Event}}}]{event }\end{DoxyParamCaption}) throws U\+R\+I\+Syntax\+Exception, S\+Q\+L\+Exception}
+
+Creates a new event in the database.
+
+
+\begin{DoxyParams}{Parameters}
+{\em event} & An \mbox{\hyperlink{classedu_1_1uno_1_1omahelp_1_1event_1_1_event}{Event}} object containing the data about the event. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em U\+R\+I\+Syntax\+Exception} & \\
+\hline
+{\em S\+Q\+L\+Exception} & \\
+\hline
+\end{DoxyExceptions}
+\mbox{\Hypertarget{classedu_1_1uno_1_1omahelp_1_1event_1_1_event_controller_a6e08d5245406b049598da714e4bde5d6}\label{classedu_1_1uno_1_1omahelp_1_1event_1_1_event_controller_a6e08d5245406b049598da714e4bde5d6}} 
+\index{edu\+::uno\+::omahelp\+::event\+::\+Event\+Controller@{edu\+::uno\+::omahelp\+::event\+::\+Event\+Controller}!delete\+Event@{delete\+Event}}
+\index{delete\+Event@{delete\+Event}!edu\+::uno\+::omahelp\+::event\+::\+Event\+Controller@{edu\+::uno\+::omahelp\+::event\+::\+Event\+Controller}}
+\subsubsection{\texorpdfstring{delete\+Event()}{deleteEvent()}}
+{\footnotesize\ttfamily void edu.\+uno.\+omahelp.\+event.\+Event\+Controller.\+delete\+Event (\begin{DoxyParamCaption}\item[{@Request\+Param int}]{event\+Id }\end{DoxyParamCaption}) throws U\+R\+I\+Syntax\+Exception, S\+Q\+L\+Exception}
+
+Deletes an event from the database.
+
+
+\begin{DoxyParams}{Parameters}
+{\em event\+Id} & The event\+Id of the event to delete. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em U\+R\+I\+Syntax\+Exception} & \\
+\hline
+{\em S\+Q\+L\+Exception} & \\
+\hline
+\end{DoxyExceptions}
+\mbox{\Hypertarget{classedu_1_1uno_1_1omahelp_1_1event_1_1_event_controller_a69f49a3dd69d82c705e0de3566832d0b}\label{classedu_1_1uno_1_1omahelp_1_1event_1_1_event_controller_a69f49a3dd69d82c705e0de3566832d0b}} 
+\index{edu\+::uno\+::omahelp\+::event\+::\+Event\+Controller@{edu\+::uno\+::omahelp\+::event\+::\+Event\+Controller}!edit\+Event@{edit\+Event}}
+\index{edit\+Event@{edit\+Event}!edu\+::uno\+::omahelp\+::event\+::\+Event\+Controller@{edu\+::uno\+::omahelp\+::event\+::\+Event\+Controller}}
+\subsubsection{\texorpdfstring{edit\+Event()}{editEvent()}}
+{\footnotesize\ttfamily void edu.\+uno.\+omahelp.\+event.\+Event\+Controller.\+edit\+Event (\begin{DoxyParamCaption}\item[{@Request\+Body \mbox{\hyperlink{classedu_1_1uno_1_1omahelp_1_1event_1_1_event}{Event}}}]{event }\end{DoxyParamCaption}) throws U\+R\+I\+Syntax\+Exception, S\+Q\+L\+Exception}
+
+Edits an existing event in the database.
+
+
+\begin{DoxyParams}{Parameters}
+{\em event} & An \mbox{\hyperlink{classedu_1_1uno_1_1omahelp_1_1event_1_1_event}{Event}} object containing the new data to update with. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em U\+R\+I\+Syntax\+Exception} & \\
+\hline
+{\em S\+Q\+L\+Exception} & \\
+\hline
+\end{DoxyExceptions}
+\mbox{\Hypertarget{classedu_1_1uno_1_1omahelp_1_1event_1_1_event_controller_a7fd1113ad27e4a32243168bd4c2f19c7}\label{classedu_1_1uno_1_1omahelp_1_1event_1_1_event_controller_a7fd1113ad27e4a32243168bd4c2f19c7}} 
+\index{edu\+::uno\+::omahelp\+::event\+::\+Event\+Controller@{edu\+::uno\+::omahelp\+::event\+::\+Event\+Controller}!like\+Event@{like\+Event}}
+\index{like\+Event@{like\+Event}!edu\+::uno\+::omahelp\+::event\+::\+Event\+Controller@{edu\+::uno\+::omahelp\+::event\+::\+Event\+Controller}}
+\subsubsection{\texorpdfstring{like\+Event()}{likeEvent()}}
+{\footnotesize\ttfamily void edu.\+uno.\+omahelp.\+event.\+Event\+Controller.\+like\+Event (\begin{DoxyParamCaption}\item[{@Request\+Param int}]{user\+Id,  }\item[{@Request\+Param int}]{event\+Id }\end{DoxyParamCaption}) throws S\+Q\+L\+Exception, U\+R\+I\+Syntax\+Exception}
+
+Marks the specified user as liking the specified event.
+
+
+\begin{DoxyParams}{Parameters}
+{\em user\+Id} & The user\+Id of the user that liked an event. \\
+\hline
+{\em event\+Id} & The event\+Id of the event that the user liked. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em S\+Q\+L\+Exception} & \\
+\hline
+{\em U\+R\+I\+Syntax\+Exception} & \\
+\hline
+\end{DoxyExceptions}
+\mbox{\Hypertarget{classedu_1_1uno_1_1omahelp_1_1event_1_1_event_controller_a3a0ce672a4dcadc4ad500d0ba7f5fdf8}\label{classedu_1_1uno_1_1omahelp_1_1event_1_1_event_controller_a3a0ce672a4dcadc4ad500d0ba7f5fdf8}} 
+\index{edu\+::uno\+::omahelp\+::event\+::\+Event\+Controller@{edu\+::uno\+::omahelp\+::event\+::\+Event\+Controller}!list\+All\+Events@{list\+All\+Events}}
+\index{list\+All\+Events@{list\+All\+Events}!edu\+::uno\+::omahelp\+::event\+::\+Event\+Controller@{edu\+::uno\+::omahelp\+::event\+::\+Event\+Controller}}
+\subsubsection{\texorpdfstring{list\+All\+Events()}{listAllEvents()}}
+{\footnotesize\ttfamily List$<$\mbox{\hyperlink{classedu_1_1uno_1_1omahelp_1_1event_1_1_event}{Event}}$>$ edu.\+uno.\+omahelp.\+event.\+Event\+Controller.\+list\+All\+Events (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) throws U\+R\+I\+Syntax\+Exception, S\+Q\+L\+Exception}
+
+Returns a list object that contains all the events in the database.
+
+\begin{DoxyReturn}{Returns}
+A List object that contains \mbox{\hyperlink{classedu_1_1uno_1_1omahelp_1_1event_1_1_event}{Event}} objects. 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em U\+R\+I\+Syntax\+Exception} & \\
+\hline
+{\em S\+Q\+L\+Exception} & \\
+\hline
+\end{DoxyExceptions}
+\mbox{\Hypertarget{classedu_1_1uno_1_1omahelp_1_1event_1_1_event_controller_a829db25a4758bcb33dbc7735aad24ae4}\label{classedu_1_1uno_1_1omahelp_1_1event_1_1_event_controller_a829db25a4758bcb33dbc7735aad24ae4}} 
+\index{edu\+::uno\+::omahelp\+::event\+::\+Event\+Controller@{edu\+::uno\+::omahelp\+::event\+::\+Event\+Controller}!list\+My\+Events@{list\+My\+Events}}
+\index{list\+My\+Events@{list\+My\+Events}!edu\+::uno\+::omahelp\+::event\+::\+Event\+Controller@{edu\+::uno\+::omahelp\+::event\+::\+Event\+Controller}}
+\subsubsection{\texorpdfstring{list\+My\+Events()}{listMyEvents()}}
+{\footnotesize\ttfamily List$<$\mbox{\hyperlink{classedu_1_1uno_1_1omahelp_1_1event_1_1_event}{Event}}$>$ edu.\+uno.\+omahelp.\+event.\+Event\+Controller.\+list\+My\+Events (\begin{DoxyParamCaption}\item[{@Path\+Variable int}]{user\+Id }\end{DoxyParamCaption}) throws U\+R\+I\+Syntax\+Exception, S\+Q\+L\+Exception}
+
+Returns a list of events for a specified user.
+
+
+\begin{DoxyParams}{Parameters}
+{\em user\+Id} & The user\+Id of the user to get events from. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A List object that contains \mbox{\hyperlink{classedu_1_1uno_1_1omahelp_1_1event_1_1_event}{Event}} objects. 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em U\+R\+I\+Syntax\+Exception} & \\
+\hline
+{\em S\+Q\+L\+Exception} & \\
+\hline
+\end{DoxyExceptions}
+\mbox{\Hypertarget{classedu_1_1uno_1_1omahelp_1_1event_1_1_event_controller_ac6ce265c776c82ca7e1b56c911267da8}\label{classedu_1_1uno_1_1omahelp_1_1event_1_1_event_controller_ac6ce265c776c82ca7e1b56c911267da8}} 
+\index{edu\+::uno\+::omahelp\+::event\+::\+Event\+Controller@{edu\+::uno\+::omahelp\+::event\+::\+Event\+Controller}!unattend\+Event@{unattend\+Event}}
+\index{unattend\+Event@{unattend\+Event}!edu\+::uno\+::omahelp\+::event\+::\+Event\+Controller@{edu\+::uno\+::omahelp\+::event\+::\+Event\+Controller}}
+\subsubsection{\texorpdfstring{unattend\+Event()}{unattendEvent()}}
+{\footnotesize\ttfamily void edu.\+uno.\+omahelp.\+event.\+Event\+Controller.\+unattend\+Event (\begin{DoxyParamCaption}\item[{@Request\+Param int}]{user\+Id,  }\item[{@Request\+Param int}]{event\+Id }\end{DoxyParamCaption}) throws S\+Q\+L\+Exception, U\+R\+I\+Syntax\+Exception}
+
+Marks the specified user as not attending a specified event.
+
+
+\begin{DoxyParams}{Parameters}
+{\em user\+Id} & The user\+Id of the user that is not attending. \\
+\hline
+{\em event\+Id} & The event\+Id of the event that the user is not attending. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em S\+Q\+L\+Exception} & \\
+\hline
+{\em U\+R\+I\+Syntax\+Exception} & \\
+\hline
+\end{DoxyExceptions}
+\mbox{\Hypertarget{classedu_1_1uno_1_1omahelp_1_1event_1_1_event_controller_af352df6963751f721b1e25c57aba36c8}\label{classedu_1_1uno_1_1omahelp_1_1event_1_1_event_controller_af352df6963751f721b1e25c57aba36c8}} 
+\index{edu\+::uno\+::omahelp\+::event\+::\+Event\+Controller@{edu\+::uno\+::omahelp\+::event\+::\+Event\+Controller}!unlike\+Event@{unlike\+Event}}
+\index{unlike\+Event@{unlike\+Event}!edu\+::uno\+::omahelp\+::event\+::\+Event\+Controller@{edu\+::uno\+::omahelp\+::event\+::\+Event\+Controller}}
+\subsubsection{\texorpdfstring{unlike\+Event()}{unlikeEvent()}}
+{\footnotesize\ttfamily void edu.\+uno.\+omahelp.\+event.\+Event\+Controller.\+unlike\+Event (\begin{DoxyParamCaption}\item[{@Request\+Param int}]{user\+Id,  }\item[{@Request\+Param int}]{event\+Id }\end{DoxyParamCaption}) throws S\+Q\+L\+Exception, U\+R\+I\+Syntax\+Exception}
+
+Marks the specified user as not liking the specified event.
+
+
+\begin{DoxyParams}{Parameters}
+{\em user\+Id} & The user\+Id of the user that unliked an event. \\
+\hline
+{\em event\+Id} & The event\+Id of the event that the user unliked. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em S\+Q\+L\+Exception} & \\
+\hline
+{\em U\+R\+I\+Syntax\+Exception} & \\
+\hline
+\end{DoxyExceptions}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+S\+C\+I-\/8700/omahelp-\/rest/src/main/java/edu/uno/omahelp/event/Event\+Controller.\+java\end{DoxyCompactItemize}

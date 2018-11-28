@@ -1,0 +1,70 @@
+\hypertarget{classedu_1_1uno_1_1omahelp_1_1organization_1_1_organization_dao}{}\section{edu.\+uno.\+omahelp.\+organization.\+Organization\+Dao Class Reference}
+\label{classedu_1_1uno_1_1omahelp_1_1organization_1_1_organization_dao}\index{edu.\+uno.\+omahelp.\+organization.\+Organization\+Dao@{edu.\+uno.\+omahelp.\+organization.\+Organization\+Dao}}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classedu_1_1uno_1_1omahelp_1_1organization_1_1_organization_dao_a88678c75366e626aa880d5e566553c7a}{Organization\+Dao}} ()  throws U\+R\+I\+Syntax\+Exception, S\+Q\+L\+Exception 
+\item 
+List$<$ \mbox{\hyperlink{classedu_1_1uno_1_1omahelp_1_1organization_1_1_organization}{Organization}} $>$ \mbox{\hyperlink{classedu_1_1uno_1_1omahelp_1_1organization_1_1_organization_dao_a92b3c1daf59ccd4abdc594dae27cbbd0}{list\+All\+Organizations}} ()  throws U\+R\+I\+Syntax\+Exception, S\+Q\+L\+Exception 
+\item 
+List$<$ \mbox{\hyperlink{classedu_1_1uno_1_1omahelp_1_1organization_1_1_organization}{Organization}} $>$ \mbox{\hyperlink{classedu_1_1uno_1_1omahelp_1_1organization_1_1_organization_dao_af0fc342f36ca6cde5e8560aded7b6a3f}{list\+User\+Organizations}} (int user\+Id)  throws S\+Q\+L\+Exception 
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+This class contains the methods necessary to handle the \mbox{\hyperlink{classedu_1_1uno_1_1omahelp_1_1organization_1_1_organization}{Organization}} database operations requested by the \mbox{\hyperlink{classedu_1_1uno_1_1omahelp_1_1organization_1_1_organization_controller}{Organization\+Controller}}. 
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classedu_1_1uno_1_1omahelp_1_1organization_1_1_organization_dao_a88678c75366e626aa880d5e566553c7a}\label{classedu_1_1uno_1_1omahelp_1_1organization_1_1_organization_dao_a88678c75366e626aa880d5e566553c7a}} 
+\index{edu\+::uno\+::omahelp\+::organization\+::\+Organization\+Dao@{edu\+::uno\+::omahelp\+::organization\+::\+Organization\+Dao}!Organization\+Dao@{Organization\+Dao}}
+\index{Organization\+Dao@{Organization\+Dao}!edu\+::uno\+::omahelp\+::organization\+::\+Organization\+Dao@{edu\+::uno\+::omahelp\+::organization\+::\+Organization\+Dao}}
+\subsubsection{\texorpdfstring{Organization\+Dao()}{OrganizationDao()}}
+{\footnotesize\ttfamily edu.\+uno.\+omahelp.\+organization.\+Organization\+Dao.\+Organization\+Dao (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) throws U\+R\+I\+Syntax\+Exception, S\+Q\+L\+Exception}
+
+Class constructor that creates a connection to the database. 
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classedu_1_1uno_1_1omahelp_1_1organization_1_1_organization_dao_a92b3c1daf59ccd4abdc594dae27cbbd0}\label{classedu_1_1uno_1_1omahelp_1_1organization_1_1_organization_dao_a92b3c1daf59ccd4abdc594dae27cbbd0}} 
+\index{edu\+::uno\+::omahelp\+::organization\+::\+Organization\+Dao@{edu\+::uno\+::omahelp\+::organization\+::\+Organization\+Dao}!list\+All\+Organizations@{list\+All\+Organizations}}
+\index{list\+All\+Organizations@{list\+All\+Organizations}!edu\+::uno\+::omahelp\+::organization\+::\+Organization\+Dao@{edu\+::uno\+::omahelp\+::organization\+::\+Organization\+Dao}}
+\subsubsection{\texorpdfstring{list\+All\+Organizations()}{listAllOrganizations()}}
+{\footnotesize\ttfamily List$<$\mbox{\hyperlink{classedu_1_1uno_1_1omahelp_1_1organization_1_1_organization}{Organization}}$>$ edu.\+uno.\+omahelp.\+organization.\+Organization\+Dao.\+list\+All\+Organizations (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) throws U\+R\+I\+Syntax\+Exception, S\+Q\+L\+Exception}
+
+Lists all the organizations in the \mbox{\hyperlink{classedu_1_1uno_1_1omahelp_1_1organization_1_1_organization}{Organization}} database and puts them in a list.
+
+\begin{DoxyReturn}{Returns}
+A List object containing an \mbox{\hyperlink{classedu_1_1uno_1_1omahelp_1_1organization_1_1_organization}{Organization}} object for each organization in the \mbox{\hyperlink{classedu_1_1uno_1_1omahelp_1_1organization_1_1_organization}{Organization}} database. 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em U\+R\+I\+Syntax\+Exception} & \\
+\hline
+{\em S\+Q\+L\+Exception} & \\
+\hline
+\end{DoxyExceptions}
+\mbox{\Hypertarget{classedu_1_1uno_1_1omahelp_1_1organization_1_1_organization_dao_af0fc342f36ca6cde5e8560aded7b6a3f}\label{classedu_1_1uno_1_1omahelp_1_1organization_1_1_organization_dao_af0fc342f36ca6cde5e8560aded7b6a3f}} 
+\index{edu\+::uno\+::omahelp\+::organization\+::\+Organization\+Dao@{edu\+::uno\+::omahelp\+::organization\+::\+Organization\+Dao}!list\+User\+Organizations@{list\+User\+Organizations}}
+\index{list\+User\+Organizations@{list\+User\+Organizations}!edu\+::uno\+::omahelp\+::organization\+::\+Organization\+Dao@{edu\+::uno\+::omahelp\+::organization\+::\+Organization\+Dao}}
+\subsubsection{\texorpdfstring{list\+User\+Organizations()}{listUserOrganizations()}}
+{\footnotesize\ttfamily List$<$\mbox{\hyperlink{classedu_1_1uno_1_1omahelp_1_1organization_1_1_organization}{Organization}}$>$ edu.\+uno.\+omahelp.\+organization.\+Organization\+Dao.\+list\+User\+Organizations (\begin{DoxyParamCaption}\item[{int}]{user\+Id }\end{DoxyParamCaption}) throws S\+Q\+L\+Exception}
+
+Lists all the organizations that a specified user is associated with.
+
+
+\begin{DoxyParams}{Parameters}
+{\em user\+Id} & The user\+Id of the user. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A list object containing \mbox{\hyperlink{classedu_1_1uno_1_1omahelp_1_1organization_1_1_organization}{Organization}} objects. 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em S\+Q\+L\+Exception} & \\
+\hline
+\end{DoxyExceptions}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+S\+C\+I-\/8700/omahelp-\/rest/src/main/java/edu/uno/omahelp/organization/Organization\+Dao.\+java\end{DoxyCompactItemize}
